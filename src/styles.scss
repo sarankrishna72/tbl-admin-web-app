@@ -2,3 +2,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary-700: #001F42;
+  --primary-300: #006DEB;
+  --neutral-100: #E3EAF1;
+}
+
+$fonts: (roboto-regular,roboto-black,roboto-light,roboto-medium,roboto-thin,roboto-bold);
+
+@each $font in $fonts {
+  @font-face {
+    font-family: $font;
+    src: url("/assets/font/#{$font}.ttf");
+  }
+
+  .#{$font} {
+     font-family: $font;
+  }
+}
+
+
+
+html, body {
+  height: 100%;
+  font-family: Roboto-Regular;
+}
