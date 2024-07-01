@@ -17,9 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "prerender": {
-              "routesFile": "routes.txt"
-            },
             "outputPath": "dist/tbl-admin-web-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
