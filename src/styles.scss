@@ -2,11 +2,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 :root {
+  --primary-800: #001124;
   --primary-700: #001F42;
+  --primary-500: #003E85;
   --primary-300: #006DEB;
   --neutral-100: #E3EAF1;
+  --neutral-300: #AABFD6;
+  --gray-400: #878D92;
 }
 
 $fonts: (roboto-regular,roboto-black,roboto-light,roboto-medium,roboto-thin,roboto-bold);
@@ -18,7 +22,7 @@ $fonts: (roboto-regular,roboto-black,roboto-light,roboto-medium,roboto-thin,robo
   }
 
   .#{$font} {
-     font-family: $font;
+     font-family: '#{$font}';
   }
 }
 
@@ -27,4 +31,23 @@ $fonts: (roboto-regular,roboto-black,roboto-light,roboto-medium,roboto-thin,robo
 html, body {
   height: 100%;
   font-family: Roboto-Regular;
+}
+
+
+.icon-center {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
