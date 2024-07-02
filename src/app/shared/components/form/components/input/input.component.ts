@@ -41,8 +41,6 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
   }
 
   errorMessage(): string {
-    console.log(this.formConfig?.validations)
-    console.log(this.controlDir?.control?.errors)
     let error = this.controlDir?.control?.errors || {};
     if ( Object.keys(error)?.length > 0) {
       let errorName = Object.keys(error)[0]

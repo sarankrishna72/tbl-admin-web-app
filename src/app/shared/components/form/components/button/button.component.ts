@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
   selector: 'app-button',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss'
@@ -16,6 +16,7 @@ export class ButtonComponent implements OnChanges,OnInit {
   @Input() buttonRadius : ButtonRadius = 'md';
   @Input() buttonSize : ButtonSize = 'lg';
   @Input() classes: string = ' '
+  @Input() style: any = {}
   @Input() rounded: boolean = true;
   @Input() fullWidth: boolean = true;
   @Output() onClick: EventEmitter<any> = new EventEmitter();
