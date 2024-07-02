@@ -18,12 +18,8 @@ export class ControlValueAccessorDirective  implements OnInit, ControlValueAcces
 
 
   ngOnInit(): void {
-    const control = this.controlDir.control;
-    console.log(control)
-    const validators = control?.validator
-      ? [control.validator, Validators.required]
-      : Validators.required;
-    control?.setValidators(validators);
+
+
 
   }
 

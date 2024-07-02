@@ -10,6 +10,7 @@
   <input
     [id]="formConfig.key"
     [type]="formConfig.type"
+    [value]="controlDir.control?.value"
     class="border-neutral-300 border outline-0 rounded-md h-12 p-3 w-full roboto-regular text-base "
     [placeholder]="formConfig.placeholder"
     [ngClass]="{ '!border-success-400': controlDir.control?.touched && controlDir.control?.valid , '!border-error-500': controlDir.control?.touched && controlDir.control?.invalid }"
@@ -38,19 +39,26 @@
     </span>
   }
 
-  @if (formConfig.helpText) {
-    <div class="text-gray-600 text-xxs flex items-center gap-1">
-      @if (controlDir.control?.touched && controlDir.control?.invalid) {
-      <span class="material-icons text-base cursor-pointer noselect"
-        [ngClass]="{ 'text-error-500': controlDir.control?.touched && controlDir.control?.invalid }">
-        {{ 'error' }}
-      </span>
-      }
-      {{formConfig.helpText}}
-    </div>
-  }
 </div>
 
+@if (formConfig.helpText && !(controlDir.control?.touched && controlDir.control?.invalid)) {
+  <div class="text-gray-600 text-xxs flex items-center gap-1">
+    @if (controlDir.control?.touched && controlDir.control?.invalid) {
+    <span class="material-icons text-base cursor-pointer noselect"
+      [ngClass]="{ 'text-error-500': controlDir.control?.touched && controlDir.control?.invalid }">
+      {{ 'error' }}
+    </span>
+    }
+    {{formConfig.helpText }}
+  </div>
+}
 
-
+@if (controlDir.control?.touched && controlDir.control?.invalid && formConfig.validations.length) {
+<div class="text-error-500 text-xxs flex items-center gap-1">
+  <span class="material-icons text-base cursor-pointer noselect text-error-500">
+    {{ 'error' }}
+  </span>
+  {{errorMessage()}}
+</div>
+}
 

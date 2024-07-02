@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, ReactiveFormsModule } from '@angular/forms';
 import { FormBase } from '../../../../../core/model';
 import { ControlValueAccessorDirective } from '../../../../directives/form/control-value-accessor.directive';
 import { CommonModule } from '@angular/common';
@@ -9,7 +9,8 @@ import { FormService } from '../../../../services/form/form.service';
   selector: 'app-input',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
 
   templateUrl: './input.component.html',
@@ -33,9 +34,23 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
         }
       }
       if (validators.length > 0) {
-        this.controlDir.control?.addValidators(validators)
+        this.controlDir.control?.addValidators(validators);
+        this.controlDir.control?.updateValueAndValidity();
       }
     }
+  }
+
+  errorMessage(): string {
+    console.log(this.formConfig?.validations)
+    console.log(this.controlDir?.control?.errors)
+    let error = this.controlDir?.control?.errors || {};
+    if ( Object.keys(error)?.length > 0) {
+      let errorName = Object.keys(error)[0]
+      if (errorName)
+        return this.formConfig?.validations?.find(validation => validation.validatorName?.toLowerCase() === errorName)?.message || '';
+    }
+
+    return 'This field is required';
   }
 
   toggleEye() {

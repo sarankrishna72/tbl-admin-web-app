@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBase } from '../../../core/model';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent, InputComponent } from '../../../core/constants';
-
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-form',
@@ -25,6 +25,7 @@ export class FormComponent implements OnChanges {
    * @memberof FormComponent
    */
   generateFormGroupControls() {
+    this.formData = _.orderBy(this.formData, ['order'],['asc']);
     for (const formQuestion of this.formData) {
       const control = new FormControl(formQuestion.value || '') as FormControl<any>;
       this.formGroup.addControl(formQuestion.key, control )
