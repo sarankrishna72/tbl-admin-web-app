@@ -14,12 +14,7 @@ module.exports = {
       "xl": ['24px', '32px'],
       "xxl": ['28px', '36px'],
     },
-    screens: {
-      'mobile': '320px',
-      'tablet': '640px',
-      'laptop': '1024px',
-      'desktop': '1280px',
-    },
+
     extend: {
       colors: {
         'primary-800': 'var(--primary-800)',
@@ -35,7 +30,12 @@ module.exports = {
         'success-400': 'var(--success-400)',
         'error-500': 'var(--error-500)',
       },
-
+      screens: {
+        'mobile': '320px',
+        'tablet': '640px',
+        'laptop': '1024px',
+        'desktop': '1400px',
+      },
     },
   },
   plugins: [],

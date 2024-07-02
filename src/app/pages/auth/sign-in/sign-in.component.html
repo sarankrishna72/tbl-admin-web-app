@@ -1,8 +1,8 @@
-<section id="sign-in-page" class="h-full grid laptop:grid-cols-11 laptop:gap-6 p-6 bg-white overflow-auto ">
+<section id="sign-in-page" class="h-full grid laptop:grid-cols-11 max-w-screen-2xl mx-auto laptop:gap-6 p-6 bg-white overflow-auto ">
   <div class="col-span-5 max-laptop:flex max-laptop:flex-col max-laptop:justify-center max-laptop:items-center">
     <img class="h-16 w-16 max-laptop:h-20 max-laptop:w-20 mb-10" [src]="staticImages.logo" />
 
-    <div class="laptop:p-14 p-4 signin-card-box-shadow max-laptop:!shadow-none max-tablet:w-full max-laptop:w-9/12  rounded-lg bg-white">
+    <div class="laptop:p-14 p-6 signin-card-box-shadow max-laptop:!shadow-none max-tablet:w-full max-laptop:w-9/12  rounded-lg bg-white">
       <div class="text-primary-700 text-xxl font-medium roboto-bold after:border-spacing-2 after:w-20 after:rounded-sm after:h-[3px] after:block after:border-b-[3px] after:border-b-primary-300 mb-6">Welcome!</div>
       <app-form [formData]="formConfigs" />
     </div>

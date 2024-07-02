@@ -8,7 +8,6 @@ export const SIGN_IN_FORM_DATA: FormBase[] = [
     label: "Email Address",
     order:1,
     placeholder: "Enter your email address...",
-    helpText: "Helper text goes here",
     validations: [
       new FormBaseControlValidator({validatorName: ValidatorsType.EMAIL,message: "Please Enter a valid Email", validatorValue: true }),
       new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true })

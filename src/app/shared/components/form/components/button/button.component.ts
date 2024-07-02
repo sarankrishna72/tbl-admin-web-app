@@ -14,7 +14,7 @@ export class ButtonComponent implements OnChanges,OnInit {
   @Input() buttonType: string = 'button';
   @Input() buttonTheme: ButtonTheme = 'primary';
   @Input() buttonRadius : ButtonRadius = 'md';
-  @Input() buttonSize : ButtonSize = 'md';
+  @Input() buttonSize : ButtonSize = 'lg';
   @Input() classes: string = ' '
   @Input() rounded: boolean = true;
   @Input() fullWidth: boolean = true;
