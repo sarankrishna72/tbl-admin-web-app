@@ -14,7 +14,6 @@ export const SIGN_IN_FORM_DATA: FormBase[] = [
     ]
   }),
   new InputTextField({
-
     key: "password",
     value: "",
     type: "password",
