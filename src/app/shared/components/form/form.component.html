@@ -1,0 +1,12 @@
+<form [formGroup]="formGroup" autocomplete="off" class="flex flex-col gap-3">
+  @for ( formQuestion of formData; track formQuestion.key) {
+    @switch (formQuestion.controlType) {
+      @case ("textfield") {
+        <app-input [formControlName]="formQuestion.key" [formConfig]="formQuestion" />
+      }
+    }
+  }
+  <app-button (onClick)="submitForm()" class="mt-2">
+    Login
+  </app-button>
+</form>

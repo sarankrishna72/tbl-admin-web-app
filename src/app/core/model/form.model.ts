@@ -1,7 +1,7 @@
 import { Observable } from "rxjs/internal/Observable";
 
-export class FormBase<T> {
-  value: T|undefined;
+export class FormBase {
+  value: any;
   key: string;
   label: string;
   order: number;
@@ -11,8 +11,13 @@ export class FormBase<T> {
   options: { key: string, value: string }[];
   api: Observable<any> | null;
   validations: FormBaseControlValidator[] = [];
+  success_icon ?: string = '';
+  error_icon ?: string = '';
+  icon ?: string = '';
+  helpText?: string = '';
+  showValidationIcon ?: boolean = false;
   constructor(options: {
-    value?: T;
+    value?: any;
     key?: string;
     label?: string;
     order?: number;
@@ -21,7 +26,12 @@ export class FormBase<T> {
     options?: { key: string, value: string }[];
     api ?: Observable<any>;
     placeholder ?: string;
+    helpText ?: string;
     validations ?: FormBaseControlValidator[];
+    error_icon ?: string;
+    success_icon ?: string;
+    icon ?: string;
+    showValidationIcon ?: boolean
   } = {}) {
     this.value = options.value;
     this.key = options.key || '';
@@ -33,6 +43,11 @@ export class FormBase<T> {
     this.api = options.api || null;
     this.validations = options.validations || [];
     this.placeholder = options.placeholder || "";
+    this.helpText = options.helpText || "";
+    this.error_icon = options.error_icon || "";
+    this.success_icon = options.success_icon || "";
+    this.icon = options.icon || "";
+    this.showValidationIcon = options.showValidationIcon || false;
   }
 }
 
@@ -53,11 +68,11 @@ export class FormBaseControlValidator{
 }
 
 
-export class InputTextField extends FormBase<string> {
-  override controlType = 'text';
+export class InputTextField extends FormBase {
+  override controlType = 'textfield';
 }
 
-export class InputDropdown extends FormBase<string> {
+export class InputDropdown extends FormBase {
   override controlType = 'dropdown';
 }
 

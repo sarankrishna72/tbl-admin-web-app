@@ -1,0 +1,56 @@
+
+@if (formConfig.label ) {
+  <label [for]="formConfig.key" [id]="'label'+formConfig.key"
+    class="roboto-medium  text-sm text-primary-800 mb-1 inline-block">
+    {{formConfig.label}}
+  </label>
+}
+
+<div class="relative">
+  <input
+    [id]="formConfig.key"
+    [type]="formConfig.type"
+    class="border-neutral-300 border outline-0 rounded-md h-12 p-3 w-full roboto-regular text-base "
+    [placeholder]="formConfig.placeholder"
+    [ngClass]="{ '!border-success-400': controlDir.control?.touched && controlDir.control?.valid , '!border-error-500': controlDir.control?.touched && controlDir.control?.invalid }"
+    (input)="onChange($any($event.target).value)"
+    (blur)="onTouched();"
+    [disabled]="disabled"
+  />
+
+  @if (formConfig.showValidationIcon && !(formConfig.type == 'password' || isEyeOpen)) {
+    @if (controlDir.control?.touched && controlDir.control?.valid ) {
+      <span class="material-icons text-success-400 icon-center cursor-pointer noselect ">
+        {{ formConfig.success_icon || 'check' }}
+      </span>
+    }
+
+    @if (controlDir.control?.touched && controlDir.control?.valid && formConfig.error_icon ) {
+      <span class="material-icons text-success-400 icon-center cursor-pointer noselect ">
+        {{ formConfig.error_icon }}
+      </span>
+    }
+  }
+
+  @if (formConfig.type == 'password' || isEyeOpen) {
+    <span class="material-icons icon-center cursor-pointer noselect text-primary-700" [ngClass]="{'!text-success-400': controlDir.control?.touched && controlDir.control?.valid }" (click)="toggleEye()">
+      {{ isEyeOpen ? 'visibility_off' :'visibility'}}
+    </span>
+  }
+
+  @if (formConfig.helpText) {
+    <div class="text-gray-600 text-xxs flex items-center gap-1">
+      @if (controlDir.control?.touched && controlDir.control?.invalid) {
+      <span class="material-icons text-base cursor-pointer noselect"
+        [ngClass]="{ 'text-error-500': controlDir.control?.touched && controlDir.control?.invalid }">
+        {{ 'error' }}
+      </span>
+      }
+      {{formConfig.helpText}}
+    </div>
+  }
+</div>
+
+
+
+
