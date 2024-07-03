@@ -7,9 +7,9 @@ export const routes: Routes = [
     path: '',
     component: SignInComponent,
     pathMatch: 'full'
-  }, {
+  },{
     path: ':id',
     component: MainComponent,
-    pathMatch: 'full'
+
   }
 ];

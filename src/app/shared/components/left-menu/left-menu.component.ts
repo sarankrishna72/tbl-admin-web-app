@@ -1,4 +1,5 @@
 
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ButtonComponent } from '../form/components';
 import { DEFAULT_IMAGES } from './../../../core/constants/image';
 import { Component } from '@angular/core';
@@ -7,7 +8,9 @@ import { Component } from '@angular/core';
   selector: 'app-left-menu',
   standalone: true,
   imports: [
-    ButtonComponent
+    ButtonComponent,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './left-menu.component.html',
   styleUrl: './left-menu.component.scss'

@@ -7,20 +7,18 @@
           <span class="material-icons text-md cursor-pointer noselect ">
             {{ 'add' }}
           </span>
-          <span>Create New Outlet</span>
+          <span>Create New Outlet </span>
         </div>
       </app-button>
     </div>
 
     <div class="laptop:hidden block">
-      <app-button buttonSize="sm" buttonTheme="">
+      <app-button (onClick)="_appStoreService.toggleSideMenuOpened()" buttonSize="sm" buttonTheme="">
         <div class="h-7 flex items-center">
           <img [src]="staticImages.menu" class="" />
         </div>
       </app-button>
     </div>
-
-
   </div>
 
 </app-main-container>

@@ -3,8 +3,9 @@
     <div class="min-w-56 laptop:block hidden">
       <app-left-menu />
     </div>
-    <div class=" absolute left-0 top-0 h-full popup-bg w-full ">
-      <app-left-menu class="w-56 block h-full"/>
+
+    <div  class="w-0 transition-width duration-700 ease-in-out overflow-hidden absolute left-0 top-0 h-full popup-bg {{_appStoreService.sideMenuOpened ? '!w-full': ''}} ">
+      <app-left-menu class="w-56 block  h-full"  appOutsideClick (appClickOutside)="toggleOutSide()"/>
     </div>
 
     <div class="w-full card-box-shadow h-full bg-white p-5 rounded-lg">
