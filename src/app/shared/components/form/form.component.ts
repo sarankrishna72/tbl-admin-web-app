@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBase } from '../../../core/model';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ButtonComponent, InputComponent } from '../../../core/constants';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as _ from 'lodash';
+import { InputComponent, ButtonComponent } from './components';
 
 @Component({
   selector: 'app-form',

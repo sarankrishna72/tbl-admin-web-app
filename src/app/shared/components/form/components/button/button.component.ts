@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ButtonTheme, ButtonRadius, Size } from '../../../../../core/constants/types';
 
 @Component({
   selector: 'app-button',
@@ -14,7 +15,7 @@ export class ButtonComponent implements OnChanges,OnInit {
   @Input() buttonType: string = 'button';
   @Input() buttonTheme: ButtonTheme = 'primary';
   @Input() buttonRadius : ButtonRadius = 'md';
-  @Input() buttonSize : ButtonSize = 'lg';
+  @Input() buttonSize : Size = 'lg';
   @Input() classes: string = ' '
   @Input() style: any = {}
   @Input() rounded: boolean = true;
@@ -51,9 +52,13 @@ export class ButtonComponent implements OnChanges,OnInit {
   getThemeClasses() {
     switch (this.buttonTheme) {
       case 'primary':
-        return 'bg-primary-500 hover:bg-primary-600 text-white text-sm border border-primary-500 '
+        return 'bg-primary-500 hover:bg-primary-600 text-white text-sm border border-primary-500 ';
       case 'primary-outlined':
-        return 'border border-primary-800 hover:border-primary-500 text-sm text-primary-800 hover:text-primary-500'
+        return 'border border-primary-800 hover:border-primary-500 text-sm text-primary-800 hover:text-primary-500';
+      case 'secondary':
+        return 'secondary-button text-white text-sm border ';
+      case 'secondary-outlined':
+        return 'border text-sm secondary-outlined bg-white';
       default:
         return '';
     }
@@ -88,6 +93,3 @@ export class ButtonComponent implements OnChanges,OnInit {
 
 }
 
-type ButtonTheme = 'primary' | 'secondary' | 'primary-outlined' | 'secondary-outlined';
-type ButtonSize = 'md' | 'sm' | 'xs' | 'lg' | 'xl';
-type ButtonRadius = 'md' | 'sm' | 'xs' | 'lg' | 'xl' | 'full';
