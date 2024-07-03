@@ -1,4 +1,4 @@
-<div class="card-box-sahdow bg-white rounded-lg p-2 h-full">
+<div class="card-box-sahdow bg-white rounded-lg p-2 w-full h-full">
   <div class="flex justify-center items-center py-5 border-b border-gray-100">
     <img class="h-16 w-16 max-laptop:h-20 max-laptop:w-20 " [src]="staticImages.logo" />
   </div>
@@ -21,12 +21,12 @@
         </div>
         <div class="text-white my-3 roboto-regular text-center text-[15px]">Super Admin</div>
         <div class="flex justify-center mt-2">
-          <app-button [buttonTheme]="'secondary'" [buttonSize]="'sm'" [classes]="' text-x-base !w-[110px] '">
-            <div class="flex justify-between gap-2 items-center">
+          <app-button [buttonTheme]="'secondary'" [buttonSize]="'xs'" [classes]="' text-x-base '">
+            <div class="flex justify-between  gap-2 items-center">
               <span class="material-icons text-white text-md cursor-pointer  ">
                 {{ 'logout' }}
               </span>
-              <span class="roboto-regular">Logout</span>
+              <span class="roboto-regular text-x-base">Logout</span>
             </div>
           </app-button>
         </div>

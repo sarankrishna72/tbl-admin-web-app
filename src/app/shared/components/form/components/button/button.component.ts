@@ -52,13 +52,13 @@ export class ButtonComponent implements OnChanges,OnInit {
   getThemeClasses() {
     switch (this.buttonTheme) {
       case 'primary':
-        return 'bg-primary-500 hover:bg-primary-600 text-white text-sm border border-primary-500 ';
+        return 'bg-primary-500 hover:bg-primary-600 text-white  border border-primary-500 ';
       case 'primary-outlined':
-        return 'border border-primary-800 hover:border-primary-500 text-sm text-primary-800 hover:text-primary-500';
+        return 'border border-primary-800 hover:border-primary-500 text-primary-800 hover:text-primary-500';
       case 'secondary':
-        return 'secondary-button text-white text-sm border ';
+        return 'secondary-button text-white  border ';
       case 'secondary-outlined':
-        return 'border text-sm secondary-outlined bg-white';
+        return 'border  secondary-outlined bg-white';
       default:
         return '';
     }
@@ -67,17 +67,17 @@ export class ButtonComponent implements OnChanges,OnInit {
   getButtonSize() {
     switch (this.buttonSize) {
       case 'md':
-        return 'h-11 py-2 px-5';
+        return ' py-3 px-5 text-md';
       case 'sm':
-        return 'h-10 py-1 px-5';
+        return ' py-2 px-4 text-sm';
       case 'xs':
-        return 'h-9 py-2 px-5';
+        return 'py-1 px-3 text-xs';
       case 'lg':
-        return 'h-12 py-3 px-6';
+        return 'py-4 px-6 text-lg';
       case 'xl':
-        return 'h-13 py-4 px-7';
+        return 'py-5 px-7 text-xl';
       default:
-        return 'h-10  py-1 px-5';
+        return 'py-1 px-3 text-base';
     }
   }
 

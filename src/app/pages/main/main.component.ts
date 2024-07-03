@@ -1,3 +1,4 @@
+import { DEFAULT_IMAGES } from './../../core/constants/image';
 import { Component } from '@angular/core';
 import { MainContainerComponent } from '../../shared/components/main-container/main-container.component';
 import { TitleComponent } from '../../shared/components/title/title.component';
@@ -15,5 +16,5 @@ import { ButtonComponent } from '../../shared/components/form/components/button/
   styleUrl: './main.component.scss'
 })
 export class MainComponent {
-
+  staticImages:any =  DEFAULT_IMAGES;
 }
