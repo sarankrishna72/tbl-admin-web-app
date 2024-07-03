@@ -4,7 +4,7 @@
       <app-left-menu />
     </div>
 
-    <div  class="w-0 transition-width duration-700 ease-in-out overflow-hidden absolute left-0 top-0 h-full popup-bg {{_appStoreService.sideMenuOpened ? '!w-full': ''}} ">
+    <div  class="w-0 transition-width hidden max-laptop:block duration-700 ease-in-out overflow-hidden absolute left-0 top-0 h-full popup-bg {{_appStoreService.sideMenuOpened ? '!w-full': ''}} ">
       <app-left-menu class="w-56 block  h-full"  appOutsideClick (appClickOutside)="toggleOutSide()"/>
     </div>
 
