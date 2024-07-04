@@ -1,11 +1,11 @@
-<section id="main-container" class="h-full overflow-auto p-4 tablet:p-6 bg-neutral-100">
-  <div class="h-full flex gap-4 tablet:gap-6">
-    <div class="min-w-56 laptop:block hidden">
+<section id="main-container" class="h-full overflow-auto p-4 bg-neutral-100">
+  <div class="h-full flex gap-4 ">
+    <div class="min-w-60 laptop:block hidden">
       <app-left-menu />
     </div>
 
     <div  class="w-0 transition-width hidden max-laptop:block duration-700 ease-in-out overflow-hidden absolute left-0 top-0 h-full popup-bg {{_appStoreService.sideMenuOpened ? '!w-full': ''}} ">
-      <app-left-menu class="w-56 block  h-full"  appOutsideClick (appClickOutside)="toggleOutSide()"/>
+      <app-left-menu class="w-60 block  h-full"  appOutsideClick (appClickOutside)="toggleOutSide()"/>
     </div>
 
     <div class="w-full card-box-shadow h-full bg-white p-5 rounded-lg">
