@@ -47,7 +47,6 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
       if (errorName)
         return this.formConfig?.validations?.find(validation => validation.validatorName?.toLowerCase() === errorName)?.message || '';
     }
-
     return 'This field is required';
   }
 

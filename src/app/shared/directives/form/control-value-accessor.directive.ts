@@ -6,7 +6,7 @@ import { FormBaseControlValidator } from '../../../core/model';
   selector: '[appControlValueAccessor]',
   standalone: true
 })
-export class ControlValueAccessorDirective  implements  ControlValueAccessor{
+export class ControlValueAccessorDirective  implements  ControlValueAccessor {
 
   onChange: (value: any) => void = () => {};
   onTouched: () => void = () => {};
@@ -18,7 +18,6 @@ export class ControlValueAccessorDirective  implements  ControlValueAccessor{
 
 
   writeValue(value: any): void {
-    this.onTouched();
     value && this.controlDir.control?.setValue(value, { emitEvent: false });
   }
 
