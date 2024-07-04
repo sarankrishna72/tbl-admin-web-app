@@ -24,7 +24,7 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
   @Output() blur: EventEmitter<void> = new EventEmitter<void>();
   private _formService = inject(FormService);
 
-  override ngOnInit(): void {
+  ngOnInit(): void {
     if (this.formConfig.validations.length > 0) {
       const validators = []
       for (const validation of this.formConfig.validations) {
