@@ -46,6 +46,8 @@ export class TitleComponent implements OnInit{
         return 'text-xl';
       case 'xxl':
         return 'text-xxl';
+      case '3xl':
+        return 'text-3xl';
       default:
         return ' ';
     }
