@@ -27,6 +27,7 @@ module.exports = {
         'primary-300': 'var(--primary-300)',
         'neutral-100': 'var(--neutral-100)',
         'neutral-300': 'var(--neutral-300)',
+        'gray-700': 'var(--gray-700)',
         'gray-600': 'var(--gray-600)',
         'gray-400': 'var(--gray-400)',
         'gray-100': 'var(--gray-100)',

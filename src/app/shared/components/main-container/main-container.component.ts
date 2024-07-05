@@ -18,6 +18,7 @@ export class MainContainerComponent {
   public _appStoreService = inject(AppStoreService)
 
   toggleOutSide() {
+    console.log("immmmmmmmmm")
     if (this._appStoreService.sideMenuOpened)  this._appStoreService.toggleSideMenuOpened()
   }
 }
