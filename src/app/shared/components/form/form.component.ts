@@ -47,7 +47,6 @@ export class FormComponent implements OnChanges {
         this.formOutput.emit({action: action.actionType});
         break;
     }
-    console.log(this.formGroup.valid)
   }
 
   /**

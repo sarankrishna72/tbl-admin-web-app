@@ -6,8 +6,8 @@ export class TableModel {
   pagination ?: TablePagination | null;
   tableHeadColumnClass ?: string = '';
   tableBodyColumnClass ?: string = '';
-  sortKey ?: string = '';
-  sortDirection ?: string = '';
+  sortKey : string = '';
+  sortDirection : boolean | 'asc' | 'desc' = 'asc';
   showIndexColumn ?: boolean = false;
   actions ?: TableActions[] = [];
   constructor(options: {
@@ -18,8 +18,8 @@ export class TableModel {
     tableHeadColumnClass ?: string;
     tableBodyColumnClass ?: string;
     pagination ?: TablePagination;
-    sortKey ?: string;
-    sortDirection ?: string;
+    sortKey : string;
+    sortDirection :  boolean | 'asc' | 'desc';
     showIndexColumn ?: boolean;
     actions ?: TableActions[]
   }) {
@@ -28,7 +28,7 @@ export class TableModel {
     this.mobileResponsiveCard = options.mobileResponsiveCard || false;
     this.createButtonLabel = options.createButtonLabel || '' ;
     this.sortKey = options.sortKey || '' ;
-    this.sortDirection = options.sortDirection || '' ;
+    this.sortDirection = options.sortDirection || 'asc' ;
     this.tableHeadColumnClass = options.tableHeadColumnClass || '' ;
     this.tableBodyColumnClass = options.tableBodyColumnClass || '' ;
     this.pagination = options.pagination || null;
@@ -54,7 +54,7 @@ interface TableActions {
 
 export class TableColumn {
   order ?: number | null = null;
-  columnKey : string | null = null;
+  columnKey : string = '';
   columnName : string | null = null;
   columnType : TableColumnType;
   checkbox ?: boolean = false;
@@ -63,7 +63,7 @@ export class TableColumn {
 
   constructor(options: {
     order ?: number;
-    columnKey ?: string;
+    columnKey : string;
     columnName ?: string;
     columnType : TableColumnType;
     checkbox ?: boolean;

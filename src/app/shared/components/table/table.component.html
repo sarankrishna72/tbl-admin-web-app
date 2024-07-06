@@ -2,16 +2,35 @@
   <table class="w-full">
     <thead>
       <tr>
-        <td class="bg-neutral-100 py-[10px] px-3 roboto-medium text-base text-primary-800">No</td>
-        <td class="bg-neutral-100 py-[10px] px-3 roboto-medium text-base text-primary-800">Outlet Name</td>
-        <td class="bg-neutral-100 py-[10px] px-3 roboto-medium text-base text-primary-800">Outlet Image</td>
-        <td class="bg-neutral-100 py-[10px] px-3 roboto-medium text-base text-primary-800">City</td>
-        <td class="bg-neutral-100 py-[10px] px-3 roboto-medium text-base text-primary-800">Area</td>
-        <td class="bg-neutral-100 py-[10px] px-3 roboto-medium text-base text-primary-800">Action</td>
+        @for ( colDef of colsDef; track colDef.columnKey) {
+          <td class="bg-neutral-100 py-[10px] px-3 roboto-medium text-base text-primary-800">{{colDef.columnName}}</td>
+        }
       </tr>
     </thead>
     <tbody>
-      <tr>
+      @for ( colDef of colsDef; track colDef.columnKey) {
+        <tr>
+          @for (rowData of tableRowData; track rowData.id) {
+            <td class="py-[10px] px-3 roboto-regular text-gray-700 text-base">
+              @switch (colDef.columnType) {
+                @case ('text') {
+                  {{rowData[colDef.columnKey]}}
+                }
+                @case ('html') {
+                  <span [innerHTML]="rowData[colDef.columnKey]"></span>
+                }
+                @case ('image') {
+                  <img [src]="rowData[colDef.columnKey]" />
+                }
+                @default {
+                  {{rowData[colDef.columnKey]}}
+                }
+              }
+            </td>
+          }
+        </tr>
+      }
+      <!-- <tr>
         <td class="py-[10px] px-3 roboto-regular text-gray-700 text-base">1</td>
         <td class="py-[10px] px-3 roboto-regular text-gray-700 text-base">TBL one</td>
         <td class="py-[10px] px-3 roboto-regular text-gray-700 text-base">
@@ -46,7 +65,7 @@
         <td class="py-[10px] px-3 roboto-regular text-gray-700 text-base">Bangalore</td>
         <td class="py-[10px] px-3 roboto-regular text-gray-700 text-base">Koramangala</td>
         <td class="py-[10px] px-3 roboto-regular text-gray-700 text-base">Action</td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 

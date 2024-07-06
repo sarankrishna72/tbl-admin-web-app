@@ -4,7 +4,7 @@ import { TableModel } from "./table.model";
 import { ButtonTheme } from "../constants/types";
 
 export class CrudPageModel {
-  tableConfigs?: TableModel | null;
+  tableConfigs: TableModel;
   pageActions?: CrudPageActions[] = [];
   title : string = '';
   list_api ?: Observable<any> | null;
@@ -14,7 +14,7 @@ export class CrudPageModel {
   api_params ?: Object = {};
 
   constructor(options: {
-    tableConfigs?: TableModel;
+    tableConfigs: TableModel;
     pageActions?: CrudPageActions[] ;
     title : string;
     list_api ?: Observable<any>;
@@ -23,7 +23,7 @@ export class CrudPageModel {
     formConfigs ?: FormConfig;
     api_params ?: Object;
   }) {
-    this.tableConfigs = options.tableConfigs || null;
+    this.tableConfigs = options.tableConfigs;
     this.pageActions = options.pageActions || [];
     this.title = options.title || '';
     this.list_api = options.list_api || null;
