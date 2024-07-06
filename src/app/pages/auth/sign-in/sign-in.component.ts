@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBase } from '../../../core/model/form.model';
+import { FormConfig } from '../../../core/model/form.model';
 import { DEFAULT_IMAGES } from '../../../core/constants';
 import { SIGN_IN_FORM_DATA } from '../../../core/configurations/forms';
 import { FormComponent } from '../../../shared/components/form/form.component';
@@ -19,5 +19,5 @@ import { TitleComponent } from '../../../shared/components/title/title.component
 })
 export class SignInComponent {
   staticImages: any = DEFAULT_IMAGES;
-  formConfigs: FormBase[]= SIGN_IN_FORM_DATA;
+  formConfigs: FormConfig = SIGN_IN_FORM_DATA;
 }

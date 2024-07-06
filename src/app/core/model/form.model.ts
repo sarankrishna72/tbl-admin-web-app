@@ -1,4 +1,5 @@
 import { Observable } from "rxjs/internal/Observable";
+import { ButtonTheme, ButtonType } from "../constants/types";
 
 export class FormBase {
   value: any;
@@ -67,6 +68,26 @@ export class FormBaseControlValidator{
   }
 }
 
+export class FormConfig {
+  controls : FormBase[]  = [];
+  actions: FormAction[] = [];
+   constructor(options: {
+    controls : FormBase[];
+    actions : FormAction[];
+  }) {
+    this.controls = options.controls || [];
+    this.actions = options.actions || [];
+  }
+}
+
+
+export interface FormAction {
+  actionType: formActionTypes;
+  label : string;
+  classes ?: string;
+  buttonTheme ?: ButtonTheme;
+  buttonType : ButtonType;
+}
 
 export class InputTextField extends FormBase {
   override controlType = 'textfield';
@@ -76,6 +97,7 @@ export class InputDropdown extends FormBase {
   override controlType = 'dropdown';
 }
 
+type formActionTypes = 'submit' | 'reset' | 'cancel';
 
 export enum ValidatorsType {
   REQUIRED = "required",

@@ -1,12 +1,17 @@
 <form [formGroup]="formGroup" autocomplete="off" class="flex flex-col gap-3">
-  @for ( formQuestion of formData; track formQuestion.key) {
+  @for ( formQuestion of formData['controls']; track formQuestion.key) {
     @switch (formQuestion.controlType) {
       @case ("textfield") {
         <app-input [formControlName]="formQuestion.key" [formConfig]="formQuestion" />
       }
     }
   }
-  <app-button [buttonSize]="'md'" (onClick)="submitForm()" class="mt-3 ">
-    Login
-  </app-button>
+  <div class="w-full flex justify-between mt-3 gap-3">
+    @for ( action of formData.actions ; track action.actionType) {
+      <app-button [class]="action.classes" [buttonSize]="'md'" [buttonType]="action.buttonType" (onClick)="formAction(action)">
+        {{action.label}}
+      </app-button>
+    }
+  </div>
+
 </form>

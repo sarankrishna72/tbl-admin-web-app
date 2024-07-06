@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ButtonTheme, ButtonRadius, Size } from '../../../../../core/constants/types';
+import { ButtonTheme, ButtonRadius, Size, ButtonType } from '../../../../../core/constants/types';
 
 @Component({
   selector: 'app-button',
@@ -12,7 +12,7 @@ import { ButtonTheme, ButtonRadius, Size } from '../../../../../core/constants/t
   styleUrl: './button.component.scss'
 })
 export class ButtonComponent implements OnChanges,OnInit {
-  @Input() buttonType: string = 'button';
+  @Input() buttonType: ButtonType = 'button';
   @Input() buttonTheme: ButtonTheme = 'primary';
   @Input() buttonRadius : ButtonRadius = 'md';
   @Input() buttonSize : Size = 'lg';
@@ -52,13 +52,13 @@ export class ButtonComponent implements OnChanges,OnInit {
   getThemeClasses() {
     switch (this.buttonTheme) {
       case 'primary':
-        return 'bg-primary-500 hover:bg-primary-600 text-white  border border-primary-500 ';
+        return ' bg-primary-500 hover:bg-primary-600 text-white  border border-primary-500 ';
       case 'primary-outlined':
-        return 'border border-primary-800 hover:border-primary-500 text-primary-800 hover:text-primary-500';
+        return ' border border-primary-800 hover:border-primary-500 hover:bg-primary-500 hover:!text-white text-primary-800 hover:text-primary-500';
       case 'secondary':
-        return 'secondary-button text-white  border ';
+        return ' secondary-button text-white  border ';
       case 'secondary-outlined':
-        return 'border  secondary-outlined bg-white';
+        return ' border  secondary-outlined bg-white';
       default:
         return '';
     }
@@ -71,13 +71,13 @@ export class ButtonComponent implements OnChanges,OnInit {
       case 'sm':
         return ' py-2 px-4 text-sm';
       case 'xs':
-        return 'py-1 px-3 text-xs';
+        return ' py-1 px-3 text-xs';
       case 'lg':
-        return 'py-4 px-6 text-lg';
+        return ' py-4 px-6 text-lg';
       case 'xl':
-        return 'py-5 px-7 text-xl';
+        return ' py-5 px-7 text-xl';
       default:
-        return 'py-1 px-3 text-base';
+        return ' py-1 px-3 text-base';
     }
   }
 

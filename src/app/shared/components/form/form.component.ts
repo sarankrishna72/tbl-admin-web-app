@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormBase } from '../../../core/model';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {FormAction, FormConfig } from '../../../core/model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as _ from 'lodash';
 import { InputComponent, ButtonComponent } from './components';
@@ -16,23 +16,37 @@ import { InputComponent, ButtonComponent } from './components';
   styleUrl: './form.component.scss'
 })
 export class FormComponent implements OnChanges {
-  @Input() formData: FormBase[] = [];
+  @Input() formData!: FormConfig;
   @Input() formGroup: FormGroup = new FormGroup({});
-
+  @Output() formOutput: EventEmitter<any> = new EventEmitter();
   /**
    * Generate Form Control Configuration
    *
    * @memberof FormComponent
    */
   generateFormGroupControls() {
-    this.formData = _.orderBy(this.formData, ['order'],['asc']);
-    for (const formQuestion of this.formData) {
+    let { controls, actions } : FormConfig = this.formData;
+
+    controls = _.orderBy(controls, ['order'],['asc']);
+    for (const formQuestion of controls) {
       const control = new FormControl(formQuestion.value || '') as FormControl<any>;
       this.formGroup.addControl(formQuestion.key, control )
     }
   }
 
-  submitForm() {
+  formAction(action: FormAction) {
+    switch (action.actionType) {
+      case "reset":
+        this.formGroup.reset();
+        this.formGroup.updateValueAndValidity();
+        break;
+      case "submit":
+        this.formOutput.emit({action: action.actionType, value: this.formGroup.value});
+        break;
+      default:
+        this.formOutput.emit({action: action.actionType});
+        break;
+    }
     console.log(this.formGroup.valid)
   }
 
@@ -45,7 +59,7 @@ export class FormComponent implements OnChanges {
    */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['formData'] && changes['formData'].currentValue) {
-      if (this.formData.length > 0) {
+      if (this.formData.controls.length > 0) {
         this.generateFormGroupControls();
       }
     }
