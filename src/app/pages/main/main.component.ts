@@ -7,6 +7,7 @@ import { AppStoreService } from '../../shared/services/store/app-store.service';
 import { TableComponent } from '../../shared/components/table/table.component';
 import { CommonService } from '../../shared/services/common/common.service';
 import { CrudPageModel } from '../../core/model';
+import { NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -24,12 +25,23 @@ export class MainComponent implements OnInit{
   public _appStoreService = inject(AppStoreService)
   public _commonService = inject(CommonService)
   configurations: CrudPageModel| null = null;
+  public _router = inject(Router)
   private loggingEffect = effect(() => {
-    if (this._appStoreService.getCurrentPageConfig()) this.configurations = this._appStoreService.getCurrentPageConfig();
+    if (this._appStoreService.getCurrentPageConfig()) {
+      this.configurations = this._appStoreService.getCurrentPageConfig();
+    } else {
+      this.configurations = null
+    }
   });
 
 
-
+  changeRouterEvent():void {
+    this._router.events.subscribe((val) => {
+       if (val instanceof NavigationEnd) {
+        this._commonService.getPageConfiguration()
+      }
+    });
+  }
 
 
   /**
@@ -38,6 +50,7 @@ export class MainComponent implements OnInit{
    * @memberof MainComponent
    */
   ngOnInit(): void {
-    this._commonService.getPageConfiguration()
+    this._commonService.getPageConfiguration();
+    this.changeRouterEvent();
   }
 }

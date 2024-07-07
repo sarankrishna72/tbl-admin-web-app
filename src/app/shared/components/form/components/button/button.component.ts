@@ -54,7 +54,7 @@ export class ButtonComponent implements OnChanges,OnInit {
       case 'primary':
         return ' bg-primary-500 hover:bg-primary-600 text-white  border border-primary-500 ';
       case 'primary-outlined':
-        return ' border border-primary-800 hover:border-primary-500 hover:bg-primary-500 hover:!text-white text-primary-800 hover:text-primary-500';
+        return ' border border-primary-700 hover:border-primary-500 hover:bg-primary-500 hover:!text-white text-primary-700 hover:text-primary-500';
       case 'secondary':
         return ' secondary-button text-white  border ';
       case 'secondary-outlined':

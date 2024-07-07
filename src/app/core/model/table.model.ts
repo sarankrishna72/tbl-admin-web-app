@@ -80,5 +80,5 @@ export class TableColumn {
   }
 }
 
-type TableColumnType = 'text' | 'image' | 'action' | 'html';
+type TableColumnType = 'text' | 'image' | 'action' | 'html' | 'index';
 type TableActionType = 'edit' | 'delete' | 'custom';

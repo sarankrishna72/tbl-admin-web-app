@@ -3,24 +3,39 @@
     <thead>
       <tr>
         @for ( colDef of colsDef; track colDef.columnKey) {
-          <td class="bg-neutral-100 py-[10px] px-3 roboto-medium text-base text-primary-800">{{colDef.columnName}}</td>
+          <td class="bg-neutral-100 py-[10px] px-3 roboto-medium text-base text-primary-800" [ngClass]="{'text-center': colDef.columnType == 'action'}" [ngStyle]="{'min-width': colDef.columnWidth }">{{colDef.columnName}}</td>
         }
       </tr>
     </thead>
     <tbody>
-      @for ( colDef of colsDef; track colDef.columnKey) {
+      @for (rowData of tableRowData; track rowData.id; let index = $index) {
         <tr>
-          @for (rowData of tableRowData; track rowData.id) {
-            <td class="py-[10px] px-3 roboto-regular text-gray-700 text-base">
+          @for ( colDef of colsDef; track colDef.columnKey) {
+            <td class="py-[10px] px-3 roboto-regular border-b border-gray-100 text-gray-700 text-base">
               @switch (colDef.columnType) {
                 @case ('text') {
                   {{rowData[colDef.columnKey]}}
                 }
+                @case ('index') {
+                  {{ index + 1 }}
+                }
                 @case ('html') {
                   <span [innerHTML]="rowData[colDef.columnKey]"></span>
                 }
+                @case ('action') {
+                  <div class="flex items-center justify-center gap-2">
+                    @for ( action of tableConfigs.actions; track action.action_id) {
+                      <app-button buttonSize="xs" [classes]="'w-10 '+ action.classes "  buttonTheme="custom">
+                        <span class="material-icons w-4 text-md cursor-pointer noselect ">
+                          {{ action.icon }}
+                        </span>
+                        {{ action.action_name }}
+                      </app-button>
+                    }
+                  </div>
+                }
                 @case ('image') {
-                  <img [src]="rowData[colDef.columnKey]" />
+                  <img class="h-[50px] w-[90px] rounded-md" [src]="rowData[colDef.columnKey]" />
                 }
                 @default {
                   {{rowData[colDef.columnKey]}}
@@ -30,6 +45,29 @@
           }
         </tr>
       }
+
+      @if (tableRowData.length == 0) {
+        <tr>
+          <td [attr.colspan]="colsDef.length" class="p-7 ">
+            <div class="flex items-center justify-center flex-col">
+              <img [src]="staticImages.no_data_available" />
+              <div class="text-primary-800 text-lg roboto-regular">No data available!</div>
+              @if (tableConfigs.createButtonLabel) {
+              <app-button buttonSize="xs" classes=" mt-4" buttonTheme="primary-outlined">
+                <div class="flex items-center justify-center gap-1">
+                  <span class="material-icons text-md cursor-pointer noselect ">
+                    {{ 'add' }}
+                  </span>
+                  <span>{{tableConfigs.createButtonLabel}}</span>
+                </div>
+              </app-button>
+              }
+            </div>
+          </td>
+        </tr>
+      }
+
+
       <!-- <tr>
         <td class="py-[10px] px-3 roboto-regular text-gray-700 text-base">1</td>
         <td class="py-[10px] px-3 roboto-regular text-gray-700 text-base">TBL one</td>

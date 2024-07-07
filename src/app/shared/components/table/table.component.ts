@@ -1,11 +1,17 @@
+import { DEFAULT_IMAGES } from './../../../core/constants/image';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TableColumn, TableModel } from '../../../core/model';
 import * as _ from 'lodash';
+import { ButtonComponent } from '../form/components';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [],
+  imports: [
+    ButtonComponent,
+    CommonModule
+  ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
@@ -13,15 +19,17 @@ export class TableComponent implements OnChanges{
   @Input() tableConfigs!: TableModel;
   colsDef: TableColumn[] = [];
   tableRowData: any[] = [];
-
+  staticImages:any =  DEFAULT_IMAGES;
 
   generateColumns(): void {
     this.colsDef = _.orderBy(this.tableConfigs!.columns, ['order'],['asc']);
     if (this.tableConfigs.showIndexColumn) {
       this.colsDef.unshift({
         columnKey: "index",
-        columnType: "text",
+        columnType: "index",
         columnName: "No.",
+        columnWidth: "100px"
+
       })
     }
 
@@ -29,7 +37,8 @@ export class TableComponent implements OnChanges{
       this.colsDef.push({
         columnKey: "action",
         columnType: "action",
-        columnName: "Action",
+        columnName: "Actions",
+        columnWidth: "150px"
       })
     }
   }

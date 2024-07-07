@@ -6,7 +6,7 @@ import { CrudPageModel } from '../../../core/model';
 })
 export class AppStoreService {
   private isSideMenuOpened:WritableSignal<boolean> = signal(false);
-  private currentPageConfig: WritableSignal<CrudPageModel| null> = signal(null);
+  private currentPageConfig: WritableSignal<CrudPageModel | null> = signal(null);
   constructor() { }
 
   /**
@@ -33,7 +33,7 @@ export class AppStoreService {
    *
    * @memberof AppStoreService
    */
-  setCurrentPageConfig(value: CrudPageModel) {
+  setCurrentPageConfig(value: CrudPageModel | null) {
     this.currentPageConfig.set(value);
   }
 
