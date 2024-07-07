@@ -40,6 +40,7 @@ interface CrudPageActions {
   label ?: string;
   button_theme : ButtonTheme;
   action_id : string;
+  classes ?: string;
 }
 
 type CrudePageActionName = 'create' | 'delete_all' | 'custom';

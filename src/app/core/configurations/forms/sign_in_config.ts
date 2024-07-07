@@ -33,9 +33,11 @@ export const SIGN_IN_FORM_DATA: FormConfig = new FormConfig(
       {
         actionType: "submit",
         label: "Login",
-        buttonTheme: 'primary',
-        buttonType: "submit",
-        classes: 'flex-1 w-full'
+        buttonConfig: {
+          buttonTheme: 'primary',
+          buttonType: 'submit',
+          classes: 'flex-1 w-full'
+        }
       }
     ]
   }

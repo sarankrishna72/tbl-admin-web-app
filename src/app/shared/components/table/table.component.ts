@@ -2,7 +2,7 @@ import { DEFAULT_IMAGES } from './../../../core/constants/image';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TableColumn, TableModel } from '../../../core/model';
 import * as _ from 'lodash';
-import { ButtonComponent } from '../form/components';
+import { ButtonComponent } from '..';
 import { CommonModule } from '@angular/common';
 
 @Component({

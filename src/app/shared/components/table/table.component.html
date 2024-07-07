@@ -23,9 +23,9 @@
                   <span [innerHTML]="rowData[colDef.columnKey]"></span>
                 }
                 @case ('action') {
-                  <div class="flex items-center justify-center gap-2">
+                  <div class="flex items-center justify-center">
                     @for ( action of tableConfigs.actions; track action.action_id) {
-                      <app-button buttonSize="xs" [classes]="'w-10 '+ action.classes "  buttonTheme="custom">
+                      <app-button buttonSize="xs" [classes]="'w-10 !py-[2px] !px-[6px] '+ action.classes "  buttonTheme="custom">
                         <span class="material-icons w-4 text-md cursor-pointer noselect ">
                           {{ action.icon }}
                         </span>

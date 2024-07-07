@@ -1,5 +1,5 @@
 import { Observable } from "rxjs/internal/Observable";
-import { ButtonTheme, ButtonType } from "../constants/types";
+import { ButtonRadius, ButtonTheme, ButtonType, Size } from "../constants/types";
 
 export class FormBase {
   value: any;
@@ -84,9 +84,18 @@ export class FormConfig {
 export interface FormAction {
   actionType: formActionTypes;
   label : string;
+  buttonConfig ?: ButtonConfig;
+}
+
+interface ButtonConfig {
+  buttonType: ButtonType;
+  buttonTheme: ButtonTheme ;
+  buttonRadius ?: ButtonRadius;
+  buttonSize ?: Size;
   classes ?: string;
-  buttonTheme ?: ButtonTheme;
-  buttonType : ButtonType;
+  style ?: any;
+  rounded ?: boolean;
+  fullWidth ?: boolean;
 }
 
 export class InputTextField extends FormBase {

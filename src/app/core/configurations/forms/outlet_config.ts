@@ -53,9 +53,13 @@ export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
       {
         actionType: "submit",
         label: "Create",
-        buttonTheme: 'primary',
-        buttonType: "submit",
-        classes: ''
+        buttonConfig: {
+          buttonTheme: 'primary',
+          buttonSize: 'sm',
+          buttonType: 'submit',
+          style: {"font-family": "roboto-regular"},
+          classes: '!text-base'
+        }
       }
     ]
   })

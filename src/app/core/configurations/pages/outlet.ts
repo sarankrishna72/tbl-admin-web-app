@@ -89,7 +89,8 @@ const OutletPageData: CrudPageModel = new CrudPageModel(
         icon: "add",
         label: "Create New Outlet",
         button_theme: "primary-outlined",
-        action_id : "create"
+        action_id : "create",
+
       },
 
     ]

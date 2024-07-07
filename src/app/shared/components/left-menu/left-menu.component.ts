@@ -1,8 +1,8 @@
 
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { ButtonComponent } from '../form/components';
 import { DEFAULT_IMAGES } from './../../../core/constants/image';
 import { Component } from '@angular/core';
+import { ButtonComponent } from '..';
 
 @Component({
   selector: 'app-left-menu',

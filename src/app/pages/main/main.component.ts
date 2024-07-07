@@ -1,13 +1,10 @@
 import { DEFAULT_IMAGES } from './../../core/constants/image';
 import { Component, OnInit, inject, effect } from '@angular/core';
-import { MainContainerComponent } from '../../shared/components/main-container/main-container.component';
-import { TitleComponent } from '../../shared/components/title/title.component';
-import { ButtonComponent } from '../../shared/components/form/components/button/button.component';
 import { AppStoreService } from '../../shared/services/store/app-store.service';
-import { TableComponent } from '../../shared/components/table/table.component';
 import { CommonService } from '../../shared/services/common/common.service';
 import { CrudPageModel } from '../../core/model';
 import { NavigationEnd, Router } from '@angular/router';
+import { ButtonComponent, FormComponent, MainContainerComponent, TitleComponent, PopupComponent, TableComponent } from '../../shared/components';
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -15,7 +12,9 @@ import { NavigationEnd, Router } from '@angular/router';
     MainContainerComponent,
     TitleComponent,
     ButtonComponent,
-    TableComponent
+    TableComponent,
+    PopupComponent,
+    FormComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'

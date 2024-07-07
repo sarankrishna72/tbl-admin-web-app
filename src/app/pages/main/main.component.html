@@ -25,9 +25,19 @@
     </div>
   </div>
 
-  <div class="mt-6">
+  <div class="mt-6 w-">
     @if (configurations?.tableConfigs) {
       <app-table [tableConfigs]="configurations?.tableConfigs!"></app-table>
     }
   </div>
+  <app-popup [title]="'Create New Outlet'" containerClass="tablet:w-[460px] w-[90%]">
+    @if (configurations?.formConfigs) {
+      <div class="pt-3">
+        <app-form [formData]="configurations?.formConfigs!"></app-form>
+      </div>
+    }
+
+  </app-popup>
 </app-main-container>
+
+

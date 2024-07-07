@@ -8,7 +8,17 @@
   }
   <div class="w-full flex justify-between mt-3 gap-3">
     @for ( action of formData.actions ; track action.actionType) {
-      <app-button [class]="action.classes" [buttonSize]="'md'" [buttonType]="action.buttonType" (onClick)="formAction(action)">
+      <app-button
+        [classes]="action.buttonConfig?.classes || '' "
+        [buttonRadius]="action.buttonConfig?.buttonRadius || 'md'"
+        [buttonSize]="action.buttonConfig?.buttonSize || 'md'"
+        [buttonType]="action.buttonConfig?.buttonType || 'button'"
+        [style]="action.buttonConfig?.style || {}"
+        [rounded]="action.buttonConfig?.rounded || false"
+        [fullWidth]="action.buttonConfig?.fullWidth || false"
+        (onClick)="formAction(action)"
+
+      >
         {{action.label}}
       </app-button>
     }
