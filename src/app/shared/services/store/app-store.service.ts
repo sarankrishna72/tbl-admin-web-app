@@ -7,6 +7,7 @@ import { CrudPageModel } from '../../../core/model';
 export class AppStoreService {
   private isSideMenuOpened:WritableSignal<boolean> = signal(false);
   private currentPageConfig: WritableSignal<CrudPageModel | null> = signal(null);
+  private popupShowing: WritableSignal<boolean> = signal(false);
   constructor() { }
 
   /**
@@ -28,7 +29,7 @@ export class AppStoreService {
     return this.isSideMenuOpened();
   }
 
-   /**
+  /**
    * Set Current Page Configuration
    *
    * @memberof AppStoreService
@@ -46,5 +47,24 @@ export class AppStoreService {
    */
   getCurrentPageConfig() {
     return this.currentPageConfig();
+  }
+
+  /**
+   * Set Popup Showing
+   *
+   * @memberof AppStoreService
+   */
+  setPopupShowing() {
+    this.popupShowing.set(!this.popupShowing());
+  }
+
+  /**
+   * Get Popup Showing from the store
+   *
+   * @return {*}
+   * @memberof AppStoreService
+   */
+  getPopupShowing() {
+    return this.popupShowing();
   }
 }

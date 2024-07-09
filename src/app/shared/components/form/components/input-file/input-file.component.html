@@ -1,0 +1,39 @@
+@if (formConfig.label ) {
+  <label [for]="formConfig.key" [id]="'label'+formConfig.key"
+    class="roboto-regular text-sm text-primary-800 mb-1 inline-block">
+    {{formConfig.label}}
+  </label>
+}
+
+<div class="container flex-col bg-neutral-100 border border-neutral-300 p-4 rounded flex justify-center items-center" appDragAndDrop (fileDropped)="onFileDropped($event)">
+  <input type="file" #fileDropRef id="fileDropRef" [multiple]="formConfig.multiple || false" (blur)="onTouched();" (change)="fileBrowseHandler($event.target)" />
+  <span class="material-icons text-gray-400 text-[40px] cursor-pointer noselect"
+    >
+    cloud_upload
+  </span>
+  <div class="text-base roboto-regular">
+    <span class=" text-gray-400">Drag & Drop file or </span>
+    <label for="fileDropRef" class="text-primary-500 cursor-pointer">Browse</label>
+  </div>
+</div>
+
+@if (formConfig.helpText && !(controlDir.control?.touched && controlDir.control?.invalid)) {
+<div class="text-gray-600 text-xxs flex items-center gap-1">
+  @if (controlDir.control?.touched && controlDir.control?.invalid) {
+  <span class="material-icons text-base cursor-pointer noselect"
+    [ngClass]="{ 'text-error-500': controlDir.control?.touched && controlDir.control?.invalid }">
+    {{ 'error' }}
+  </span>
+  }
+  {{formConfig.helpText }}
+</div>
+}
+
+@if (controlDir.control?.touched && controlDir.control?.invalid && formConfig.validations.length) {
+<div class="text-error-500 text-xxs flex items-center gap-1">
+  <span class="material-icons text-base cursor-pointer noselect text-error-500">
+    {{ 'error' }}
+  </span>
+  {{errorMessage()}}
+</div>
+}

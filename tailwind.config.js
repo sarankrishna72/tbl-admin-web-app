@@ -30,6 +30,7 @@ module.exports = {
         'gray-700': 'var(--gray-700)',
         'gray-600': 'var(--gray-600)',
         'gray-400': 'var(--gray-400)',
+        'gray-300': 'var(--gray-300)',
         'gray-100': 'var(--gray-100)',
         'success-400': 'var(--success-400)',
         'error-500': 'var(--error-500)',

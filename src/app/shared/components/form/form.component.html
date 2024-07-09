@@ -4,6 +4,9 @@
       @case ("textfield") {
         <app-input [formControlName]="formQuestion.key" [formConfig]="formQuestion" />
       }
+      @case ("file") {
+        <app-input-file [formControlName]="formQuestion.key" [formConfig]="formQuestion" />
+      }
     }
   }
   <div class="w-full flex justify-between mt-3 gap-3">
@@ -17,7 +20,7 @@
         [rounded]="action.buttonConfig?.rounded || false"
         [fullWidth]="action.buttonConfig?.fullWidth || false"
         (onClick)="formAction(action)"
-
+        class="w-full"
       >
         {{action.label}}
       </app-button>

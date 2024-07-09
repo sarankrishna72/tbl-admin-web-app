@@ -1,4 +1,4 @@
-import { FormBaseControlValidator, FormConfig, InputTextField, ValidatorsType,  } from "../../model";
+import { FormBaseControlValidator, FormConfig, InputFile, InputTextField, ValidatorsType,  } from "../../model";
 
 
 export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
@@ -37,13 +37,15 @@ export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true })
         ]
       }),
-      new InputTextField({
+      new InputFile({
         key: "image",
         value: "",
         type: "text",
         label: "Outlet Image",
         order:4,
         placeholder: "Enter Outlet Image",
+        helpText: "Image file must be 20MB or less",
+        multiple: false,
         validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true })
         ]

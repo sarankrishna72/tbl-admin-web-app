@@ -1,5 +1,5 @@
 import { DEFAULT_IMAGES } from './../../../core/constants/image';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, Output, SimpleChanges,EventEmitter } from '@angular/core';
 import { TableColumn, TableModel } from '../../../core/model';
 import * as _ from 'lodash';
 import { ButtonComponent } from '..';
@@ -17,10 +17,10 @@ import { CommonModule } from '@angular/common';
 })
 export class TableComponent implements OnChanges{
   @Input() tableConfigs!: TableModel;
+  @Output() tableActionCTA: EventEmitter<any> = new EventEmitter();
   colsDef: TableColumn[] = [];
   tableRowData: any[] = [];
   staticImages:any =  DEFAULT_IMAGES;
-
   generateColumns(): void {
     this.colsDef = _.orderBy(this.tableConfigs!.columns, ['order'],['asc']);
     if (this.tableConfigs.showIndexColumn) {
@@ -41,6 +41,10 @@ export class TableComponent implements OnChanges{
         columnWidth: "150px"
       })
     }
+  }
+
+  tableAction(data: any): void {
+    this.tableActionCTA.emit( {...data.action, data: data.data} );
   }
 
 

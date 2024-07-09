@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import {FormAction, FormConfig } from '../../../core/model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as _ from 'lodash';
-import { InputComponent } from './components';
+import { InputComponent, InputFileComponent } from './components';
 import { ButtonComponent } from '..';
 
 @Component({
@@ -11,6 +11,7 @@ import { ButtonComponent } from '..';
   imports: [
     InputComponent,
     ButtonComponent,
+    InputFileComponent,
     ReactiveFormsModule,
   ],
   templateUrl: './form.component.html',
@@ -20,6 +21,7 @@ export class FormComponent implements OnChanges {
   @Input() formData!: FormConfig;
   @Input() formGroup: FormGroup = new FormGroup({});
   @Output() formOutput: EventEmitter<any> = new EventEmitter();
+  @Output() onFormGroupReady: EventEmitter<any> = new EventEmitter();
   /**
    * Generate Form Control Configuration
    *
@@ -27,12 +29,12 @@ export class FormComponent implements OnChanges {
    */
   generateFormGroupControls() {
     let { controls, actions } : FormConfig = this.formData;
-
     controls = _.orderBy(controls, ['order'],['asc']);
     for (const formQuestion of controls) {
       const control = new FormControl(formQuestion.value || '') as FormControl<any>;
       this.formGroup.addControl(formQuestion.key, control )
     }
+    this.onFormGroupReady.emit(this.formGroup);
   }
 
   formAction(action: FormAction) {

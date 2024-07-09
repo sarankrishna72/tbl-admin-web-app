@@ -18,7 +18,9 @@ export class ControlValueAccessorDirective  implements  ControlValueAccessor {
 
 
   writeValue(value: any): void {
-    value && this.controlDir.control?.setValue(value, { emitEvent: false });
+    if (value !== this.controlDir.control?.value) {
+      this.controlDir.control?.setValue(value, { emitEvent: false });
+    }
   }
 
   registerOnChange(onChange: (value: any) => void): void {

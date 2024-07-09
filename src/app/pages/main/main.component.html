@@ -3,7 +3,7 @@
     <app-title size="xxl" theme="secondary" classes="roboto-medium max-tablet:!text-xl">{{configurations?.title}}</app-title>
     <div class="laptop:flex gap-3 items-center hidden">
       @for ( pageAction of configurations?.pageActions; track pageAction.action_id) {
-        <app-button buttonSize="xs" [buttonTheme]="pageAction.button_theme">
+        <app-button buttonSize="xs" (onClick)="actionCTA(pageAction)" [buttonTheme]="pageAction.button_theme">
           <div class="flex items-center justify-center gap-1">
             @if (pageAction.icon) {
               <span class="material-icons text-md cursor-pointer noselect ">
@@ -27,17 +27,20 @@
 
   <div class="mt-6 w-">
     @if (configurations?.tableConfigs) {
-      <app-table [tableConfigs]="configurations?.tableConfigs!"></app-table>
+      <app-table (tableActionCTA)="actionCTA($event)" [tableConfigs]="configurations?.tableConfigs!"></app-table>
     }
   </div>
-  <app-popup [title]="'Create New Outlet'" containerClass="tablet:w-[460px] w-[90%]">
-    @if (configurations?.formConfigs) {
-      <div class="pt-3">
-        <app-form [formData]="configurations?.formConfigs!"></app-form>
-      </div>
-    }
 
-  </app-popup>
+  @if (_appStoreService.getPopupShowing()) {
+    <app-popup [title]="'Create New Outlet'" containerClass="tablet:w-[460px] w-[90%]">
+      @if (configurations?.formConfigs) {
+      <div class="pt-3">
+        <app-form (onFormGroupReady)="onFormGroupReady($event)" [formGroup]="formGroup" [formData]="configurations?.formConfigs!"></app-form>
+      </div>
+      }
+    </app-popup>
+  }
+
 </app-main-container>
 
 

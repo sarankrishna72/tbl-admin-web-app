@@ -15,6 +15,7 @@ export class FormBase {
   success_icon ?: string = '';
   error_icon ?: string = '';
   icon ?: string = '';
+  multiple ?: boolean = false;
   helpText?: string = '';
   showValidationIcon ?: boolean = false;
   constructor(options: {
@@ -33,6 +34,7 @@ export class FormBase {
     success_icon ?: string;
     icon ?: string;
     showValidationIcon ?: boolean
+    multiple ?: boolean
   } = {}) {
     this.value = options.value;
     this.key = options.key || '';
@@ -49,6 +51,7 @@ export class FormBase {
     this.success_icon = options.success_icon || "";
     this.icon = options.icon || "";
     this.showValidationIcon = options.showValidationIcon || false;
+    this.multiple = options.multiple || false;
   }
 }
 
@@ -100,6 +103,10 @@ interface ButtonConfig {
 
 export class InputTextField extends FormBase {
   override controlType = 'textfield';
+}
+
+export class InputFile extends FormBase {
+  override controlType = 'file';
 }
 
 export class InputDropdown extends FormBase {
