@@ -51,16 +51,9 @@ export class MainComponent implements OnInit{
   }
 
 
-  onFormGroupReady(event: any) {
-    // if (this.selectedData) {
-    //   console.log(this.selectedData);
-    //   event.patchValue(this.selectedData)
-    // }
-  }
-
-
   actionCTA(action: any) {
     this.selectedData = null;
+    this.formGroup.reset();
     switch (action.action_id) {
       case "create":
         this._appStoreService.setPopupShowing();
