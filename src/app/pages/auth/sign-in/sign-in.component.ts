@@ -9,6 +9,7 @@ import { TitleComponent } from '../../../shared/components/title/title.component
 import { AppStoreService } from '../../../shared/services/store/app-store.service';
 import { ToastService } from '../../../shared/services/toast/toast.service';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { IndexedDbService } from '../../../shared/services/storage/indexed-db.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -30,9 +31,17 @@ export class SignInComponent {
   public _apiService = inject(ApiService);
   public _toastService = inject(ToastService);
   public _appStoreService = inject(AppStoreService);
+  private _indexedDbService = inject(IndexedDbService);
+  /**
+   * Submit the Sign in form to the application
+   *
+   * @param {*} event
+   * @memberof SignInComponent
+   */
   onFormSubmit(event: any) {
     this._apiService.adminSignIn(event.value).subscribe((res: any) => {
       this._toastService.success({message: `Welcome back ${res.email} `, autoClose: false, title: 'Signed in successfully!'})
     })
   }
+
 }

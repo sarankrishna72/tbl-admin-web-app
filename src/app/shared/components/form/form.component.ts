@@ -44,7 +44,11 @@ export class FormComponent implements OnChanges {
         this.formGroup.updateValueAndValidity();
         break;
       case "submit":
-        this.formOutput.emit({action: action.actionType, value: this.formGroup.value});
+        if (this.formGroup.valid) {
+          this.formOutput.emit({action: action.actionType, value: this.formGroup.value});
+        } else {
+          this.formGroup.markAllAsTouched();
+        }
         break;
       default:
         this.formOutput.emit({action: action.actionType});

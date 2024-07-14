@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { API_URI } from '../../../core/constants/api_uri';
+import { environment } from '../../../../environments/environment';
+import { HttpService } from '../http/http.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,18 +11,27 @@ import { API_URI } from '../../../core/constants/api_uri';
 export class ApiService {
 
   constructor(
-    private _httpClient: HttpClient
-  ) {
+    private _httpService: HttpService
+  ) {}
 
-  }
-
-
+  /**
+   * Admin Sign in Api Service Call
+   *
+   * @param {AdminSignIn} admin
+   * @return {*}
+   * @memberof ApiService
+   */
   adminSignIn(admin: AdminSignIn) {
-    return this._httpClient.post(API_URI.adminSignInURI, {admin: admin})
+    return this._httpService.post(API_URI.adminSignInURI, {admin: admin})
   }
 }
 
 
+/**
+ * Interface for admin SignIn Data API
+ *
+ * @interface AdminSignIn
+ */
 interface AdminSignIn {
   email: string;
   password: string;
