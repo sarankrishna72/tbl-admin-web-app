@@ -1,5 +1,5 @@
 import { Injectable, WritableSignal, signal } from '@angular/core';
-import { CrudPageModel } from '../../../core/model';
+import { CrudPageModel, ToastModel } from '../../../core/model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,7 @@ export class AppStoreService {
   private isSideMenuOpened:WritableSignal<boolean> = signal(false);
   private currentPageConfig: WritableSignal<CrudPageModel | null> = signal(null);
   private popupShowing: WritableSignal<boolean> = signal(false);
+  private toasts: WritableSignal<ToastModel[]> = signal([]);
   constructor() { }
 
   /**
@@ -29,6 +30,7 @@ export class AppStoreService {
     return this.isSideMenuOpened();
   }
 
+
   /**
    * Set Current Page Configuration
    *
@@ -49,6 +51,7 @@ export class AppStoreService {
     return this.currentPageConfig();
   }
 
+
   /**
    * Set Popup Showing
    *
@@ -57,6 +60,7 @@ export class AppStoreService {
   setPopupShowing() {
     this.popupShowing.set(!this.popupShowing());
   }
+
 
   /**
    * Get Popup Showing from the store
@@ -67,4 +71,40 @@ export class AppStoreService {
   getPopupShowing() {
     return this.popupShowing();
   }
+
+
+  /**
+   * add Toast Data
+   *
+   * @memberof AppStoreService
+   */
+  addToast(toast: any) {
+    let data = JSON.parse(JSON.stringify(this.toasts()));
+    data.push(toast);
+    this.toasts.set(data)
+  }
+
+
+  /**
+   * Remove Toast Item from toasts list
+   *
+   * @memberof AppStoreService
+   */
+  removeToast(toastId: any) {
+    let data = this.toasts();
+    data = data.filter(toast => toast.id !== toastId);
+    this.toasts.set(data);
+  }
+
+
+  /**
+   * Get Toast Data
+   *
+   * @return {*}
+   * @memberof AppStoreService
+   */
+  getToasts() {
+    return this.toasts();
+  }
+
 }

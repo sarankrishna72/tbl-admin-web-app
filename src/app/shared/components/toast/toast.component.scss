@@ -1,0 +1,77 @@
+
+.toast-item{
+  width: 420px;
+  max-width: 100%;
+  box-shadow: -8px 8px 40px 0 rgba(153, 198, 249, 0.5);
+
+}
+
+.notifications {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+}
+
+.notifications :where(.toast, .column) {
+	display: flex;
+	align-items: center;
+}
+
+.toast {
+	position: relative;
+	list-style: none;
+	animation: show_toast 0.3s ease forwards;
+}
+
+@keyframes show_toast {
+	0% {
+		transform: translateX(100%);
+	}
+	40% {
+		transform: translateX(-5%);
+	}
+	80% {
+		transform: translateX(10%);
+	}
+	100% {
+		transform: translateX(0%);
+	}
+}
+
+.notifications .toast.hide {
+	animation: hide_toast 0.3s ease forwards;
+}
+
+@keyframes hide_toast {
+	0% {
+		transform: translateX(-10%);
+	}
+	40% {
+		transform: translateX(0%);
+	}
+	80% {
+		transform: translateX(-5%);
+	}
+	100% {
+		transform: translateX(calc(100%));
+	}
+}
+
+.toast-item::before {
+	position: absolute;
+	content: '';
+	height: 4px;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	animation-name: progress;
+  animation-timing-function: linear;
+  animation-duration:  var(--animation-duration, 1s);;
+  animation-fill-mode: forwards;
+}
+
+@keyframes progress {
+	100% {
+		width: 0%;
+	}
+}

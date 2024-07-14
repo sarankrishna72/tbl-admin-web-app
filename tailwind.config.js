@@ -33,7 +33,9 @@ module.exports = {
         'gray-300': 'var(--gray-300)',
         'gray-100': 'var(--gray-100)',
         'success-400': 'var(--success-400)',
+        'success-500': 'var(--success-500)',
         'error-500': 'var(--error-500)',
+        'error-600': 'var(--error-600)',
       },
       screens: {
         'mobile': '320px',

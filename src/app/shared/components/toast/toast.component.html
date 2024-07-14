@@ -1,0 +1,63 @@
+<!-- success toast start here -->
+<ul class=" z-30 notifications fixed top-7 right-5">
+  @for (toast of _appStoreService.getToasts(); track toast.id) {
+    <li [id]="toast.id"  class="toast">
+      <div
+        [style.--animation-duration]="toast.duration+'s' || '5s'"
+        [ngClass]="{
+          'border-success-500': toast.toastType == 'success',
+          'border-error-600': toast.toastType == 'error',
+          'border-[#e9bd0c]': toast.toastType == 'warning',
+          'border-[#3498db]': toast.toastType == 'info',
+          'before:bg-[#e9bd0c]': toast.autoClose && toast.toastType == 'warning',
+          'before:bg-[#3498db]': toast.autoClose && toast.toastType == 'info',
+          'before:bg-success-500': toast.autoClose && toast.toastType == 'success',
+          'before:bg-error-600': toast.autoClose && toast.toastType == 'error',
+        }"
+        class="toast-item relative mb-3 bg-white px-3 py-4 rounded-md border-l-[5px]  flex items-center justify-between"
+      >
+        @if (toast.customHtml) {
+          <div [innerHTML]="toast.customHtml"></div>
+        } @else {
+          <div class="content gap-2 flex items-center">
+            <div class="icon h-9 w-9 flex justify-center items-center rounded-full "
+              [ngClass]="{
+                'bg-success-500': toast.toastType == 'success',
+                'bg-error-600': toast.toastType == 'error',
+                'bg-[#3498db]': toast.toastType == 'info',
+                'bg-[#e9bd0c]': toast.toastType == 'warning'
+              }"
+            >
+              <span class="material-icons text-white text-lg cursor-pointer noselect">
+                {{getIcon(toast)}}
+              </span>
+            </div>
+            <div class="details">
+              <span class="roboto-semibold text-md text-primary-700">{{ toast.title }}</span>
+              <p class="roboto-regular text-base text-gray-400">{{ toast.message }}</p>
+            </div>
+          </div>
+        }
+        @if(!toast.autoClose) {
+          <app-button (onClick)="onToastClose(toast)" [buttonTheme]="'custom'"
+            classes="!p-0 hover:bg-[#efefef] bg-[#f2f2f2] !rounded-full">
+            <div
+              class="close-icon h-9 w-9 rounded-full  cursor-pointer flex items-center justify-center  transition-all duration-300 ease-in-out">
+              <span class="material-icons text-[#878787] text-md cursor-pointer noselect">
+                close
+              </span>
+            </div>
+          </app-button>
+        }
+      </div>
+    </li>
+  }
+</ul>
+<!-- <div class="toast-wrapper">
+    @for (toast of _appStoreService.getToasts(); track toast._id) {
+
+    }
+  </div> -->
+
+<!-- success toast end here -->
+

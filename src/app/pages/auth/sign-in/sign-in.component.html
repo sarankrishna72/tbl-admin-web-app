@@ -4,10 +4,10 @@
 
     <div class="laptop:p-14 p-4 signin-card-box-shadow max-laptop:!shadow-none max-tablet:w-full max-laptop:w-9/12 w-full rounded-xl bg-white">
       <app-title size="3xl" theme="primary" [classes]="'font-medium roboto-medium after:border-spacing-2 after:w-20 after:rounded-sm after:h-[3px] after:block after:border-b-[3px] after:border-b-primary-300 mb-6 '">Welcome!</app-title>
-      <app-form [formData]="formConfigs" />
+      <app-form (formOutput)="onFormSubmit($event)" [formData]="formConfigs" />
     </div>
   </div>
-  <div class="col-span-6 laptop:block hidden overflow-hidden rounded-3xl">
-    <img class="h-full w-full" [src]="staticImages.signin_background" />
+  <div class="col-span-6 laptop:block hidden overflow-hidden rounded-3xl relative">
+    <img class="h-full w-full" fill [ngSrc]="staticImages.signin_background"  priority/>
   </div>
 </section>
