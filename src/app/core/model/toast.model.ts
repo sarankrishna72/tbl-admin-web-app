@@ -19,7 +19,7 @@ export class ToastModel {
     this.id = `${new Date().getMilliseconds()}_${Math.floor(Math.random() * 100)}`
     this.title = options.title || '';
     this.message = options.message || '';
-    this.duration = options.duration || 5;
+    this.duration = options.duration || 3;
     this.autoClose = options.autoClose == undefined || options.autoClose == null  ? true : options.autoClose;
     this.toastType = options.toastType || 'success';
     this.customHtml = options.customHtml || null;

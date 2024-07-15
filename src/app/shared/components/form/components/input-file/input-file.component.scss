@@ -27,6 +27,11 @@
   animation-iteration-count: infinite;
 }
 
+.file-input::-webkit-file-upload-button {
+    cursor:pointer;
+}
+
+
 .files-list {
   margin-top: 1.5rem;
 

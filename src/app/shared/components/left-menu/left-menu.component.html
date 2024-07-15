@@ -21,7 +21,7 @@
         </div>
         <div class="text-white my-3 roboto-regular text-center text-base">Super Admin</div>
         <div class="flex justify-center mt-2">
-          <app-button [buttonTheme]="'secondary'" [buttonSize]="'xs'" [classes]="' text-x-base '">
+          <app-button [buttonTheme]="'secondary'" (onClick)="logoutAdmin()" [buttonSize]="'xs'" [classes]="' text-x-base '">
             <div class="flex justify-between  gap-2 items-center">
               <span class="material-icons text-white text-md cursor-pointer  ">
                 {{ 'logout' }}

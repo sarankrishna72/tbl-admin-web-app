@@ -1,5 +1,6 @@
+import { environment } from './../../../../environments/environment';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environment';
+import { cipher, decipher } from '../../../core/encryption/cipher';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,6 @@ export class IndexedDbService {
    */
   private initDB() {
     const request = indexedDB.open(this.dbName, this.dbVersion);
-
     request.onupgradeneeded = (event: any) => {
       const db = event.target.result;
       if (!db.objectStoreNames.contains(this.storeName)) {
@@ -66,12 +66,17 @@ export class IndexedDbService {
    * @return {*}
    * @memberof IndexedDbService
    */
-  async addItem(item: { id: string; name: string; description: string }) {
+  async addItem(item: { id: string; value: any; description ?: string;  datatype ?: string;  encryption ?: boolean; created_at ?: Date;}) {
+    item['datatype'] = typeof item.value;
+    item['created_at'] = new Date();
+    if (item.encryption) {
+      const cipherEncryptFn = cipher(environment.cipherEncryptionKey);
+      item.value = cipherEncryptFn( typeof item.value === 'string' ? item.value : JSON.stringify(item.value))
+    }
     const db = await this.getDB();
     const transaction = db.transaction([this.storeName], 'readwrite');
     const store = transaction.objectStore(this.storeName);
-    const request = store.add(item);
-
+    const request = store.put(item);
     return new Promise((resolve, reject) => {
       request.onsuccess = () => {
         resolve(true);
@@ -91,20 +96,36 @@ export class IndexedDbService {
    * @memberof IndexedDbService
    */
   async getItem(id: string) {
-    const db = await this.getDB();
-    const transaction = db.transaction([this.storeName], 'readonly');
-    const store = transaction.objectStore(this.storeName);
-    const request = store.get(id);
+    if ( this.isBrowser) {
+      const db = await this.getDB();
+      const transaction = db.transaction([this.storeName], 'readonly');
+      const store = transaction.objectStore(this.storeName);
+      const request = store.get(id);
+      return new Promise((resolve, reject) => {
+        request.onsuccess = (event: any) => {
+          let item = event.target.result;
+          if (item) {
+            if (item.encryption) {
+              const cipherEncryptFn = decipher(environment.cipherEncryptionKey);
+              item.value = cipherEncryptFn(item.value)
+              if (item.datatype == 'object') {
+                item.value = JSON.parse(item.value)
+              }
+            }
+            resolve(item);
+          } else {
+            reject(false);
+          }
 
-    return new Promise((resolve, reject) => {
-      request.onsuccess = (event: any) => {
-        resolve(event.target.result);
-      };
+        };
 
-      request.onerror = (event) => {
-        reject(event);
-      };
-    });
+        request.onerror = (event) => {
+          console.log("Im in Error");
+          reject(event);
+        };
+      });
+    }
+    return new Promise((resolve, reject) => { reject(false)});
   }
 
   /**

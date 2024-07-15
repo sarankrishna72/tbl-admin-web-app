@@ -19,6 +19,7 @@ export class ButtonComponent implements OnChanges,OnInit {
   @Input() classes: string = ' '
   @Input() style: any = {}
   @Input() rounded: boolean = true;
+  @Input() disabled: boolean = false;
   @Input() fullWidth: boolean = true;
   @Output() onClick: EventEmitter<any> = new EventEmitter();
 

@@ -1,3 +1,3 @@
-<button  class="{{classes}} roboto-medium ripple flex items-center justify-center" [type]="buttonType" (click)="buttonClickCTA()" [ngStyle]="style">
+<button [disabled]="disabled" class="{{classes}} roboto-medium disabled:!bg-gray-100 disabled:!border-gray-100 disabled:pointer-events-none  disabled:!text-gray-400 ripple flex items-center justify-center" [type]="buttonType" (click)="buttonClickCTA()" [ngStyle]="style">
   <ng-content></ng-content>
 </button>

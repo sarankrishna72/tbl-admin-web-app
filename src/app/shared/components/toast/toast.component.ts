@@ -1,8 +1,9 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, Inject, inject, PLATFORM_ID } from '@angular/core';
 import { ButtonComponent } from '../form/components/button/button.component';
 import { AppStoreService } from '../../services/store/app-store.service';
 import { CommonModule } from '@angular/common';
 import { ToastModel } from '../../../core/model';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-toast',
@@ -17,6 +18,7 @@ import { ToastModel } from '../../../core/model';
 export class ToastComponent {
   public _appStoreService = inject(AppStoreService)
   loadedToastIds: any[] = [];
+
   public toastEffect = effect(() => {
     let toasts = this._appStoreService.getToasts();
     toasts = toasts.filter(toast => toast.autoClose);
@@ -27,12 +29,18 @@ export class ToastComponent {
         }, toast.duration! * 1000);
       }
     }
-  })
+  });
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+
+  }
 
   onToastClose(toast: any) {
-    let toastElement = document.getElementById(toast.id) as HTMLElement;
-    if (toastElement) toastElement.classList.add('hide')
-    setTimeout(() => this._appStoreService.removeToast(toast.id) , 300)
+    if (isPlatformBrowser(this.platformId)) {
+      let toastElement = document.getElementById(toast.id) as HTMLElement;
+      if (toastElement) toastElement.classList.add('hide')
+      setTimeout(() => this._appStoreService.removeToast(toast.id) , 300)
+    }
   }
 
   /**

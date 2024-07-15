@@ -10,6 +10,7 @@ import { AppStoreService } from '../../../shared/services/store/app-store.servic
 import { ToastService } from '../../../shared/services/toast/toast.service';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { IndexedDbService } from '../../../shared/services/storage/indexed-db.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -32,6 +33,7 @@ export class SignInComponent {
   public _toastService = inject(ToastService);
   public _appStoreService = inject(AppStoreService);
   private _indexedDbService = inject(IndexedDbService);
+  private _router: Router = inject(Router);
   /**
    * Submit the Sign in form to the application
    *
@@ -40,7 +42,12 @@ export class SignInComponent {
    */
   onFormSubmit(event: any) {
     this._apiService.adminSignIn(event.value).subscribe((res: any) => {
-      this._toastService.success({message: `Welcome back ${res.email} `, autoClose: false, title: 'Signed in successfully!'})
+      this._indexedDbService.addItem({id: 'token', value: res.auth_token,  description: 'admin sign in auth token', encryption: true}).then(() => {
+        this._toastService.success({message: `Welcome back ${res.email} `, autoClose: true, title: 'Signed in successfully!'});
+        this._router.navigate(["/outlets"]);
+      }).catch((error) => {
+        console.error(error)
+      })
     })
   }
 

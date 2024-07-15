@@ -1,4 +1,5 @@
 export const environment = {
    baseURI: "https://api.thebeerlibrary.in",
-   indexedDbName: "tblAdminDb-production",
+   indexedDbName: "tbl-admin-db-production",
+   cipherEncryptionKey: "cHJvZHVjdGlvbkVuY3J5cHRpb24="
 };

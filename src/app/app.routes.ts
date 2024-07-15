@@ -1,14 +1,14 @@
-import { MainComponent } from './pages/main/main.component';
 import { Routes } from '@angular/router';
-import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
-
+import { authGuard, signInAuthGuard } from './core/guards/auth/auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    component: SignInComponent,
+    loadComponent: () => import('./pages/auth/sign-in/sign-in.component').then((m) => m.SignInComponent),
+    canActivate:[signInAuthGuard],
     pathMatch: 'full'
   },{
     path: ':id',
-    component: MainComponent,
+    loadComponent: () => import('./pages/main/main.component').then((m) => m.MainComponent),
+    canActivate: [authGuard],
   }
 ];
