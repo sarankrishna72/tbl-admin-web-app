@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ToastComponent } from './shared/components';
+import { injectSpeedInsights } from '@vercel/speed-insights';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -10,4 +11,7 @@ import { ToastComponent } from './shared/components';
 })
 export class AppComponent {
   title = 'tbl-admin-web-app';
+  constructor() {
+    injectSpeedInsights();
+  }
 }
