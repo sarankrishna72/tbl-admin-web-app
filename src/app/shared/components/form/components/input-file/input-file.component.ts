@@ -4,13 +4,15 @@ import { FormBase } from '../../../../../core/model';
 import { ControlValueAccessorDirective } from '../../../../directives/form/control-value-accessor.directive';
 import { FormService } from '../../../../services/form/form.service';
 import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '../../..';
 
 @Component({
   selector: 'app-input-file',
   standalone: true,
   imports: [
     DragAndDropDirective,
-    CommonModule
+    CommonModule,
+    ButtonComponent
   ],
   templateUrl: './input-file.component.html',
   styleUrl: './input-file.component.scss'
@@ -93,7 +95,7 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
    * @param bytes (File size in bytes)
    * @param decimals (Decimals point)
    */
-  formatBytes(bytes: any, decimals: any) {
+  formatBytes(bytes: any, decimals  =2) {
     if (bytes === 0) {
       return '0 Bytes';
     }

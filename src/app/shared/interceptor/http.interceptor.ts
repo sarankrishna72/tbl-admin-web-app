@@ -6,14 +6,16 @@ import {
   HttpEvent,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, from, Observable, switchMap, throwError } from 'rxjs';
 import { ToastModel } from '../../core/model';
 import { ToastService } from '../services/toast/toast.service';
+import { IndexedDbService } from '../services/storage/indexed-db.service';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
   constructor(
-    private _toastService: ToastService
+    private _toastService: ToastService,
+    private _indexedDbService: IndexedDbService
   ) {}
 
   intercept(
@@ -22,10 +24,31 @@ export class ApiInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     // You can use your service here
 
+
+     return from(this._indexedDbService.getItem("token")).pipe(
+      switchMap((token: any) => {
+        if (token) {
+          let modifiedReq = req.clone({
+             headers: req.headers.append('X-Authentication-Token', token.value)
+          });
+          return next.handle(modifiedReq);
+        } else {
+          return next.handle(req);
+        }
+      }),
+      catchError((err: any) => {
+        return this.checkHttpError(err);
+      })
+    );
+
+
     // Modify or handle the request here
     const modifiedReq = req.clone({
+       headers: req.headers.append('X-Authentication-Token', "07cf27d379f789b0df248f59b78a1065e53b8523783fd7095c930ee324568ed8")
       // Modify the request if needed
     });
+
+
 
     // Pass the modified request on to the next handler
     return next.handle(modifiedReq).pipe(

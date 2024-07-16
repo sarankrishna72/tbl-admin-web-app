@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import {FormAction, FormConfig } from '../../../core/model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as _ from 'lodash';
-import { InputComponent, InputFileComponent } from './components';
+import { InputComponent, InputFileComponent, InputSelectComponent } from './components';
 import { ButtonComponent } from '..';
 
 @Component({
@@ -13,6 +13,7 @@ import { ButtonComponent } from '..';
     ButtonComponent,
     InputFileComponent,
     ReactiveFormsModule,
+    InputSelectComponent
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'

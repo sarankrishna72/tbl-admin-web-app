@@ -114,7 +114,7 @@ export class IndexedDbService {
             }
             resolve(item);
           } else {
-            reject(false);
+            resolve(false);
           }
 
         };

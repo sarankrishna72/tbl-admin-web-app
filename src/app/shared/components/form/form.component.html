@@ -7,6 +7,9 @@
       @case ("file") {
         <app-input-file [formControlName]="formQuestion.key" [formConfig]="formQuestion" />
       }
+      @case ("dropdown") {
+        <app-input-select [formControlName]="formQuestion.key" [formConfig]="formQuestion" />
+      }
     }
   }
   <div class="w-full flex justify-between mt-3 gap-3">

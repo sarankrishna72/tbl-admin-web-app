@@ -24,6 +24,19 @@ export class ApiService {
   adminSignIn(admin: AdminSignIn) {
     return this._httpService.post(API_URI.adminSignInURI, {admin: admin})
   }
+
+
+  /**
+   * Get a list of Cities
+   *
+   * @return {*}
+   * @memberof ApiService
+   */
+  getCitiesList() {
+    return this._httpService.get(API_URI.citiesURI)
+  }
+
+
 }
 
 

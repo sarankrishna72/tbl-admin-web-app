@@ -54,11 +54,11 @@
 }
 
 @if (controlDir.control?.touched && controlDir.control?.invalid && formConfig.validations.length) {
-<div class="text-error-500 text-xxs flex items-center gap-1">
-  <span class="material-icons text-base cursor-pointer noselect text-error-500">
-    {{ 'error' }}
-  </span>
-  {{errorMessage()}}
-</div>
+  <div class="text-error-500 text-xxs flex items-center gap-1">
+    <span class="material-icons text-base cursor-pointer noselect text-error-500">
+      {{ 'error' }}
+    </span>
+    {{errorMessage()}}
+  </div>
 }
 

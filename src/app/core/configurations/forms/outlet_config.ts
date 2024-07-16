@@ -1,4 +1,5 @@
-import { FormBaseControlValidator, FormConfig, InputFile, InputTextField, ValidatorsType,  } from "../../model";
+import { API_URI } from "../../constants/api_uri";
+import { FormBaseControlValidator, FormConfig, InputDropdown, InputFile, InputTextField, ValidatorsType,  } from "../../model";
 
 
 export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
@@ -15,12 +16,16 @@ export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true })
         ]
       }),
-      new InputTextField({
+      new InputDropdown({
         key: "city",
         value: "",
         type: "text",
         label: "City",
         order:2,
+        api: {
+          apiUrl: API_URI.citiesURI,
+          method: "get"
+        },
         placeholder: "Enter City",
         validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true })

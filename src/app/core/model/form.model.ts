@@ -10,7 +10,7 @@ export class FormBase {
   type: string;
   placeholder ?: string;
   options: { key: string, value: string }[];
-  api: Observable<any> | null;
+  api ?: ApiConfigInterface | null;
   validations: FormBaseControlValidator[] = [];
   success_icon ?: string = '';
   error_icon ?: string = '';
@@ -26,7 +26,7 @@ export class FormBase {
     controlType?: string;
     type?: string;
     options?: { key: string, value: string }[];
-    api ?: Observable<any>;
+    api ?: ApiConfigInterface;
     placeholder ?: string;
     helpText ?: string;
     validations ?: FormBaseControlValidator[];
@@ -124,4 +124,10 @@ export enum ValidatorsType {
   MAX = "max",
   NULL_VALIDATOR = "nullValidator",
   EMAIL = "email"
+}
+
+
+interface ApiConfigInterface {
+  apiUrl : string;
+  method : string;
 }

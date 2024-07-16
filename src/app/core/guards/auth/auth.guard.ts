@@ -8,9 +8,10 @@ export const authGuard: CanActivateFn = async (route, state) : Promise<boolean |
   const _indexedDbService = inject(IndexedDbService);
   const _router = inject(Router);
   const _toastService = inject(ToastService);
-  const data = await _indexedDbService.getItem("token");
+  let data;
+  data =  await _indexedDbService.getItem("token");
   if (!data) {
-   _toastService.error({title: "Access denied!", message: "User authentication failed. Please try again..", autoClose: true, duration: 3})
+    _toastService.error({title: "Access denied!", message: "User authentication failed. Please try again..", autoClose: true, duration: 3})
     _router.navigate([APP_PAGES_PATH.ROOT_PATH]);
     return false;
   }

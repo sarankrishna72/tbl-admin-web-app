@@ -1,1 +1,51 @@
-<p>input-select works!</p>
+
+@if (formConfig.label ) {
+  <label [for]="formConfig.key" [id]="'label'+formConfig.key"
+    class="roboto-regular text-sm text-primary-800 mb-1 inline-block">
+    {{formConfig.label}}
+  </label>
+}
+
+<div class="relative">
+  <select
+    [id]="formConfig.key"
+    [value]="controlDir.control?.value"
+    class="border-neutral-300 border outline-0 text-primary-500 rounded-md h-12 p-3 w-full roboto-regular custom-select text-base "
+    [ngClass]="{ '!border-success-400': controlDir.control?.touched && controlDir.control?.valid , '!border-error-500': controlDir.control?.touched && controlDir.control?.invalid }"
+    (change)="onChange($any($event.target).value)"
+    (blur)="onTouched();"
+    [disabled]="disabled"
+
+  >
+    <option value="">{{formConfig.placeholder}}</option>
+    @for ( option of options; track option.id) {
+      <option [value]="option.id">{{option.name}}</option>
+    }
+
+  </select>
+
+  <span  class="material-icons text-neutral-300 icon-center cursor-pointer noselect ">
+    {{'keyboard_arrow_down'}}
+  </span>
+</div>
+
+@if (formConfig.helpText && !(controlDir.control?.touched && controlDir.control?.invalid)) {
+  <div class="text-gray-600 text-xxs flex items-center gap-1">
+    @if (controlDir.control?.touched && controlDir.control?.invalid) {
+      <span class="material-icons text-base cursor-pointer noselect"
+        [ngClass]="{ 'text-error-500': controlDir.control?.touched && controlDir.control?.invalid }">
+        {{ 'error' }}
+      </span>
+    }
+    {{formConfig.helpText }}
+  </div>
+  }
+
+  @if (controlDir.control?.touched && controlDir.control?.invalid && formConfig.validations.length) {
+  <div class="text-error-500 text-xxs flex items-center gap-1">
+    <span class="material-icons text-base cursor-pointer noselect text-error-500">
+      {{ 'error' }}
+    </span>
+    {{errorMessage()}}
+  </div>
+}
