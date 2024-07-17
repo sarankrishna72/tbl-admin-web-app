@@ -8,6 +8,8 @@ import { ButtonComponent, FormComponent, MainContainerComponent, TitleComponent,
 import { CREATE, DELETE, EDIT } from '../../core/constants/const';
 import { FormGroup } from '@angular/forms';
 import { HttpService } from '../../shared/services/http/http.service';
+import { getObjValueFromPath } from '../../core/lib/lib';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -57,11 +59,28 @@ export class MainComponent implements OnInit{
     });
   }
 
+  onSubmit(event: any) {
+    if (event.action = "submit") {
+
+    }
+  }
+
+  getApi(api: any, data ?: any): Observable<any> {
+    switch (api.method) {
+      case "get":
+        return this._httpService.get(api.url);
+      case "post":
+        return this._httpService.post(api.url, data);
+      case "put":
+        return this._httpService.put(api.url, data);
+      default:
+        return this._httpService.get(api.url);
+    }
+  }
 
   generateList() {
-    this._httpService.get(this.configurations?.list_api).subscribe((response: any) => {
+    this.getApi(this.configurations?.list_api).subscribe((response: any) => {
       this.configurations!.tableConfigs.data = response.data || [];
-      console.log(this.configurations)
     })
   }
 
@@ -69,16 +88,28 @@ export class MainComponent implements OnInit{
   actionCTA(action: any) {
     this.selectedData = null;
     this.formGroup.reset();
+    let actionLabel: any;
+    let buttonsList:any = [];
     switch (action.action_id) {
       case "create":
-        this._appStoreService.setPopupShowing();
+        actionLabel = this.configurations?.actionsLabel?.find(x => x.type == this.CONST_CREATE);
+        buttonsList = this.configurations?.formConfigs?.actions?.map(x => {return {...x, label: x.actionType == 'submit' ? actionLabel.buttonLabel : x.label } })
+        this.configurations!.formConfigs!.actions = buttonsList;
         this.actionType = this.CONST_CREATE;
+        this._appStoreService.setPopupShowing();
         break;
       case "edit":
-        this._appStoreService.setPopupShowing();
         this.actionType = this.CONST_EDIT;
+        actionLabel = this.configurations?.actionsLabel?.find(x => x.type == this.CONST_EDIT)
+        buttonsList = this.configurations?.formConfigs?.actions?.map(x => {return {...x, label: x.actionType == 'submit' ? actionLabel.buttonLabel : x.label } })
+        this.configurations!.formConfigs!.actions = buttonsList;
+        let data = action.data;
+        this._appStoreService.setPopupShowing();
+        if (this.configurations?.form_display_keys?.length) {
+          data = this.restructureEditFormData(data);
+        }
         setTimeout(() =>
-          { this.formGroup.patchValue(action.data);}
+          { this.formGroup.patchValue(data);}
         ,10)
         this.selectedData  = action.data;
         break;
@@ -87,6 +118,14 @@ export class MainComponent implements OnInit{
     }
   }
 
+
+  restructureEditFormData(data: any): void {
+    let obj: any = {}
+    for (const item of this.configurations?.form_display_keys!) {
+      obj[item.mappingKey] = getObjValueFromPath(data, item.key)
+    }
+    return obj;
+  }
 
 
 

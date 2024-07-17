@@ -35,7 +35,7 @@
     <app-popup [title]="'Create New Outlet'" containerClass="tablet:w-[460px] w-[90%]">
       @if (configurations?.formConfigs) {
       <div class="pt-3">
-        <app-form [formGroup]="formGroup" [formData]="configurations?.formConfigs!"></app-form>
+        <app-form [formGroup]="formGroup" (formOutput)="onSubmit($event)" [formData]="configurations?.formConfigs!"></app-form>
       </div>
       }
     </app-popup>

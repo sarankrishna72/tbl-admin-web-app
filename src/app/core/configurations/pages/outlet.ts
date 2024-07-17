@@ -39,22 +39,6 @@ const tableConfig: TableModel = new TableModel(
   {
     columns: tableColumns,
     data: [
-      // {
-      //   name: "TBL Restaurant 1",
-      //   image: "https://s3-alpha-sig.figma.com/img/b21b/d94a/b37db16407e54e952d299f02ba7e971e?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ShZXMUJ3MadkGiE8kufBmeuPF4p0jJgxD94Gw4jo4MFqMNvaSDI5dJI6UhKQcCNsqQNscLHWkvXAhlhknq8u8qNJ2sJtBGOZZv-6d-~xaiRSRxV892Aydw7SeNUmRt0dfJpr-LXYcbhDxDM41Kzn7NUQpDdV8ZCyt-mk3ALVIH7TtsiQWSqt0Owrp7v48Gb~A~IUHG~1CjCylG9rWlGd6vWHUwzfvuGvk99Ta3E9ygvA-DIEdAJ373mM9haWAt04YawVzHVg9W88WW4C4WjLholXSWkz6x4MLOvp~dLaWeFBUFr3uStOP2bTc-9gYEzkzNJsJdonixLFTPVJLpi4Jg__",
-      //   city: "Bangalore",
-      //   area: "Koramangala"
-      // },{
-      //   name: "TBL Restaurant 2",
-      //   image: "https://s3-alpha-sig.figma.com/img/b21b/d94a/b37db16407e54e952d299f02ba7e971e?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ShZXMUJ3MadkGiE8kufBmeuPF4p0jJgxD94Gw4jo4MFqMNvaSDI5dJI6UhKQcCNsqQNscLHWkvXAhlhknq8u8qNJ2sJtBGOZZv-6d-~xaiRSRxV892Aydw7SeNUmRt0dfJpr-LXYcbhDxDM41Kzn7NUQpDdV8ZCyt-mk3ALVIH7TtsiQWSqt0Owrp7v48Gb~A~IUHG~1CjCylG9rWlGd6vWHUwzfvuGvk99Ta3E9ygvA-DIEdAJ373mM9haWAt04YawVzHVg9W88WW4C4WjLholXSWkz6x4MLOvp~dLaWeFBUFr3uStOP2bTc-9gYEzkzNJsJdonixLFTPVJLpi4Jg__",
-      //   city: "Bangalore",
-      //   area: "Koramangala 5th Block"
-      // },{
-      //   name: "TBL Restaurant 3",
-      //   image: "https://s3-alpha-sig.figma.com/img/b21b/d94a/b37db16407e54e952d299f02ba7e971e?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ShZXMUJ3MadkGiE8kufBmeuPF4p0jJgxD94Gw4jo4MFqMNvaSDI5dJI6UhKQcCNsqQNscLHWkvXAhlhknq8u8qNJ2sJtBGOZZv-6d-~xaiRSRxV892Aydw7SeNUmRt0dfJpr-LXYcbhDxDM41Kzn7NUQpDdV8ZCyt-mk3ALVIH7TtsiQWSqt0Owrp7v48Gb~A~IUHG~1CjCylG9rWlGd6vWHUwzfvuGvk99Ta3E9ygvA-DIEdAJ373mM9haWAt04YawVzHVg9W88WW4C4WjLholXSWkz6x4MLOvp~dLaWeFBUFr3uStOP2bTc-9gYEzkzNJsJdonixLFTPVJLpi4Jg__",
-      //   city: "Bangalore",
-      //   area: "Electronic City"
-      // }
     ],
     createButtonLabel: 'Create New Outlet',
     mobileResponsiveCard: true,
@@ -84,7 +68,13 @@ const OutletPageData: CrudPageModel = new CrudPageModel(
     title: 'Manage Outlets',
     tableConfigs: tableConfig,
     formConfigs: OUTLET_FORM_DATA,
-    list_api: API_URI.restaurantsURI,
+    actionsLabel: [
+      {label: "Create New Outlet", buttonLabel: "Create", type: "create"},
+      {label: "Edit Outlet", buttonLabel: "Update", type: "edit"}
+    ],
+    list_api: {url: API_URI.restaurantsURI, method: "get"},
+    create_api: {url: API_URI.restaurantsURI, method: "post"},
+    form_display_keys: [{mappingKey: 'id', key: 'id'},{mappingKey: 'city_id', key: 'city.id'},{mappingKey: 'address', key: 'address'}, {mappingKey: 'restaurant_name', key: 'restaurant_name'}, {mappingKey: 'photos', key: 'photos'}],
     pageActions: [
       {
         action_name: 'create',
@@ -92,7 +82,6 @@ const OutletPageData: CrudPageModel = new CrudPageModel(
         label: "Create New Outlet",
         button_theme: "primary-outlined",
         action_id : "create",
-
       },
 
     ]

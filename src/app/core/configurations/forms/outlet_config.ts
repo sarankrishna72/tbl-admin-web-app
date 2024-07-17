@@ -17,7 +17,7 @@ export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
         ]
       }),
       new InputDropdown({
-        key: "city",
+        key: "city_id",
         value: "",
         type: "text",
         label: "City",

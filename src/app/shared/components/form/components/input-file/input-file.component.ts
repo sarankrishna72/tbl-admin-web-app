@@ -60,25 +60,6 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
     this.onChange(this.files)
   }
 
-  /**
-   * Simulate the upload process
-   */
-  uploadFilesSimulator(index: number) {
-    setTimeout(() => {
-      if (index === this.files.length) {
-        return;
-      } else {
-        const progressInterval = setInterval(() => {
-          if (this.files[index].progress === 100) {
-            clearInterval(progressInterval);
-            this.uploadFilesSimulator(index + 1);
-          } else {
-            this.files[index].progress += 5;
-          }
-        }, 200);
-      }
-    }, 1000);
-  }
 
   /**
    * Convert Files list to normal array list
@@ -86,10 +67,8 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
    */
   prepareFilesList(files: Array<any>) {
     for (const item of files) {
-      item.progress = 0;
       this.files.push(item);
     }
-    this.uploadFilesSimulator(0);
   }
 
   /**
