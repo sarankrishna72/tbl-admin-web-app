@@ -6,7 +6,7 @@ export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
   {
    controls: [
       new InputTextField({
-        key: "name",
+        key: "restaurant_name",
         value: "",
         type: "text",
         label: "Outlet Name",
@@ -32,20 +32,22 @@ export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
         ]
       }),
       new InputTextField({
-        key: "area",
+        key: "address",
         value: "",
-        type: "text",
-        label: "Area",
+        type: "textarea",
+        rows: 3,
+        cols: 50,
+        resize: false,
+        label: "Address",
         order:3,
-        placeholder: "Enter Area",
+        placeholder: "Enter Address",
         validations: [
-          new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true })
+          new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
         ]
       }),
       new InputFile({
-        key: "image",
+        key: "photos",
         value: "",
-        type: "text",
         label: "Outlet Image",
         order:4,
         placeholder: "Enter Outlet Image",

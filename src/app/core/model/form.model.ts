@@ -18,6 +18,9 @@ export class FormBase {
   multiple ?: boolean = false;
   helpText?: string = '';
   showValidationIcon ?: boolean = false;
+  rows ?: number = 4;
+  cols ?: number = 50;
+  resize ?: boolean = false;
   constructor(options: {
     value?: any;
     key?: string;
@@ -33,8 +36,11 @@ export class FormBase {
     error_icon ?: string;
     success_icon ?: string;
     icon ?: string;
-    showValidationIcon ?: boolean
-    multiple ?: boolean
+    showValidationIcon ?: boolean;
+    multiple ?: boolean;
+    rows ?: number;
+    cols ?: number;
+    resize ?: boolean;
   } = {}) {
     this.value = options.value;
     this.key = options.key || '';
@@ -52,6 +58,9 @@ export class FormBase {
     this.icon = options.icon || "";
     this.showValidationIcon = options.showValidationIcon || false;
     this.multiple = options.multiple || false;
+    this.rows = options.rows || 4;
+    this.cols = options.cols || 50;
+    this.resize = options.resize || false;
   }
 }
 
@@ -123,7 +132,8 @@ export enum ValidatorsType {
   MIN = "min",
   MAX = "max",
   NULL_VALIDATOR = "nullValidator",
-  EMAIL = "email"
+  EMAIL = "email",
+  MAX_FILE_SIZE = "maxFileSize"
 }
 
 

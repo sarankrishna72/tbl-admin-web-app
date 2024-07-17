@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBaseControlValidator } from '../../../core/model';
 import { Validators } from '@angular/forms';
+import { MaxSizeValidator } from '../../components/form/validators/max.file.size';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class FormService {
    * @return {*}
    * @memberof FormService
    */
-  generateValidator(validation: FormBaseControlValidator) {
+  generateValidator(validation: FormBaseControlValidator,) {
    switch (validation.validatorName) {
     case "required":
       return Validators.required;
@@ -34,6 +35,8 @@ export class FormService {
       return Validators.email
     case "nullValidator":
       return Validators.nullValidator;
+    case "maxFileSize":
+      return MaxSizeValidator(parseInt(validation.validatorValue) * 1024 * 1024)
     default:
       return null;
    }

@@ -14,7 +14,7 @@
             <td class="py-[10px] px-3 roboto-regular border-b border-gray-100 text-gray-700 text-base">
               @switch (colDef.columnType) {
                 @case ('text') {
-                  {{rowData[colDef.columnKey]}}
+                  {{ getColumnData(colDef.columnKey, rowData) }}
                 }
                 @case ('index') {
                   {{ index + 1 }}
@@ -35,7 +35,7 @@
                   </div>
                 }
                 @case ('image') {
-                  <img class="h-[50px] w-[90px] rounded-md" [src]="rowData[colDef.columnKey]" />
+                  <img class="h-[50px] w-[90px] rounded-md" [src]="getColumnData(colDef.columnKey, rowData) || staticImages.no_image "  />
                 }
                 @default {
                   {{rowData[colDef.columnKey]}}

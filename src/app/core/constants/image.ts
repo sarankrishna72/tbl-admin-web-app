@@ -9,4 +9,5 @@ export const DEFAULT_IMAGES = {
   "location": `${DEFAULT_IMAGES_PATH}/location.svg`,
   "rocket": `${DEFAULT_IMAGES_PATH}/rocket.svg`,
   "menu": `${DEFAULT_IMAGES_PATH}/menu.svg`,
+  "no_image": `${DEFAULT_IMAGES_PATH}/no_image.jpg`,
 }

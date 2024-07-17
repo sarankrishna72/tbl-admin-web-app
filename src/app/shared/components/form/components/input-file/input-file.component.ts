@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { DragAndDropDirective } from '../../../../directives/drag-and-drop/drag-and-drop.directive';
 import { FormBase } from '../../../../../core/model';
 import { ControlValueAccessorDirective } from '../../../../directives/form/control-value-accessor.directive';
@@ -22,6 +22,7 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
   @Input() formConfig!: FormBase;
   files: any[] = [];
   private _formService = inject(FormService);
+  @ViewChild('fileDropRef') fileDropRef!: ElementRef;
 
   errorMessage(): string {
     let error = this.controlDir?.control?.errors || {};
@@ -47,6 +48,7 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
   fileBrowseHandler($event: any) {
     this.prepareFilesList($event.files);
     this.onChange($event.files)
+    this.fileDropRef.nativeElement.value = null;
   }
 
   /**

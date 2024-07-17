@@ -7,9 +7,9 @@ export class CrudPageModel {
   tableConfigs: TableModel;
   pageActions?: CrudPageActions[] = [];
   title : string = '';
-  list_api ?: Observable<any> | null;
-  create_api ?: Observable<any>  | null;
-  update_api ?: Observable<any>  | null;
+  list_api ?: any | null;
+  create_api ?: any | null;
+  update_api ?: any  | null;
   formConfigs ?: FormConfig | null;
   api_params ?: Object = {};
 
@@ -17,9 +17,9 @@ export class CrudPageModel {
     tableConfigs: TableModel;
     pageActions?: CrudPageActions[] ;
     title : string;
-    list_api ?: Observable<any>;
-    create_api ?: Observable<any>;
-    update_api ?: Observable<any>;
+    list_api ?: any;
+    create_api ?: any;
+    update_api ?: any;
     formConfigs ?: FormConfig;
     api_params ?: Object;
   }) {
