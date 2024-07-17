@@ -62,6 +62,16 @@ export class AppStoreService {
   }
 
 
+    /**
+   * Close Popup
+   *
+   * @memberof AppStoreService
+   */
+  closePopup() {
+    this.popupShowing.set(false);
+  }
+
+
   /**
    * Get Popup Showing from the store
    *

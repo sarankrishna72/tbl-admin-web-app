@@ -10,6 +10,7 @@ import { FormGroup } from '@angular/forms';
 import { HttpService } from '../../shared/services/http/http.service';
 import { getObjValueFromPath } from '../../core/lib/lib';
 import { Observable } from 'rxjs';
+import { ToastService } from '../../shared/services/toast/toast.service';
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -30,7 +31,8 @@ export class MainComponent implements OnInit{
   public _commonService = inject(CommonService)
   public _router = inject(Router);
   public _httpService = inject(HttpService);
-
+  public _toastService = inject(ToastService);
+  tableData: any = [];
   configurations: CrudPageModel| null = null;
   actionType: string = '';
   CONST_CREATE = CREATE;
@@ -59,9 +61,29 @@ export class MainComponent implements OnInit{
     });
   }
 
+
+
   onSubmit(event: any) {
     if (event.action = "submit") {
-
+      let formData = new FormData();
+      for (const key of Object.keys(event.value)) {
+        console.log(event.value[key])
+        if (event.value[key] instanceof FileList) {
+          let value = event.value[key];
+          for (let i = 0; i < value.length; i++) {
+             formData.append(`${this.configurations?.api_params}[${key}][]`, value[i])
+          }
+        } else {
+          formData.append(`${this.configurations?.api_params}[${key}]`, event.value[key]);
+        }
+      }
+      if (!this.selectedData) {
+        this.getApi(this.configurations?.create_api, formData).subscribe((response: any) => {
+          this._toastService.success({autoClose: true, message: response.message, duration: 3, title: "Success"});
+          this.tableData = [...this.tableData, ...[response.data]];
+          this._appStoreService.closePopup();
+        })
+      }
     }
   }
 
@@ -80,7 +102,7 @@ export class MainComponent implements OnInit{
 
   generateList() {
     this.getApi(this.configurations?.list_api).subscribe((response: any) => {
-      this.configurations!.tableConfigs.data = response.data || [];
+      this.tableData = response.data || [];
     })
   }
 

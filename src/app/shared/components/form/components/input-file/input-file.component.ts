@@ -48,7 +48,6 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
   fileBrowseHandler($event: any) {
     this.prepareFilesList($event.files);
     this.onChange($event.files)
-    this.fileDropRef.nativeElement.value = null;
   }
 
   /**

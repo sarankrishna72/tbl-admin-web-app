@@ -64,7 +64,7 @@ const tableConfig: TableModel = new TableModel(
 
 const OutletPageData: CrudPageModel = new CrudPageModel(
   {
-    api_params: {},
+    api_params: "restaurant",
     title: 'Manage Outlets',
     tableConfigs: tableConfig,
     formConfigs: OUTLET_FORM_DATA,
