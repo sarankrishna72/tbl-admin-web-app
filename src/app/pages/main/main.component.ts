@@ -67,7 +67,6 @@ export class MainComponent implements OnInit{
     if (event.action = "submit") {
       let formData = new FormData();
       for (const key of Object.keys(event.value)) {
-        console.log(event.value[key])
         if (event.value[key] instanceof FileList) {
           let value = event.value[key];
           for (let i = 0; i < value.length; i++) {
@@ -83,6 +82,12 @@ export class MainComponent implements OnInit{
           this.tableData = [...this.tableData, ...[response.data]];
           this._appStoreService.closePopup();
         })
+      } else {
+         this.getApi(this.configurations?.update_api, formData).subscribe((response: any) => {
+            this._toastService.success({autoClose: true, message: response.message, duration: 3, title: "Success"});
+            // this.tableData = [...this.tableData, ...[response.data]];
+            this._appStoreService.closePopup();
+        })
       }
     }
   }
@@ -94,7 +99,8 @@ export class MainComponent implements OnInit{
       case "post":
         return this._httpService.post(api.url, data);
       case "put":
-        return this._httpService.put(api.url, data);
+        let url = api.url.split("{id}").join(this.selectedData.id)
+        return this._httpService.put(url, data);
       default:
         return this._httpService.get(api.url);
     }

@@ -39,6 +39,7 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
    * on file drop handler
    */
   onFileDropped($event: any) {
+    this.files = []
     this.prepareFilesList($event);
   }
 
@@ -46,6 +47,7 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
    * handle file from browsing
    */
   fileBrowseHandler($event: any) {
+    this.files = []
     this.prepareFilesList($event.files);
     this.onChange($event.files)
   }
@@ -100,7 +102,14 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
         this.controlDir.control?.addValidators(validators);
         this.controlDir.control?.updateValueAndValidity();
       }
+
+
     }
+
+    setTimeout(() => {
+      this.files  =  this.controlDir.control?.value
+    } ,100)
+
   }
 
 }

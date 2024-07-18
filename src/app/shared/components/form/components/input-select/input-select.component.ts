@@ -54,7 +54,6 @@ export class InputSelectComponent extends ControlValueAccessorDirective  impleme
 
 
   getSelectApi() {
-    console.log(this.formConfig.api?.method)
     switch (this.formConfig.api?.method) {
       case "get":
         return this._httpService.get(this.formConfig.api.apiUrl)
