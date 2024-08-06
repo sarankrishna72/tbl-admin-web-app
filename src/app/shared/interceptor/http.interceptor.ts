@@ -23,8 +23,6 @@ export class ApiInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // You can use your service here
-
-
      return from(this._indexedDbService.getItem("token")).pipe(
       switchMap((token: any) => {
         if (token) {
@@ -39,22 +37,6 @@ export class ApiInterceptor implements HttpInterceptor {
       catchError((err: any) => {
         return this.checkHttpError(err);
       })
-    );
-
-
-    // Modify or handle the request here
-    const modifiedReq = req.clone({
-       headers: req.headers.append('X-Authentication-Token', "07cf27d379f789b0df248f59b78a1065e53b8523783fd7095c930ee324568ed8")
-      // Modify the request if needed
-    });
-
-
-
-    // Pass the modified request on to the next handler
-    return next.handle(modifiedReq).pipe(
-      catchError((err: any) => {
-        return this.checkHttpError(err);
-     })
     );
   }
 

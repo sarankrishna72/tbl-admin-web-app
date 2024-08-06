@@ -6,16 +6,27 @@ export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
   {
    controls: [
       new InputTextField({
+        key: "is_new_restaurant",
+        value: false,
+        type: "checkbox",
+        label: "New Outlet ?",
+        order:1,
+        placeholder: "",
+        validations: [
+        ]
+      }),
+      new InputTextField({
         key: "restaurant_name",
         value: "",
         type: "text",
         label: "Outlet Name",
-        order:1,
+        order:2,
         placeholder: "Enter Outlet Name",
         validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true })
         ]
       }),
+
       new InputDropdown({
         key: "city_id",
         value: "",
@@ -32,10 +43,22 @@ export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
         ]
       }),
       new InputTextField({
+        key: "front_desk_person_number",
+        value: "",
+        type: "text",
+        label: "Front Desk Contact Number",
+        order: 3,
+        placeholder: "Enter Contact Number",
+        validations: [
+          new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
+          new FormBaseControlValidator({validatorName: ValidatorsType.PATTERN,message: "Invalid mobile number", validatorValue: "[6789][0-9]{9}"}),
+        ]
+      }),
+      new InputTextField({
         key: "address",
         value: "",
         type: "textarea",
-        rows: 3,
+        rows: 4,
         cols: 50,
         resize: false,
         label: "Address",
@@ -49,7 +72,7 @@ export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
         key: "photos",
         value: "",
         label: "Outlet Image",
-        order:4,
+        order: 5,
         placeholder: "Enter Outlet Image",
         helpText: "Image file must be 20MB or less",
         multiple: false,

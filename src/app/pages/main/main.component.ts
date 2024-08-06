@@ -85,6 +85,10 @@ export class MainComponent implements OnInit{
       } else {
          this.getApi(this.configurations?.update_api, formData).subscribe((response: any) => {
             this._toastService.success({autoClose: true, message: response.message, duration: 3, title: "Success"});
+            let rowIndex = this.tableData.findIndex((row: any) => row.id == response.data.id);
+            if (rowIndex != -1) {
+              this.tableData[rowIndex] = response.data;
+             }
             // this.tableData = [...this.tableData, ...[response.data]];
             this._appStoreService.closePopup();
         })

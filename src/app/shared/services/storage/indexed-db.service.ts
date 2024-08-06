@@ -120,7 +120,6 @@ export class IndexedDbService {
         };
 
         request.onerror = (event) => {
-          console.log("Im in Error");
           reject(event);
         };
       });

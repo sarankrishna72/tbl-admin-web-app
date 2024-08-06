@@ -25,11 +25,18 @@ const tableColumns: TableColumn[] = [
     order: 3,
     columnWidth: "150px",
   }),
+   new TableColumn({
+    columnKey: "front_desk_person_number",
+    columnName: "Front Desk Contact number",
+    columnType: "text",
+    order: 4,
+    columnWidth: "150px",
+  }),
   new TableColumn({
     columnKey: "address",
     columnName: "Address",
     columnType: "text",
-    order: 4,
+    order: 5,
     columnWidth: "150px",
   })
 ]
@@ -75,7 +82,15 @@ const OutletPageData: CrudPageModel = new CrudPageModel(
     list_api: {url: API_URI.restaurantsURI, method: "get"},
     create_api: {url: API_URI.restaurantsURI, method: "post"},
     update_api: {url: API_URI.restaurantsEditURI, method: "put"},
-    form_display_keys: [{mappingKey: 'id', key: 'id'},{mappingKey: 'city_id', key: 'city.id'},{mappingKey: 'address', key: 'address'}, {mappingKey: 'restaurant_name', key: 'restaurant_name'}, {mappingKey: 'photos', key: 'photos'}],
+    form_display_keys: [
+      {mappingKey: 'id', key: 'id'},
+      {mappingKey: 'city_id', key: 'city.id'},
+      {mappingKey: 'address', key: 'address'},
+      {mappingKey: 'restaurant_name', key: 'restaurant_name'},
+      {mappingKey: 'photos', key: 'photos'},
+      {mappingKey: 'front_desk_person_number', key: 'front_desk_person_number'},
+      {mappingKey: 'is_new_restaurant', key: 'is_new_restaurant'}
+    ],
     pageActions: [
       {
         action_name: 'create',

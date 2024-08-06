@@ -1,5 +1,5 @@
 
-@if (formConfig.label ) {
+@if (formConfig.label  && formConfig.type != "checkbox") {
   <label [for]="formConfig.key" [id]="'label'+formConfig.key"
     class="roboto-regular text-sm text-primary-800 mb-1 inline-block">
     {{formConfig.label}}
@@ -17,6 +17,19 @@
       [placeholder]="formConfig.placeholder"
       [ngClass]="{ 'resize-none':  !formConfig.resize, '!border-success-400': controlDir.control?.touched && controlDir.control?.valid , '!border-error-500': controlDir.control?.touched && controlDir.control?.invalid }"
       (input)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled" ></textarea>
+  } @else if (formConfig.type == "checkbox") {
+    <div class="input-checkbox">
+      <input
+        [checked]="controlDir.control?.value"
+        [id]="formConfig.key" [type]="formConfig.type" [value]="true" [name]="formConfig.key"
+        (change)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled"
+      />
+      <label [for]="formConfig.key" class="text-sm ">{{formConfig.label}}</label>
+    </div>
+    <!-- <input [id]="formConfig.key" [type]="formConfig.type" [value]="controlDir.control?.value"
+      class="border-neutral-300 border outline-0 text-primary-500 rounded-md  p-3 w-full roboto-regular text-base "
+      [ngClass]="{ '!border-success-400': controlDir.control?.touched && controlDir.control?.valid , '!border-error-500': controlDir.control?.touched && controlDir.control?.invalid }"
+      (input)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled" /> -->
   } @else {
     <input [id]="formConfig.key" [type]="formConfig.type" [value]="controlDir.control?.value"
       class="border-neutral-300 border outline-0 text-primary-500 rounded-md h-12 p-3 w-full roboto-regular text-base "
