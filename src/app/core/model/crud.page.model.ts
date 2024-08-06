@@ -10,6 +10,7 @@ export class CrudPageModel {
   list_api ?: ApiInterface | null;
   create_api ?: ApiInterface | null;
   update_api ?: ApiInterface  | null;
+  delete_api ?: ApiInterface  | null;
   formConfigs ?: FormConfig | null;
   api_params ?: Object = {};
   form_display_keys ?: FormDisplayKeys[] | null = [];
@@ -21,6 +22,7 @@ export class CrudPageModel {
     list_api ?: ApiInterface;
     create_api ?: ApiInterface;
     update_api ?: ApiInterface;
+    delete_api ?: ApiInterface;
     formConfigs ?: FormConfig;
     api_params ?: Object;
     form_display_keys ?: FormDisplayKeys[];
@@ -32,6 +34,7 @@ export class CrudPageModel {
     this.list_api = options.list_api || null;
     this.create_api = options.create_api || null;
     this.update_api = options.update_api || null;
+    this.delete_api = options.delete_api || null;
     this.formConfigs = options.formConfigs || null;
     this.api_params = options.api_params || {};
     this.form_display_keys = options.form_display_keys || null;

@@ -83,28 +83,33 @@ export class MainComponent implements OnInit{
           this._appStoreService.closePopup();
         })
       } else {
-         this.getApi(this.configurations?.update_api, formData).subscribe((response: any) => {
-            this._toastService.success({autoClose: true, message: response.message, duration: 3, title: "Success"});
-            let rowIndex = this.tableData.findIndex((row: any) => row.id == response.data.id);
-            if (rowIndex != -1) {
-              this.tableData[rowIndex] = response.data;
-             }
-            // this.tableData = [...this.tableData, ...[response.data]];
-            this._appStoreService.closePopup();
+        this.getApi(this.configurations?.update_api, formData).subscribe((response: any) => {
+          this._toastService.success({autoClose: true, message: response.message, duration: 3, title: "Success"});
+          let rowIndex = this.tableData.findIndex((row: any) => row.id == response.data.id);
+          let tableDataVar = JSON.parse(JSON.stringify(this.tableData))
+          if (rowIndex != -1) {
+            tableDataVar[rowIndex] = response.data
+            this.tableData = tableDataVar;
+          }
+          this._appStoreService.closePopup();
         })
       }
     }
   }
 
   getApi(api: any, data ?: any): Observable<any> {
+    let url = "";
     switch (api.method) {
       case "get":
         return this._httpService.get(api.url);
       case "post":
         return this._httpService.post(api.url, data);
       case "put":
-        let url = api.url.split("{id}").join(this.selectedData.id)
+        url = api.url.split("{id}").join(this.selectedData.id)
         return this._httpService.put(url, data);
+      case "delete":
+        url = api.url.split("{id}").join(this.selectedData.id)
+        return this._httpService.delete(url, data);
       default:
         return this._httpService.get(api.url);
     }
@@ -120,6 +125,7 @@ export class MainComponent implements OnInit{
   actionCTA(action: any) {
     this.selectedData = null;
     this.formGroup.reset();
+    console.log(action);
     let actionLabel: any;
     let buttonsList:any = [];
     switch (action.action_id) {
@@ -144,6 +150,16 @@ export class MainComponent implements OnInit{
           { this.formGroup.patchValue(data);}
         ,10)
         this.selectedData  = action.data;
+        break;
+      case "delete":
+        this.actionType = this.CONST_DELETE;
+        this.selectedData  = action.data;
+        console.log(this.configurations?.delete_api)
+        this.getApi(this.configurations?.delete_api).subscribe((response: any) => {
+          this._toastService.success({autoClose: true, message: response.message, duration: 3, title: "Success"});
+          this.tableData =  this.tableData.filter((x: any) => x.id != action.data.id)
+          this._appStoreService.closePopup();
+        })
         break;
       default:
         break;

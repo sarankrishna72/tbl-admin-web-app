@@ -81,7 +81,8 @@ const OutletPageData: CrudPageModel = new CrudPageModel(
     ],
     list_api: {url: API_URI.restaurantsURI, method: "get"},
     create_api: {url: API_URI.restaurantsURI, method: "post"},
-    update_api: {url: API_URI.restaurantsEditURI, method: "put"},
+    update_api: {url: API_URI.restaurantsIdURI, method: "put"},
+    delete_api: {url: API_URI.restaurantsIdURI, method: "delete"},
     form_display_keys: [
       {mappingKey: 'id', key: 'id'},
       {mappingKey: 'city_id', key: 'city.id'},
