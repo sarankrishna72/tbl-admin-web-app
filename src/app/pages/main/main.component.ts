@@ -146,14 +146,13 @@ export class MainComponent implements OnInit{
           data = this.restructureEditFormData(data);
         }
         setTimeout(() =>
-          { this.formGroup.patchValue(data);}
+          { this.formGroup.patchValue(data); }
         ,10)
         this.selectedData  = action.data;
         break;
       case "delete":
         this.actionType = this.CONST_DELETE;
         this.selectedData  = action.data;
-        console.log(this.configurations?.delete_api)
         this.getApi(this.configurations?.delete_api).subscribe((response: any) => {
           this._toastService.success({autoClose: true, message: response.message, duration: 3, title: "Success"});
           this.tableData =  this.tableData.filter((x: any) => x.id != action.data.id)

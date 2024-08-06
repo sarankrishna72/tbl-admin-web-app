@@ -35,7 +35,12 @@
                   </div>
                 }
                 @case ('image') {
-                  <img class="h-[50px] w-[90px] rounded-md" [src]="getColumnData(colDef.columnKey, rowData) || staticImages.no_image "  />
+                  <img
+                    class="h-[50px] w-[90px] rounded-md"
+                    [src]="getColumnData(colDef.columnKey, rowData) || staticImages.no_image "
+                    srcset="{{getColumnData(colDef.columnKey, rowData)}} 1024w, {{getColumnData(colDef.columnKey, rowData)}} 640w, {{getColumnData(colDef.columnKey, rowData)}} 320w"
+                    sizes="(max-width: 1024px) 100vw, (max-width: 640px) 50vw, 100vw"
+                  />
                 }
                 @default {
                   {{rowData[colDef.columnKey]}}
