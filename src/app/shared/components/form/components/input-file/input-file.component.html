@@ -1,3 +1,4 @@
+
 @if (formConfig.label ) {
   <label [for]="formConfig.key" [id]="'label'+formConfig.key"
     class="roboto-regular text-sm text-primary-800 mb-1 inline-block">
@@ -5,64 +6,77 @@
   </label>
 }
 
-<div class="container-1 flex-col bg-neutral-100 border border-neutral-300 p-4 rounded flex justify-center items-center" appDragAndDrop (fileDropped)="onFileDropped($event)">
-  <input type="file"  #fileDropRef id="fileDropRef" class="cursor-pointer file-input" [multiple]="formConfig.multiple || false" (blur)="onTouched();" (change)="fileBrowseHandler($event.target)" />
-  <span class="material-icons text-gray-400 text-[40px] cursor-pointer noselect"
-    >
-    cloud_upload
-  </span>
-  <div class="text-base roboto-regular">
-    <span class=" text-gray-400">Drag & Drop file or </span>
-    <label for="fileDropRef" class="text-primary-500 cursor-pointer">Browse</label>
+@if (formConfig.multiple || !formConfig.multiple && files.length == 0 ) {
+  <div class="container-1 flex-col bg-neutral-100 border border-neutral-300 p-4 rounded flex justify-center items-center"
+    appDragAndDrop (fileDropped)="onFileDropped($event)">
+    <input type="file" #fileDropRef id="fileDropRef" class="cursor-pointer file-input"
+      [multiple]="formConfig.multiple || false" (blur)="onTouched();" (change)="fileBrowseHandler($event.target)" />
+    <span class="material-icons text-gray-400 text-[40px] cursor-pointer noselect">
+      cloud_upload
+    </span>
+    <div class="text-base roboto-regular">
+      <span class=" text-gray-400">Drag & Drop file or </span>
+      <label for="fileDropRef" class="text-primary-500 cursor-pointer">Browse</label>
+    </div>
   </div>
-</div>
 
 
-@if (formConfig.helpText && !(controlDir.control?.touched && controlDir.control?.invalid)) {
-  <div class="text-gray-600 text-xxs flex items-center gap-1">
-    @if (controlDir.control?.touched && controlDir.control?.invalid) {
+  @if (formConfig.helpText && !(controlDir.control?.touched && controlDir.control?.invalid)) {
+    <div class="text-gray-600 text-xxs flex items-center gap-1">
+      @if (controlDir.control?.touched && controlDir.control?.invalid) {
       <span class="material-icons text-base cursor-pointer noselect"
         [ngClass]="{ 'text-error-500': controlDir.control?.touched && controlDir.control?.invalid }">
         {{ 'error' }}
       </span>
-    }
-    {{formConfig.helpText }}
-  </div>
-}
-
-@if (controlDir.control?.touched && controlDir.control?.invalid && formConfig.validations.length) {
-  <div class="text-error-500 text-xxs flex items-center gap-1">
-    <span class="material-icons text-base cursor-pointer noselect text-error-500">
-      {{ 'error' }}
-    </span>
-    {{errorMessage()}}
-  </div>
-}
-
-
-<div>
-  @for ( file of files; track i; let i = $index) {
-    <div class="flex justify-between rounded items-center border border-neutral-300 border-dashed mt-3 p-2">
-      <div class="flex justify-start items-center">
-        <div class="file-icon" style="width: 50px">
-          <span class="material-icons text-gray-300 w-4 text-4xl cursor-pointer noselect ">
-            {{ 'description' }}
-          </span>
-        </div>
-        <div class="info">
-          <h4 class="text-base roboto-regular text-primary-500">
-            {{ file?.name }}
-          </h4>
-          <p class="text-xs roboto-regular text-primary-300">
-            {{ formatBytes(file?.size) }}
-          </p>
-        </div>
-      </div>
-      <app-button buttonSize="xs" [classes]="'w-10 !py-[2px] !px-[6px] ' " (onClick)="deleteFile(i)" buttonTheme="custom">
-        <span class="material-icons text-gray-300 w-4 text-md cursor-pointer noselect ">
-          {{ 'delete' }}
-        </span>
-      </app-button>
+      }
+      {{formConfig.helpText }}
     </div>
   }
-</div>
+
+  @if (controlDir.control?.touched && controlDir.control?.invalid && formConfig.validations.length) {
+    <div class="text-error-500 text-xxs flex items-center gap-1">
+      <span class="material-icons text-base cursor-pointer noselect text-error-500">
+        {{ 'error' }}
+      </span>
+      {{errorMessage()}}
+    </div>
+  }
+}
+
+
+@if (files.length > 0 ) {
+  <div>
+    @for ( file of files; track i; let i = $index) {
+    <div class="inline-flex relative">
+      <app-button buttonSize="xs" [classes]="'!w-auto !py-[2px] bg-primary-50 !px-[6px] absolute inline-flex right-[-10px] top-[-10px] z-10' " (onClick)="deleteFile(i)" buttonTheme="custom">
+        <span class="material-icons text-primary-800 w-4 text-md cursor-pointer noselect ">
+          {{ 'close' }}
+        </span>
+      </app-button>
+      <img [src]="file.url" class="h-28 w-48 rounded-md " />
+    </div>
+    <!-- <div class="flex justify-between rounded items-center border border-neutral-300 border-dashed mt-3 p-2">
+        <div class="flex justify-start items-center">
+          <div class="file-icon" style="width: 50px">
+            <span class="material-icons text-gray-300 w-4 text-4xl cursor-pointer noselect ">
+              {{ 'description' }}
+            </span>
+          </div>
+          <div class="info">
+            <h4 class="text-base roboto-regular text-primary-500">
+              {{ file?.name }}
+            </h4>
+            <p class="text-xs roboto-regular text-primary-300">
+            </p>
+          </div>
+        </div>
+        <app-button buttonSize="xs" [classes]="'w-10 !py-[2px] !px-[6px] ' " (onClick)="deleteFile(i)" buttonTheme="custom">
+          <span class="material-icons text-gray-300 w-4 text-md cursor-pointer noselect ">
+            {{ 'delete' }}
+          </span>
+        </app-button>
+      </div> -->
+    }
+  </div>
+}
+
