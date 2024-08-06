@@ -51,7 +51,7 @@ export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
         placeholder: "Enter Contact Number",
         validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
-          new FormBaseControlValidator({validatorName: ValidatorsType.PATTERN,message: "Invalid mobile number", validatorValue: "[6789][0-9]{9}"}),
+          new FormBaseControlValidator({validatorName: ValidatorsType.PATTERN,message: "Invalid mobile number", validatorValue: "\+91[6789][0-9]{9}"}),
         ]
       }),
       new InputTextField({

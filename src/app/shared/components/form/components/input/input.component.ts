@@ -40,10 +40,6 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
     }
   }
 
-  onCheckboxChange(event: any) {
-    console.log(event)
-  }
-
   errorMessage(): string {
     let error = this.controlDir?.control?.errors || {};
     if ( Object.keys(error)?.length > 0) {

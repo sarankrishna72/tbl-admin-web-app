@@ -110,8 +110,6 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
         this.controlDir.control?.addValidators(validators);
         this.controlDir.control?.updateValueAndValidity();
       }
-
-
     }
 
     setTimeout(() => {
