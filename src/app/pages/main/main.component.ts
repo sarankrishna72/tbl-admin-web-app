@@ -125,7 +125,6 @@ export class MainComponent implements OnInit{
   actionCTA(action: any) {
     this.selectedData = null;
     this.formGroup.reset();
-    console.log(action);
     let actionLabel: any;
     let buttonsList:any = [];
     switch (action.action_id) {
