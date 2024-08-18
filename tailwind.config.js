@@ -25,6 +25,7 @@ module.exports = {
         'primary-700': 'var(--primary-700)',
         'primary-600': 'var(--primary-600)',
         'primary-500': 'var(--primary-500)',
+        'primary-50': 'var(--primary-50)',
         'primary-300': 'var(--primary-300)',
         'neutral-100': 'var(--neutral-100)',
         'neutral-300': 'var(--neutral-300)',

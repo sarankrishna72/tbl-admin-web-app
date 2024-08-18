@@ -66,7 +66,7 @@ export class IndexedDbService {
    * @return {*}
    * @memberof IndexedDbService
    */
-  async addItem(item: { id: string; value: any; description ?: string;  datatype ?: string;  encryption ?: boolean; created_at ?: Date;}) {
+  async addItem(item: { id: string; user_type: string;  value: any; description ?: string;  datatype ?: string;  encryption ?: boolean; created_at ?: Date;}) {
     item['datatype'] = typeof item.value;
     item['created_at'] = new Date();
     if (item.encryption) {

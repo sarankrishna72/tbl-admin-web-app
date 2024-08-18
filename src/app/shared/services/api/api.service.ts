@@ -21,9 +21,21 @@ export class ApiService {
    * @return {*}
    * @memberof ApiService
    */
-  adminSignIn(admin: AdminSignIn) {
+  adminSignIn(admin: SignInInterface) {
     return this._httpService.post(API_URI.adminSignInURI, {admin: admin})
   }
+
+  /**
+   * Admin Sign in Api Service Call
+   *
+   * @param {AdminSignIn} admin
+   * @return {*}
+   * @memberof ApiService
+   */
+  cashierSignIn(admin: SignInInterface) {
+    return this._httpService.post(API_URI.cashierSignInURI, {cashier: admin})
+  }
+
 
 
   /**
@@ -45,7 +57,7 @@ export class ApiService {
  *
  * @interface AdminSignIn
  */
-interface AdminSignIn {
+interface SignInInterface {
   email: string;
   password: string;
 }

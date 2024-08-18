@@ -19,7 +19,7 @@
         <div class="h-11 w-11 flex justify-center items-center rounded-full overflow-hidden bg-white m-auto">
           <img [src]="staticImages.rocket" class="h-9 w-9" />
         </div>
-        <div class="text-white my-3 roboto-regular text-center text-base">Super Admin</div>
+        <div class="text-white my-3 roboto-regular text-center text-base">{{ currentUserData?.user_type == 'admin' ? 'Super Admin' : 'Cashier' }}</div>
         <div class="flex justify-center mt-2">
           <app-button [buttonTheme]="'secondary'" (onClick)="logoutAdmin()" [buttonSize]="'xs'" [classes]="' text-x-base '">
             <div class="flex justify-between  gap-2 items-center">
