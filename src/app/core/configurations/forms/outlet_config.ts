@@ -43,18 +43,6 @@ export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
         ]
       }),
       new InputTextField({
-        key: "front_desk_person_number",
-        value: "",
-        type: "text",
-        label: "Front Desk Contact Number",
-        order: 3,
-        placeholder: "Enter Contact Number",
-        validations: [
-          new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
-          new FormBaseControlValidator({validatorName: ValidatorsType.PATTERN,message: "Invalid mobile number", validatorValue: "\+91[6789][0-9]{9}"}),
-        ]
-      }),
-      new InputTextField({
         key: "address",
         value: "",
         type: "textarea",

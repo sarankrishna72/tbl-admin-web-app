@@ -1,35 +1,35 @@
 import { API_URI } from "../../constants/api_uri";
 import { CrudPageModel, TableColumn, TableModel } from "../../model";
-import { OUTLET_FORM_DATA } from "../forms";
+import { CASHIER_FORM_DATA } from "../forms";
 
 
 const tableColumns: TableColumn[] = [
   new TableColumn({
-    columnKey: "restaurant_name",
-    columnName: "Outlet Name",
+    columnKey: "name",
+    columnName: "Cashier Name",
     columnType: "text",
     order: 1,
     columnWidth: "150px",
   }),
   new TableColumn({
-    columnKey: "feature_photo",
-    columnName: "Outlet Image",
-    columnType: "image",
+    columnKey: "email",
+    columnName: "Email",
+    columnType: "text",
     order: 2,
     columnWidth: "150px",
   }),
   new TableColumn({
-    columnKey: "city.name",
-    columnName: "City",
+    columnKey: "restaurant.name",
+    columnName: "Restaurant Name",
     columnType: "text",
     order: 3,
     columnWidth: "150px",
   }),
-  new TableColumn({
-    columnKey: "address",
-    columnName: "Address",
+ new TableColumn({
+    columnKey: "phone_number",
+    columnName: "Phone Number",
     columnType: "text",
-    order: 5,
+    order: 4,
     columnWidth: "150px",
   })
 ]
@@ -40,7 +40,7 @@ const tableConfig: TableModel = new TableModel(
     columns: tableColumns,
     data: [
     ],
-    createButtonLabel: 'Create New Outlet',
+    createButtonLabel: 'Create New Cashier',
     mobileResponsiveCard: true,
     showIndexColumn: true,
     sortKey: 'id',
@@ -62,34 +62,34 @@ const tableConfig: TableModel = new TableModel(
 );
 
 
-const OutletPageData: CrudPageModel = new CrudPageModel(
+const CashierPageData: CrudPageModel = new CrudPageModel(
   {
-    api_params: "restaurant",
-    title: 'Manage Outlets',
+    api_params: "cashier",
+    title: 'Cashier Accounts',
     tableConfigs: tableConfig,
-    formConfigs: OUTLET_FORM_DATA,
+    formConfigs: CASHIER_FORM_DATA,
     actionsLabel: [
-      {label: "Create New Outlet", buttonLabel: "Create", type: "create"},
-      {label: "Edit Outlet", buttonLabel: "Update", type: "edit"}
+      {label: "Create New Cashier", buttonLabel: "Create", type: "create"},
+      {label: "Edit Cashier", buttonLabel: "Update", type: "edit"}
     ],
-    list_api: {url: API_URI.restaurantsURI, method: "get"},
-    create_api: {url: API_URI.restaurantsURI, method: "post"},
-    update_api: {url: API_URI.restaurantsIdURI, method: "put"},
-    delete_api: {url: API_URI.restaurantsIdURI, method: "delete"},
+    list_api: {url: API_URI.cashiersURI, method: "get"},
+    create_api: {url: API_URI.cashiersURI, method: "post"},
+    update_api: {url: API_URI.cashiersIdURI, method: "put"},
+    delete_api: {url: API_URI.cashiersIdURI, method: "delete"},
     form_display_keys: [
       {mappingKey: 'id', key: 'id'},
-      {mappingKey: 'city_id', key: 'city.id'},
-      {mappingKey: 'address', key: 'address'},
-      {mappingKey: 'restaurant_name', key: 'restaurant_name'},
+      {mappingKey: 'restaurant_id', key: 'restaurant.id'},
+      {mappingKey: 'name', key: 'name'},
+      {mappingKey: 'email', key: 'email'},
       {mappingKey: 'photos', key: 'photos'},
-      {mappingKey: 'front_desk_person_number', key: 'front_desk_person_number'},
+      {mappingKey: 'phone_number', key: 'phone_number'},
       {mappingKey: 'is_new_restaurant', key: 'is_new_restaurant'}
     ],
     pageActions: [
       {
         action_name: 'create',
         icon: "add",
-        label: "Create New Outlet",
+        label: "Create New Cashier",
         button_theme: "primary-outlined",
         action_id : "create",
       },
@@ -98,4 +98,4 @@ const OutletPageData: CrudPageModel = new CrudPageModel(
   }
 )
 
-export { OutletPageData };
+export { CashierPageData };
