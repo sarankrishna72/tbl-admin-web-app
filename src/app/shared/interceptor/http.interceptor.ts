@@ -54,8 +54,9 @@ export class ApiInterceptor implements HttpInterceptor {
         toast['message'] = err.error.error;
         toast['title'] = "401: Unauthorized request";
       } else {
+        console.log( err.error)
         toast['title'] = err.statusText;
-        toast['message'] = err.error.error;
+        toast['message'] =  err.error?.error || err.error.message;
       }
     } else {
       toast['title'] = "Error: ";

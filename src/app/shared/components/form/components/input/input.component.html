@@ -5,58 +5,64 @@
     {{formConfig.label}}
   </label>
 }
-
-<div class="relative">
-
-  @if(formConfig.type == "textarea") {
-    <textarea
-      [id]="formConfig.key" [value]="controlDir.control?.value"
-      [attr.cols]="formConfig.cols"
-      [attr.rows]="formConfig.rows"
-      class="border-neutral-300 border outline-0 text-primary-500 rounded-md p-3 w-full roboto-regular text-base "
-      [placeholder]="formConfig.placeholder"
-      [ngClass]="{ 'resize-none':  !formConfig.resize, '!border-success-400': controlDir.control?.touched && controlDir.control?.valid , '!border-error-500': controlDir.control?.touched && controlDir.control?.invalid }"
-      (input)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled" ></textarea>
-  } @else if (formConfig.type == "checkbox") {
-    <div class="input-checkbox">
-      <input
-        [checked]="controlDir.control?.value"
-        [id]="formConfig.key" [type]="formConfig.type" [value]="true" [name]="formConfig.key"
-        (change)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled"
-      />
-      <label [for]="formConfig.key" class="text-sm ">{{formConfig.label}}</label>
-    </div>
-  } @else {
-    <input [id]="formConfig.key" [type]="formConfig.type" [value]="controlDir.control?.value"
-      class="border-neutral-300 border outline-0 text-primary-500 rounded-md h-12 p-3 w-full roboto-regular text-base "
-      [placeholder]="formConfig.placeholder"
-      [ngClass]="{ '!border-success-400': controlDir.control?.touched && controlDir.control?.valid , '!border-error-500': controlDir.control?.touched && controlDir.control?.invalid }"
-      (input)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled" />
-  }
-
-
-  @if (formConfig.showValidationIcon && !(formConfig.type == 'password' || isEyeOpen)) {
-    @if (controlDir.control?.touched && controlDir.control?.valid ) {
-      <span class="material-icons text-success-400 icon-center cursor-pointer noselect ">
-        {{ formConfig.success_icon || 'check' }}
-      </span>
-    }
-
-    @if (controlDir.control?.touched && controlDir.control?.valid && formConfig.error_icon ) {
-      <span class="material-icons text-success-400 icon-center cursor-pointer noselect ">
-        {{ formConfig.error_icon }}
-      </span>
-    }
-  }
-
-  @if (formConfig.type == 'password' || isEyeOpen) {
-    <span class="material-icons icon-center cursor-pointer noselect text-primary-700" [ngClass]="{'!text-success-400': controlDir.control?.touched && controlDir.control?.valid }" (click)="toggleEye()">
-      {{ isEyeOpen ? 'visibility_off' :'visibility'}}
+<div class="input-group flex items-center w-full">
+  @if (formConfig.prefix ) {
+    <span
+      class="p-3 flex items-center justify-center text-primary-500 rounded-md h-12 roboto-regular text-base inline-bock border-neutral-300 border input-prefix"
+      [ngClass]="{ '!border-success-400': controlDir.control?.touched && controlDir.control?.valid , '!border-error-500': controlDir.control?.touched && controlDir.control?.invalid }">
+      <span [innerHTML]="formConfig.prefix | safeHtml"></span>
     </span>
   }
+  <div class="relative flex-1">
+    @if(formConfig.type == "textarea") {
+      <textarea
+        [id]="formConfig.key" [value]="controlDir.control?.value"
+        [attr.cols]="formConfig.cols"
+        [attr.rows]="formConfig.rows"
+        class="border-neutral-300 border outline-0 text-primary-500 rounded-md p-3 w-full roboto-regular text-base "
+        [placeholder]="formConfig.placeholder"
+        [ngClass]="{ 'resize-none':  !formConfig.resize, '!border-success-400': controlDir.control?.touched && controlDir.control?.valid , '!border-error-500': controlDir.control?.touched && controlDir.control?.invalid }"
+        (input)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled" ></textarea>
+    } @else if (formConfig.type == "checkbox") {
+      <div class="input-checkbox">
+        <input
+          [checked]="controlDir.control?.value"
+          [id]="formConfig.key" [type]="formConfig.type" [value]="true" [name]="formConfig.key"
+          (change)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled"
+        />
+        <label [for]="formConfig.key" class="text-sm ">{{formConfig.label}}</label>
+      </div>
+    } @else {
+      <input [id]="formConfig.key" [type]="formConfig.type" [value]="controlDir.control?.value"
+        class="border-neutral-300 border outline-0  text-primary-500 rounded-md h-12 p-3 w-full roboto-regular text-base "
+        [placeholder]="formConfig.placeholder"
+        [ngClass]="{ 'input-prefix-form': formConfig.prefix,'!border-success-400': controlDir.control?.touched && controlDir.control?.valid , '!border-error-500': controlDir.control?.touched && controlDir.control?.invalid }"
+        (input)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled" />
+    }
 
+
+    @if (formConfig.showValidationIcon && !(formConfig.type == 'password' || isEyeOpen)) {
+      @if (controlDir.control?.touched && controlDir.control?.valid ) {
+        <span class="material-icons text-success-400 icon-center cursor-pointer noselect ">
+          {{ formConfig.success_icon || 'check' }}
+        </span>
+      }
+
+      @if (controlDir.control?.touched && controlDir.control?.valid && formConfig.error_icon ) {
+        <span class="material-icons text-success-400 icon-center cursor-pointer noselect ">
+          {{ formConfig.error_icon }}
+        </span>
+      }
+    }
+
+    @if (formConfig.type == 'password' || isEyeOpen) {
+      <span class="material-icons icon-center cursor-pointer noselect text-primary-700" [ngClass]="{'!text-success-400': controlDir.control?.touched && controlDir.control?.valid }" (click)="toggleEye()">
+        {{ isEyeOpen ? 'visibility_off' :'visibility'}}
+      </span>
+    }
+
+  </div>
 </div>
-
 @if (formConfig.helpText && !(controlDir.control?.touched && controlDir.control?.invalid)) {
   <div class="text-gray-600 text-xxs flex items-center gap-1">
     @if (controlDir.control?.touched && controlDir.control?.invalid) {

@@ -51,8 +51,8 @@ export class LeftMenuComponent implements OnInit {
       }]
     } else {
       this.menuItems = [{
-        icon: 'group',
-        name: 'Home',
+        icon: 'my_location',
+        name: 'Manage Wallet',
         route: APP_PAGES_PATH.CASHIER_HOME
       }]
     }

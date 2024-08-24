@@ -1,5 +1,75 @@
 <app-main-container>
-  <div class="flex justify-between  items-center">
-    AAAAA
+  <div class="">
+    <app-title size="xxl" theme="secondary" classes="roboto-medium max-tablet:!text-xl">{{"Manage Wallet"}}</app-title>
+    <div class="flex gap-4 mt-6">
+      <div class="flex-[3]">
+        <app-form [formGroup]="userDetailsForm" (formOutput)="submitFormData($event, 'userDetails')" [formData]="cashierFormConfig"></app-form>
+      </div>
+      <div class="flex-[1]"></div>
+      <div class="flex-[3]">
+
+        @if (userDetails) {
+          <div class="bg-neutral-100 p-4 rounded-md">
+            <app-title size="lg" theme="secondary" classes="roboto-medium">{{"Customer Details"}}</app-title>
+            <div class="mt-4">
+              <div class="flex justify-between item-center mt-2">
+                <div>
+                  <app-title size="base" classes="roboto-regular !text-gray-400">{{"Phone Number"}}</app-title>
+                </div>
+                <div>
+                  <app-title size="base" theme="primary" classes="roboto-medium">{{userDetails.phone_number}}</app-title>
+                </div>
+              </div>
+              <div class="flex justify-between item-center mt-2">
+                <div>
+                  <app-title size="base" classes="roboto-regular !text-gray-400">{{"Customer Name"}}</app-title>
+                </div>
+                <div>
+                  <app-title size="base" theme="primary" classes="roboto-medium">{{userDetails.name}}</app-title>
+                </div>
+              </div>
+              <div class="flex justify-between item-center mt-2">
+                <div>
+                  <app-title size="base" classes="roboto-regular !text-gray-400">{{"Wallet Points"}}</app-title>
+                </div>
+                <div>
+                  <app-title size="base" theme="primary" classes="roboto-medium">{{userDetails.balance_amount}}</app-title>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 border border-primary-500 rounded-md mt-4">
+            <app-title size="lg" theme="secondary" classes="roboto-medium">{{"Calculate Wallet Points"}}</app-title>
+            <div class="mt-4">
+              <app-form (formOutput)="submitFormData($event, 'updateWallet')" [formData]="cashierWalletCaluclationFormConfig"></app-form>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
   </div>
 </app-main-container>
+
+@if (_appStoreService.getPopupShowing()) {
+  <app-popup containerClass="tablet:w-[560px] w-[90%]">
+    @if (popupDetails) {
+      <div>
+        <app-title size="xl" theme="secondary" classes="roboto-medium text-center">{{"Discount Amount is ₹" +
+          popupDetails.offer_amount }}</app-title>
+        <div class="flex w-full justify-between	 pt-4">
+          <app-title size="sm" theme="secondary" classes="roboto-medium">{{"Earned Wallet Points"}}</app-title>
+          <app-title size="md" theme="secondary" classes="roboto-medium">{{popupDetails.earned_point}}</app-title>
+        </div>
+        <div class="flex justify-between pt-4 pb-4">
+          <app-title size="sm" theme="secondary" classes="roboto-medium">{{"Total Wallet Points"}}</app-title>
+          <app-title size="md" theme="secondary" classes="roboto-medium">{{popupDetails.total_wallet_points}}</app-title>
+        </div>
+        <div class="pt-4 flex justify-between  border-t border-gray-200">
+          <app-title size="lg" theme="secondary" classes="roboto-medium">{{"Final Bill Amount"}}</app-title>
+          <app-title size="lg" theme="secondary" classes="roboto-medium">{{"₹"+popupDetails.total_amount}}</app-title>
+        </div>
+      </div>
+    }
+
+  </app-popup>
+}

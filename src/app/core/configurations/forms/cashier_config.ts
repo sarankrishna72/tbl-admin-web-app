@@ -26,7 +26,7 @@ export const CASHIER_FORM_DATA: FormConfig = new FormConfig(
         type: "text",
         label: "Cashier Name",
         order:1,
-        placeholder: "Ente Cashier Name",
+        placeholder: "Enter Cashier Name",
         validations: [
         ]
       }),
@@ -36,10 +36,11 @@ export const CASHIER_FORM_DATA: FormConfig = new FormConfig(
         type: "text",
         label: "Front Desk Contact Number",
         order: 3,
+        prefix: "+91",
         placeholder: "Enter Contact Number",
         validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
-          new FormBaseControlValidator({validatorName: ValidatorsType.PATTERN,message: "Invalid mobile number", validatorValue: "\\+91[6789][0-9]{9}"}),
+          new FormBaseControlValidator({validatorName: ValidatorsType.PATTERN,message: "Invalid mobile number", validatorValue: "[6789][0-9]{9}"}),
         ]
       }),
       new InputTextField({

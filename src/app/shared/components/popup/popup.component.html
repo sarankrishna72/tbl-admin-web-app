@@ -1,6 +1,6 @@
 <div class="popup-container transition-opacity duration-300 ease-out flex justify-center items-center right-0 z-10 overflow-hidden absolute left-0 top-0 h-full popup-bg">
-  <div class="p-7 rounded-md bg-white max-h-[90%] overflow-auto" [ngClass]="containerClass">
-    <div class="text-primary-800 flex justify-between roboto-regular text-xxl border-b border-gray-100 pb-3" [ngClass]="titleClass">
+  <div class="p-7 rounded-md bg-white max-h-[90%] relative overflow-auto" [ngClass]="containerClass">
+    <div class=" {{title ? 'text-primary-800 flex justify-between roboto-regular text-xxl border-b border-gray-100 pb-3' : 'absolute right-4 top-4'}}" [ngClass]="titleClass">
       {{title}}
       <app-button buttonSize="xs" [classes]="'w-10 !py-[2px] !px-[6px] '" (onClick)="_appStoreService.setPopupShowing()" buttonTheme="custom">
         <span class="material-icons text-gray-300 cursor-pointer noselect">

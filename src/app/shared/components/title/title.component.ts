@@ -34,12 +34,14 @@ export class TitleComponent implements OnInit{
 
   getSizeClass() {
      switch (this.size) {
-      case 'md':
-        return 'text-md';
-      case 'sm':
-        return 'text-sm';
       case 'xs':
         return 'text-xs';
+      case 'base':
+        return 'text-base';
+      case 'sm':
+        return 'text-sm';
+      case 'md':
+        return 'text-md';
       case 'lg':
         return 'text-lg';
       case 'xl':

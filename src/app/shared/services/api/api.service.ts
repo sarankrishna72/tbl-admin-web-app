@@ -39,6 +39,29 @@ export class ApiService {
 
 
   /**
+   * Get User Account Information for the Cashier to Add Wallet Points
+   *
+   * @param {*} data
+   * @return {*}
+   * @memberof ApiService
+   */
+  cashierGetUserDetails(data: any) {
+    return this._httpService.get(API_URI.cashierUserDetailsURI, {params: data})
+  }
+
+  /**
+   * Update User Wallet Points
+   *
+   * @param {*} data
+   * @return {*}
+   * @memberof ApiService
+   */
+  cashierUpdateWalletPoints(data: any) {
+    return this._httpService.post(API_URI.cashierUpdateWalletPointsURI, data)
+  }
+
+
+  /**
    * Get a list of Cities
    *
    * @return {*}

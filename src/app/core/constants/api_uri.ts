@@ -13,4 +13,6 @@ export const API_URI = {
   restaurantsIdURI: `/${API_VERSION}/${ADMIN}/restaurants/{id}.json`,
   cashiersURI: `/${API_VERSION}/${ADMIN}/cashiers.json`,
   cashiersIdURI: `/${API_VERSION}/${ADMIN}/cashiers/{id}.json`,
+  cashierUserDetailsURI: `/${API_VERSION}/${CASHIER}/users/get_user_details.json`,
+  cashierUpdateWalletPointsURI: `/${API_VERSION}/${CASHIER}/users/update_wallet_points.json`
 }

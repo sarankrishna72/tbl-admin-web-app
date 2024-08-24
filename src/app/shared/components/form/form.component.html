@@ -12,13 +12,14 @@
       }
     }
   }
-  <div class="w-full flex justify-between mt-3 gap-3">
+  <div class="w-full flex justify-between gap-3">
     @for ( action of formData.actions ; track action.actionType) {
       <app-button
-        [classes]="action.buttonConfig?.classes || '' "
+        [classes]="action.buttonConfig?.classes + ' mt-3 ' || '' "
         [buttonRadius]="action.buttonConfig?.buttonRadius || 'md'"
         [buttonSize]="action.buttonConfig?.buttonSize || 'md'"
         [buttonType]="action.buttonConfig?.buttonType || 'button'"
+        [disabled]="((action.validationDisable || false) && formGroup.invalid)"
         [style]="action.buttonConfig?.style || {}"
         [rounded]="action.buttonConfig?.rounded || false"
         [fullWidth]="action.buttonConfig?.fullWidth || false"

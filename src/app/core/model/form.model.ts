@@ -11,6 +11,7 @@ export class FormBase {
   placeholder ?: string;
   options: { key: string, value: string }[];
   api ?: ApiConfigInterface | null;
+  prefix ?: any;
   validations: FormBaseControlValidator[] = [];
   success_icon ?: string = '';
   error_icon ?: string = '';
@@ -28,6 +29,7 @@ export class FormBase {
     order?: number;
     controlType?: string;
     type?: string;
+    prefix ?: any;
     options?: { key: string, value: string }[];
     api ?: ApiConfigInterface;
     placeholder ?: string;
@@ -45,6 +47,7 @@ export class FormBase {
     this.value = options.value;
     this.key = options.key || '';
     this.label = options.label || '';
+    this.prefix = options.prefix || '';
     this.order = options.order === undefined ? 1 : options.order;
     this.controlType = options.controlType || '';
     this.type = options.type || '';
@@ -97,6 +100,7 @@ export interface FormAction {
   actionType: formActionTypes;
   label : string;
   buttonConfig ?: ButtonConfig;
+  validationDisable?: boolean;
 }
 
 interface ButtonConfig {

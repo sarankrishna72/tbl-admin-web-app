@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <div class="mt-6 w-">
+  <div class="mt-6">
     @if (configurations?.tableConfigs) {
       <app-table (tableActionCTA)="actionCTA($event)" [tableRowData]="tableData || []" [tableConfigs]="configurations?.tableConfigs!"></app-table>
     }

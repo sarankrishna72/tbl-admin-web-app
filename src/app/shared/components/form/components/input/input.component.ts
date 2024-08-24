@@ -4,13 +4,15 @@ import { FormBase } from '../../../../../core/model';
 import { ControlValueAccessorDirective } from '../../../../directives/form/control-value-accessor.directive';
 import { CommonModule } from '@angular/common';
 import { FormService } from '../../../../services/form/form.service';
+import { SafeHtmlPipe } from '../../../../../core/pipe/safe-html/safe-html.pipe';
 
 @Component({
   selector: 'app-input',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SafeHtmlPipe
   ],
 
   templateUrl: './input.component.html',

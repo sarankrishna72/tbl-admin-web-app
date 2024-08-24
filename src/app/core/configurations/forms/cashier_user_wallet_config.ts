@@ -1,0 +1,71 @@
+import { FormBaseControlValidator, FormConfig, InputTextField, ValidatorsType } from "../../model";
+
+export const CASHIER_CUSTOMER_FORM_DATA: FormConfig = new FormConfig(
+  {
+    controls: [
+      new InputTextField({
+        key: "phone_number",
+        value: "",
+        type: "text",
+        label: "Customer Phone Number",
+        order:1,
+        prefix: "+91",
+        showValidationIcon: true,
+        placeholder: "Enter customer phone number",
+         validations: [
+          new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
+          new FormBaseControlValidator({validatorName: ValidatorsType.PATTERN,message: "Invalid mobile number", validatorValue: "[6789][0-9]{9}"}),
+        ]
+      })
+    ],
+     actions: [
+      {
+        actionType: "submit",
+        label: "Submit",
+        validationDisable: true,
+        buttonConfig: {
+          buttonTheme: 'primary',
+          buttonSize: 'sm',
+          buttonType: 'submit',
+          style: {"font-family": "roboto-regular"},
+          classes: '!text-base !mt-0'
+        }
+      }
+    ]
+  }
+)
+
+
+export const CASHIER_CUSTOMER_CALCULATE_WALLET_FORM: FormConfig = new FormConfig(
+  {
+    controls: [
+      new InputTextField({
+        key: "total_amount",
+        value: "",
+        type: "number",
+        label: "Bill Amount",
+        order:1,
+        prefix: "₹",
+        showValidationIcon: true,
+        placeholder: "Enter bill amount",
+         validations: [
+          new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
+        ]
+      })
+    ],
+     actions: [
+      {
+        actionType: "submit",
+        label: "Submit",
+        validationDisable: true,
+        buttonConfig: {
+          buttonTheme: 'primary',
+          buttonSize: 'sm',
+          buttonType: 'submit',
+          style: {"font-family": "roboto-regular"},
+          classes: '!text-base !mt-0'
+        }
+      }
+    ]
+  }
+)
