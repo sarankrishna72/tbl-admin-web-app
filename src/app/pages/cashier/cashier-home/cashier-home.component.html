@@ -1,12 +1,12 @@
 <app-main-container>
   <div class="">
-    <app-title size="xxl" theme="secondary" classes="roboto-medium max-tablet:!text-xl">{{"Manage Wallet"}}</app-title>
-    <div class="flex gap-4 mt-6">
-      <div class="flex-[3]">
+    <app-page-header pageTitle="Manage Wallet" ></app-page-header>
+
+    <div class="flex max-tablet:flex-col gap-4">
+      <div class="flex-1">
         <app-form [formGroup]="userDetailsForm" (formOutput)="submitFormData($event, 'userDetails')" [formData]="cashierFormConfig"></app-form>
       </div>
-      <div class="flex-[1]"></div>
-      <div class="flex-[3]">
+      <div class="flex-1">
 
         @if (userDetails) {
           <div class="bg-neutral-100 p-4 rounded-md">
@@ -51,7 +51,7 @@
 </app-main-container>
 
 @if (_appStoreService.getPopupShowing()) {
-  <app-popup containerClass="tablet:w-[560px] w-[90%]">
+  <app-popup containerClass="tablet:w-[480px] w-[90%]">
     @if (popupDetails) {
       <div>
         <app-title size="xl" theme="secondary" classes="roboto-medium text-center">{{"Discount Amount is ₹" +

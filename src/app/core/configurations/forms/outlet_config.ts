@@ -45,13 +45,10 @@ export const OUTLET_FORM_DATA: FormConfig = new FormConfig(
       new InputTextField({
         key: "address",
         value: "",
-        type: "textarea",
-        rows: 4,
-        cols: 50,
-        resize: false,
-        label: "Address",
+        type: "text",
+        label: "Area",
         order:3,
-        placeholder: "Enter Address",
+        placeholder: "Enter Area",
         validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
         ]

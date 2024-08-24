@@ -50,6 +50,7 @@ export const CASHIER_CUSTOMER_CALCULATE_WALLET_FORM: FormConfig = new FormConfig
         placeholder: "Enter bill amount",
          validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
+          new FormBaseControlValidator({validatorName: ValidatorsType.MIN,message: "Bill amount should be greater than 0", validatorValue: 1 }),
         ]
       })
     ],

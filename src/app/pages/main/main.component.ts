@@ -4,7 +4,7 @@ import { AppStoreService } from '../../shared/services/store/app-store.service';
 import { CommonService } from '../../shared/services/common/common.service';
 import { CrudPageModel } from '../../core/model';
 import { NavigationEnd, Router } from '@angular/router';
-import { ButtonComponent, FormComponent, MainContainerComponent, TitleComponent, PopupComponent, TableComponent } from '../../shared/components';
+import { ButtonComponent, FormComponent, MainContainerComponent, TitleComponent, PopupComponent, TableComponent, PageHeaderComponent } from '../../shared/components';
 import { CREATE, DELETE, EDIT } from '../../core/constants/const';
 import { FormGroup } from '@angular/forms';
 import { HttpService } from '../../shared/services/http/http.service';
@@ -20,7 +20,8 @@ import { ToastService } from '../../shared/services/toast/toast.service';
     ButtonComponent,
     TableComponent,
     PopupComponent,
-    FormComponent
+    FormComponent,
+    PageHeaderComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'

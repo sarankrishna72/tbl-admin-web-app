@@ -1,31 +1,22 @@
 <app-main-container>
-  <div class="flex justify-between  items-center">
-    <app-title size="xxl" theme="secondary" classes="roboto-medium max-tablet:!text-xl">{{configurations?.title}}</app-title>
+  <app-page-header [pageTitle]="configurations?.title || ''">
     <div class="laptop:flex gap-3 items-center hidden">
       @for ( pageAction of configurations?.pageActions; track pageAction.action_id) {
         <app-button buttonSize="xs" (onClick)="actionCTA(pageAction)" [buttonTheme]="pageAction.button_theme">
           <div class="flex items-center justify-center gap-1">
             @if (pageAction.icon) {
-              <span class="material-icons text-md cursor-pointer noselect ">
-                {{ pageAction.icon }}
-              </span>
+            <span class="material-icons text-md cursor-pointer noselect ">
+              {{ pageAction.icon }}
+            </span>
             }
             <span>{{pageAction.label}}</span>
           </div>
         </app-button>
       }
-
     </div>
-    <div class="laptop:hidden block">
-      <app-button (onClick)="_appStoreService.toggleSideMenuOpened()" buttonSize="sm" classes="!p-0" buttonTheme="">
-        <div class="h-7 flex items-center">
-          <img [src]="staticImages.menu" class="" />
-        </div>
-      </app-button>
-    </div>
-  </div>
+  </app-page-header>
 
-  <div class="mt-6">
+  <div>
     @if (configurations?.tableConfigs) {
       <app-table (tableActionCTA)="actionCTA($event)" [tableRowData]="tableData || []" [tableConfigs]="configurations?.tableConfigs!"></app-table>
     }

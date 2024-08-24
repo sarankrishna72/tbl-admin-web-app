@@ -24,7 +24,7 @@ export class CashierSignInComponent {
 
    onFormSubmit(event: any): void {
     this._apiService.cashierSignIn(event).subscribe((res: any) => {
-      this._indexedDbService.addItem({id: 'token', user_type: "cashier", value: res.auth_token,  description: 'cashier sign in auth token', encryption: true}).then(() => {
+      this._indexedDbService.addItem({id: 'token', city: res.restaurant, user_type: "cashier", value: res.auth_token,  description: 'cashier sign in auth token', encryption: true}).then(() => {
         this._toastService.success({message: `Welcome back ${res.email} `, autoClose: true, title: 'Signed in successfully!'});
         this._router.navigate(["/cashier/home"]);
       }).catch((error) => {

@@ -1,3 +1,4 @@
+export { PageHeaderComponent } from './page-header/page-header.component';
 export { ToastComponent } from './toast/toast.component';
 export { TitleComponent } from './title/title.component';
 export { ButtonComponent } from './form/components/button/button.component';

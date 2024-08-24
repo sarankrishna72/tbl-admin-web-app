@@ -27,7 +27,7 @@ const tableColumns: TableColumn[] = [
   }),
   new TableColumn({
     columnKey: "address",
-    columnName: "Address",
+    columnName: "Area",
     columnType: "text",
     order: 5,
     columnWidth: "150px",
