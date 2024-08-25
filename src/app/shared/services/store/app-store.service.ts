@@ -6,10 +6,31 @@ import { CrudPageModel, ToastModel } from '../../../core/model';
 })
 export class AppStoreService {
   private isSideMenuOpened:WritableSignal<boolean> = signal(false);
+  private loading:WritableSignal<boolean> = signal(false);
   private currentPageConfig: WritableSignal<CrudPageModel | null> = signal(null);
   private popupShowing: WritableSignal<boolean> = signal(false);
   private toasts: WritableSignal<ToastModel[]> = signal([]);
   constructor() { }
+
+  /**
+   * Toggle Loader
+   *
+   * @memberof AppStoreService
+   */
+  setLoading(value: boolean) {
+    this.loading.set(value)
+  }
+
+  /**
+   *Get Loader Value
+   *
+   * @readonly
+   * @memberof AppStoreService
+   */
+  get loader(): boolean {
+    return this.loading();
+  }
+
 
   /**
    * Toggle the side menu state

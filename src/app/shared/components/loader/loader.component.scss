@@ -1,0 +1,346 @@
+$COLOR_WHITE: #fff;
+$COLOR_FOOT: #d91e19;
+$COLOR_BEER: #f2be44;
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($animation-name) {
+  -webkit-animation: $animation-name;
+  -moz-animation: $animation-name;
+  animation: $animation-name;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@mixin prefixes($property, $value) {
+  @each $prefix in -webkit-, -moz-, -ms-, -o-, "" {
+    #{$prefix}#{$property}: $value;
+  }
+}
+
+.beer-wrapper {
+  position: absolute;
+  width: 70px;
+  height: 200px;
+}
+
+.beer {
+  position: absolute;
+  width: 70px;
+
+  &__body {
+    position: relative;
+    width: 70px;
+    height: 115px;
+    border-radius: 4px 4px 20px 20px;
+    background: $COLOR_WHITE;
+    overflow: hidden;
+    z-index: 10;
+    @include animation(body 0.8s infinite ease-in-out);
+  }
+
+  &__foot {
+    position: absolute;
+    top: 105px;
+    width: 60px;
+    height: 80px;
+
+    &:before {
+      bottom: 0px;
+      width: 15px;
+      height: 8px;
+      background: $COLOR_FOOT;
+    }
+
+    &--right {
+      border-right: 8px solid $COLOR_FOOT;
+      right: 20px;
+      @include animation(right-foot 0.8s 0.4s infinite ease-in-out);
+      @include prefixes(transform-origin, top right);
+
+      &:before {
+        right: -19px;
+        @include animation(right-tsumasaki 0.8s 0.4s infinite ease-in-out);
+      }
+    }
+    &--left {
+      border-left: 8px solid $COLOR_FOOT;
+      left: 20px;
+      @include animation(left-foot 0.8s infinite ease-in-out);
+      @include prefixes(transform-origin, top left);
+
+      &:before {
+        left: -19px;
+        @include animation(left-tsumasaki 0.8s infinite ease-in-out);
+      }
+    }
+  }
+
+  &__liquid {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80%;
+    background: $COLOR_BEER;
+    z-index: 10;
+
+    &:before {
+      width: 69px;
+      height: 28px;
+      border-radius: 50%;
+      top: -10px;
+      background: $COLOR_BEER;
+      @include animation(beer 2s infinite ease-in-out);
+    }
+
+    &:after {
+      width: 70px;
+      height: 28px;
+      border-radius: 50%;
+      top: -10px;
+      background: $COLOR_BEER;
+    }
+  }
+
+  &:before {
+    top: 20px;
+    right: -32px;
+    width: 50px;
+    height: 59px;
+    border: 10px solid $COLOR_WHITE;
+    border-radius: 10px;
+    box-sizing: border-box;
+    @include prefixes(box-sizing, border-box);
+    @include animation(body 0.8s infinite ease-in-out);
+  }
+
+  &__bubble {
+    position: absolute;
+    top: -15px;
+    right: 0;
+    width: 33px;
+    height: 25px;
+    background: $COLOR_WHITE;
+    border-radius: 50% 50% 0 0;
+    z-index: 10;
+    @include animation(body 0.8s infinite ease-in-out);
+
+    &:before {
+      top: 1px;
+      right: 29px;
+      width: 30px;
+      height: 20px;
+      background: $COLOR_WHITE;
+      border-radius: 50% 50% 0 0;
+    }
+
+    &:after {
+      top: 10px;
+      right: 50px;
+      width: 20px;
+      height: 15px;
+      background: $COLOR_WHITE;
+      border-radius: 50% 50% 0 0;
+    }
+  }
+
+  &__kiho {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background: $COLOR_WHITE;
+    border-radius: 50%;
+    z-index: 10;
+    opacity: 0;
+    @include prefixes(transition, 0.8s);
+    @include animation(kiho 2s infinite ease-in-out);
+
+    &:before {
+      left: 20px;
+      width: 10px;
+      height: 10px;
+      background: $COLOR_WHITE;
+      border-radius: 50%;
+      z-index: 10;
+      opacity: 0;
+      @include prefixes(transition, 0.8s);
+      @include animation(kiho2 3s infinite ease-in-out);
+    }
+
+    &:after {
+      left: 35px;
+      width: 5px;
+      height: 5px;
+      background: $COLOR_WHITE;
+      border-radius: 50%;
+      z-index: 10;
+      opacity: 0;
+      @include prefixes(transition, 0.8s);
+      @include animation(kiho2 3s infinite ease-in-out);
+    }
+
+    &:nth-of-type(2) {
+      left: 40px;
+      @include animation(kiho 2s 1s infinite ease-in-out);
+
+      &:before {
+        left: 10px;
+        @include animation(kiho2 3s 1s infinite ease-in-out);
+      }
+
+      &:after {
+        left: 10px;
+        @include animation(kiho2 3s 1s infinite ease-in-out);
+      }
+    }
+  }
+}
+
+@include keyframes(left-tsumasaki) {
+  0%,
+  100% {
+    left: -20px;
+    @include prefixes(transform, rotate(0));
+  }
+  35% {
+    left: 10px;
+    @include prefixes(transform, rotate(-20deg));
+  }
+  65% {
+    left: 11px;
+    bottom: -6px;
+    @include prefixes(transform, rotate(-25deg));
+  }
+}
+
+@include keyframes(right-tsumasaki) {
+  0%,
+  100% {
+    right: -20px;
+    @include prefixes(transform, rotate(0));
+  }
+  35% {
+    right: 10px;
+    @include prefixes(transform, rotate(20deg));
+  }
+  65% {
+    right: 11px;
+    bottom: -6px;
+    @include prefixes(transform, rotate(25deg));
+  }
+}
+
+@include keyframes(left-foot) {
+  0%,
+  100% {
+    border-radius: 0;
+    @include prefixes(transform, rotate(0));
+  }
+  35% {
+    border-radius: 0 70%;
+    @include prefixes(transform, rotate(-10deg));
+  }
+  65% {
+    border-radius: 0 70%;
+    @include prefixes(transform, rotate(55deg));
+  }
+}
+
+@include keyframes(right-foot) {
+  0%,
+  100% {
+    border-radius: 0;
+    @include prefixes(transform, rotate(0));
+  }
+  35% {
+    border-radius: 70% 0;
+    @include prefixes(transform, rotate(10deg));
+  }
+  65% {
+    border-radius: 70% 0;
+    @include prefixes(transform, rotate(-55deg));
+  }
+}
+
+@include keyframes(body) {
+  0%,
+  50%,
+  100% {
+    @include prefixes(transform, translateY(-0.5vh) rotate(0.2deg));
+  }
+  15%,
+  65% {
+    @include prefixes(transform, translateY(0.3vh) rotate(-0.2deg));
+  }
+}
+
+@include keyframes(beer) {
+  0%,
+  50%,
+  100% {
+    @include prefixes(transform, translateX(-1.5vh) rotate(0.2deg));
+  }
+  15%,
+  65% {
+    @include prefixes(transform, translateX(1.5vh) rotate(-0.2deg));
+  }
+}
+
+@include keyframes(kiho) {
+  0% {
+    opacity: 0.8;
+    @include prefixes(transform, translateY(0));
+  }
+  100% {
+    opacity: 0;
+    @include prefixes(transform, translateY(-80px));
+  }
+}
+
+@include keyframes(kiho2) {
+  0% {
+    opacity: 1;
+    @include prefixes(transform, translateY(40px));
+  }
+  100% {
+    opacity: 0;
+    @include prefixes(transform, translateY(0));
+  }
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+  }
+}
+
+.loader-container {
+  // background:#123752;
+  background: linear-gradient(to right, rgba(0, 62, 133, 1) 0%, rgba(0, 62, 133, 0.7) 100%);
+}
+
+p {
+  position: absolute;
+  top: calc(50% - 180px);
+  color: $COLOR_WHITE;
+  font-size: 40px;
+  text-align: center;
+}
