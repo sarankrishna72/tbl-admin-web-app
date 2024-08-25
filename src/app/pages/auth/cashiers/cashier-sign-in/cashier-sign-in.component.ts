@@ -28,7 +28,6 @@ export class CashierSignInComponent {
         this._toastService.success({message: `Welcome back ${res.email} `, autoClose: true, title: 'Signed in successfully!'});
         this._router.navigate(["/cashier/home"]);
       }).catch((error) => {
-        console.error(error)
       })
     })
   }
