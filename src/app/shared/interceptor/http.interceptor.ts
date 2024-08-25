@@ -25,9 +25,9 @@ export class ApiInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-      this._appStoreService.setLoading(true);
      return from(this._indexedDbService.getItem("token")).pipe(
       switchMap((token: any) => {
+        this._appStoreService.setLoading(true);
         if (token) {
           let modifiedReq = req.clone({
              headers: req.headers.append('X-Authentication-Token', token.value)
@@ -35,7 +35,6 @@ export class ApiInterceptor implements HttpInterceptor {
           return next.handle(modifiedReq).pipe(
              tap((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                  console.log(event)
                   this._appStoreService.setLoading(false);
                 }
               }

@@ -27,7 +27,7 @@ export class AppStoreService {
    * @readonly
    * @memberof AppStoreService
    */
-  get loader(): boolean {
+  getLoader(): boolean {
     return this.loading();
   }
 
