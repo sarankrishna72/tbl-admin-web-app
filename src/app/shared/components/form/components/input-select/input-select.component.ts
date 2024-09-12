@@ -23,24 +23,11 @@ export class InputSelectComponent extends ControlValueAccessorDirective  impleme
   value: string = '';
   isEyeOpen: boolean = false;
   @Output() blur: EventEmitter<void> = new EventEmitter<void>();
+  isRequired: boolean = false;
   private _formService = inject(FormService);
   private _httpService = inject(HttpService);
   options: any = [];
-  ngOnInit(): void {
-    if (this.formConfig.validations.length > 0) {
-      const validators = []
-      for (const validation of this.formConfig.validations) {
-        let controlValidator = this._formService.generateValidator(validation);
-        if (controlValidator) {
-          validators.push(controlValidator)
-        }
-      }
-      if (validators.length > 0) {
-        this.controlDir.control?.addValidators(validators);
-        this.controlDir.control?.updateValueAndValidity();
-      }
-    }
-  }
+
 
   errorMessage(): string {
     let error = this.controlDir?.control?.errors || {};
@@ -70,11 +57,25 @@ export class InputSelectComponent extends ControlValueAccessorDirective  impleme
       this.getSelectApi().subscribe((res: any) => {
         this.options = res.data || res;
       })
-      // this.getSelectApi().subscribe(res => {
-      //   console.log(res)
-      // });
     }
 
+  }
+
+  ngOnInit(): void {
+    if (this.formConfig.validations.length > 0) {
+      const validators = []
+      for (const validation of this.formConfig.validations) {
+        let controlValidator = this._formService.generateValidator(validation);
+        if (controlValidator) {
+          validators.push(controlValidator)
+        }
+      }
+      if (validators.length > 0) {
+        this.controlDir.control?.addValidators(validators);
+        this.controlDir.control?.updateValueAndValidity();
+      }
+      this.isRequired = this._formService.checkRequiredField(this.formConfig.validations);
+    }
   }
 
 }

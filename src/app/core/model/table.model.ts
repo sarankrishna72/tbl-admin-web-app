@@ -47,6 +47,7 @@ export class TablePagination {
 interface TableActions {
   action_name ?: string;
   action_id : string;
+  label ?: string;
   action_type: TableActionType;
   icon ?: string;
   classes ?: string;

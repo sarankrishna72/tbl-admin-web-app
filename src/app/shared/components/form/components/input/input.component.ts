@@ -25,22 +25,8 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
   isEyeOpen: boolean = false;
   @Output() blur: EventEmitter<void> = new EventEmitter<void>();
   private _formService = inject(FormService);
+  isRequired: boolean = false;
 
-  ngOnInit(): void {
-    if (this.formConfig.validations.length > 0) {
-      const validators = []
-      for (const validation of this.formConfig.validations) {
-        let controlValidator = this._formService.generateValidator(validation);
-        if (controlValidator) {
-          validators.push(controlValidator)
-        }
-      }
-      if (validators.length > 0) {
-        this.controlDir.control?.addValidators(validators);
-        this.controlDir.control?.updateValueAndValidity();
-      }
-    }
-  }
 
   errorMessage(): string {
     let error = this.controlDir?.control?.errors || {};
@@ -55,5 +41,22 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
   toggleEye() {
     this.isEyeOpen = !this.isEyeOpen;
     (this.isEyeOpen) ? this.formConfig.type = "text" : this.formConfig.type = "password";
+  }
+
+  ngOnInit(): void {
+    if (this.formConfig.validations.length > 0) {
+      const validators = []
+      for (const validation of this.formConfig.validations) {
+        let controlValidator = this._formService.generateValidator(validation);
+        if (controlValidator) {
+          validators.push(controlValidator)
+        }
+      }
+      if (validators.length > 0) {
+        this.controlDir.control?.addValidators(validators);
+        this.controlDir.control?.updateValueAndValidity();
+      }
+       this.isRequired = this._formService.checkRequiredField(this.formConfig.validations);
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBaseControlValidator } from '../../../core/model';
+import { FormBaseControlValidator, ValidatorsType } from '../../../core/model';
 import { Validators } from '@angular/forms';
 import { MaxSizeValidator } from '../../components/form/validators/max.file.size';
 
@@ -17,7 +17,7 @@ export class FormService {
    * @return {*}
    * @memberof FormService
    */
-  generateValidator(validation: FormBaseControlValidator,) {
+  generateValidator(validation: FormBaseControlValidator) {
    switch (validation.validatorName) {
     case "required":
       return Validators.required;
@@ -40,5 +40,11 @@ export class FormService {
     default:
       return null;
    }
+  }
+
+
+  checkRequiredField(validations: FormBaseControlValidator[]) {
+    let requiredValidation = validations.find(validation => validation.validatorName == ValidatorsType.REQUIRED)
+    return requiredValidation ? true : false;
   }
 }

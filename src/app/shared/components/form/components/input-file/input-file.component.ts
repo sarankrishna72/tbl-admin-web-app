@@ -23,7 +23,7 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
   files: any[] = [];
   private _formService = inject(FormService);
   @ViewChild('fileDropRef') fileDropRef!: ElementRef;
-
+  isRequired: boolean = false;
   errorMessage(): string {
     let error = this.controlDir?.control?.errors || {};
     if ( Object.keys(error)?.length > 0) {
@@ -110,6 +110,7 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
         this.controlDir.control?.addValidators(validators);
         this.controlDir.control?.updateValueAndValidity();
       }
+       this.isRequired = this._formService.checkRequiredField(this.formConfig.validations);
     }
 
     setTimeout(() => {

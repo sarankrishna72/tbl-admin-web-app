@@ -50,10 +50,12 @@ const tableConfig: TableModel = new TableModel(
         action_id: 'edit',
         action_type: 'edit',
         icon: 'edit',
+        label: "Edit Outlet",
         classes: 'hover:!text-primary-500'
       }, {
         action_id: 'delete',
         action_type: 'delete',
+        label: "Delete Outlet",
         icon: 'delete',
         classes: 'hover:!text-error-500'
       }

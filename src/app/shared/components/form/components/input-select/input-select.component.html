@@ -3,6 +3,10 @@
   <label [for]="formConfig.key" [id]="'label'+formConfig.key"
     class="roboto-regular text-sm text-primary-800 mb-1 inline-block">
     {{formConfig.label}}
+
+    @if (isRequired) {
+      <span class="text-error-500 ml-1">*</span>
+    }
   </label>
 }
 

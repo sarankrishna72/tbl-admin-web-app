@@ -50,11 +50,13 @@ const tableConfig: TableModel = new TableModel(
         action_id: 'edit',
         action_type: 'edit',
         icon: 'edit',
+        label: "Edit Cashier",
         classes: 'hover:!text-primary-500'
       }, {
         action_id: 'delete',
         action_type: 'delete',
         icon: 'delete',
+        label: "Delete Cashier",
         classes: 'hover:!text-error-500'
       }
     ]

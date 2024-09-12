@@ -41,7 +41,7 @@ export class MainComponent implements OnInit{
   CONST_EDIT = EDIT;
   formGroup: FormGroup = new FormGroup({});
   selectedData: any;
-
+  selectedAction: any;
   private loggingEffect = effect(() => {
     if (this._appStoreService.getCurrentPageConfig()) {
       this.configurations = this._appStoreService.getCurrentPageConfig();
@@ -127,6 +127,7 @@ export class MainComponent implements OnInit{
     this.selectedData = null;
     this.formGroup.reset();
     let actionLabel: any;
+    this.selectedAction = action;
     let buttonsList:any = [];
     switch (action.action_id) {
       case "create":
@@ -135,6 +136,7 @@ export class MainComponent implements OnInit{
         this.configurations!.formConfigs!.actions = buttonsList;
         this.actionType = this.CONST_CREATE;
         this._appStoreService.setPopupShowing();
+
         break;
       case "edit":
         this.actionType = this.CONST_EDIT;
