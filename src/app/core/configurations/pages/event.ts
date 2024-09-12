@@ -99,7 +99,9 @@ const EventPageData: CrudPageModel = new CrudPageModel(
       {mappingKey: 'description', key: 'description'},
       {mappingKey: 'photos', key: 'photos'},
       {mappingKey: 'notification_push_date', key: 'notification_push_date'},
-      {mappingKey: 'event_date', key: 'event_date'}
+      {mappingKey: 'event_date', key: 'event_date'},
+      {mappingKey: 'redirection_link', key: 'redirection_link'}
+
     ],
     pageActions: [
       {

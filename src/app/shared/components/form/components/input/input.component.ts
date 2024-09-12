@@ -5,7 +5,7 @@ import { ControlValueAccessorDirective } from '../../../../directives/form/contr
 import { CommonModule } from '@angular/common';
 import { FormService } from '../../../../services/form/form.service';
 import { SafeHtmlPipe } from '../../../../../core/pipe/safe-html/safe-html.pipe';
-
+import moment from 'moment';
 @Component({
   selector: 'app-input',
   standalone: true,
@@ -43,6 +43,18 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
     (this.isEyeOpen) ? this.formConfig.type = "text" : this.formConfig.type = "password";
   }
 
+
+
+  checkFormControlsDate() {
+    setTimeout(() => {
+      let value = this.controlDir?.control?.value;
+      if (this.formConfig.type.includes("date")) {
+        this.controlDir?.control?.setValue(moment(new Date(value)).format("YYYY-MM-DDTHH:mm:ss"));
+      }
+    },100);
+  }
+
+
   ngOnInit(): void {
     if (this.formConfig.validations.length > 0) {
       const validators = []
@@ -56,7 +68,11 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
         this.controlDir.control?.addValidators(validators);
         this.controlDir.control?.updateValueAndValidity();
       }
-       this.isRequired = this._formService.checkRequiredField(this.formConfig.validations);
+
+      this.checkFormControlsDate();
+      this.isRequired = this._formService.checkRequiredField(this.formConfig.validations);
     }
   }
 }
+
+
