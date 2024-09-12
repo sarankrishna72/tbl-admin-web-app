@@ -26,10 +26,10 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
         label: "Title",
         order:2,
         placeholder: "Enter Title",
-        helpText: "Title must be 10 characters or less",
+        helpText: "Title must be 20 characters or less",
         validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
-          new FormBaseControlValidator({validatorName: ValidatorsType.MAX_LENGTH,message: "Title must be 10 characters or less", validatorValue: 10 })
+          new FormBaseControlValidator({validatorName: ValidatorsType.MAX_LENGTH,message: "Title must be 20 characters or less", validatorValue: 20 })
         ]
       }),
       new InputTextField({
@@ -39,10 +39,10 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
         label: "Description",
         order:3,
         placeholder: "Enter Description",
-        helpText: "Description must be 20 characters or less",
+        helpText: "Description must be 50 characters or less",
         validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
-          new FormBaseControlValidator({validatorName: ValidatorsType.MAX_LENGTH,message: "Description must be 20 characters or less", validatorValue: 20 })
+          new FormBaseControlValidator({validatorName: ValidatorsType.MAX_LENGTH,message: "Description must be 50 characters or less", validatorValue: 50 })
         ]
       }),
       new InputFile({
