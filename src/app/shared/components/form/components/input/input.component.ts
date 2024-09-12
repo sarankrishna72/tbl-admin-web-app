@@ -48,7 +48,7 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
   checkFormControlsDate() {
     setTimeout(() => {
       let value = this.controlDir?.control?.value;
-      if (this.formConfig.type.includes("date")) {
+      if (this.formConfig.type.includes("date") && value) {
         this.controlDir?.control?.setValue(moment(new Date(value)).format("YYYY-MM-DDTHH:mm:ss"));
       }
     },100);

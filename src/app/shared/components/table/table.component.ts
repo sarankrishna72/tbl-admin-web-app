@@ -43,6 +43,15 @@ export class TableComponent implements OnChanges{
   }
 
   tableAction(data: any): void {
+    if (data.action == 'create') {
+      data.action = {
+        action_name: 'create',
+        icon: "add",
+        label: this.tableConfigs.createButtonLabel,
+        button_theme: "primary-outlined",
+        action_id : "create",
+      }
+    }
     this.tableActionCTA.emit( {...data.action, data: data.data} );
   }
 

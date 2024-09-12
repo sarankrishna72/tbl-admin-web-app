@@ -58,7 +58,7 @@
               <img [src]="staticImages.no_data_available" />
               <div class="text-primary-800 text-lg roboto-regular">No data available!</div>
               @if (tableConfigs.createButtonLabel) {
-              <app-button buttonSize="xs" classes=" mt-4" buttonTheme="primary-outlined">
+              <app-button (onClick)="tableAction({action: 'create', data: null})" buttonSize="xs" classes=" mt-4" buttonTheme="primary-outlined">
                 <div class="flex items-center justify-center gap-1">
                   <span class="material-icons text-md cursor-pointer noselect ">
                     {{ 'add' }}
