@@ -23,12 +23,25 @@
   </div>
 
   @if (_appStoreService.getPopupShowing()) {
-    <app-popup [title]="selectedAction.label" containerClass="tablet:w-[460px] w-[90%]">
-      @if (configurations?.formConfigs) {
-      <div class="pt-3">
-        <app-form [formGroup]="formGroup" (formOutput)="onSubmit($event)" [formData]="configurations?.formConfigs!"></app-form>
-      </div>
-      }
+    <app-popup bodyClass="scrollbar-hide" [title]="selectedAction.label" containerClass="tablet:w-[460px]  w-[90%]">
+
+        <ng-container popup-body>
+          <div class="pt-1">
+            <app-form [formGroup]="formGroup" [showFormActions]="false" [formData]="configurations?.formConfigs!"></app-form>
+          </div>
+        </ng-container>
+
+        <ng-container popup-footer>
+          <app-form-actions [formGroup]="formGroup" [actions]="configurations?.formConfigs!.actions"
+            (formAction)="onSubmit($event)"></app-form-actions>
+        </ng-container>
+
+
+        <!-- <ng-container ngProjectAs="[slot='footer']">
+
+        </ng-container > -->
+
+
     </app-popup>
   }
 

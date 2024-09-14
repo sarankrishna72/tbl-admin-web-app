@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as _ from 'lodash';
 import { InputComponent, InputFileComponent, InputSelectComponent } from './components';
 import { ButtonComponent } from '..';
+import { FormActionsComponent } from './components/form-actions/form-actions.component';
 
 @Component({
   selector: 'app-form',
@@ -13,7 +14,8 @@ import { ButtonComponent } from '..';
     ButtonComponent,
     InputFileComponent,
     ReactiveFormsModule,
-    InputSelectComponent
+    InputSelectComponent,
+    FormActionsComponent
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
@@ -23,6 +25,7 @@ export class FormComponent implements OnChanges {
   @Input() formGroup: FormGroup = new FormGroup({});
   @Output() formOutput: EventEmitter<any> = new EventEmitter();
   @Output() onFormGroupReady: EventEmitter<any> = new EventEmitter();
+  @Input() showFormActions: boolean = true;
   /**
    * Generate Form Control Configuration
    *
@@ -38,23 +41,8 @@ export class FormComponent implements OnChanges {
     this.onFormGroupReady.emit(this.formGroup);
   }
 
-  formAction(action: FormAction) {
-    switch (action.actionType) {
-      case "reset":
-        this.formGroup.reset();
-        this.formGroup.updateValueAndValidity();
-        break;
-      case "submit":
-        if (this.formGroup.valid) {
-          this.formOutput.emit({action: action.actionType, value: this.formGroup.value});
-        } else {
-          this.formGroup.markAllAsTouched();
-        }
-        break;
-      default:
-        this.formOutput.emit({action: action.actionType});
-        break;
-    }
+  formAction(action: any) {
+    this.formOutput.emit(action);
   }
 
   /**

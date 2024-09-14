@@ -11,6 +11,7 @@ import { HttpService } from '../../shared/services/http/http.service';
 import { getObjValueFromPath } from '../../core/lib/lib';
 import { Observable } from 'rxjs';
 import { ToastService } from '../../shared/services/toast/toast.service';
+import { FormActionsComponent } from '../../shared/components/form/components/form-actions/form-actions.component';
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -21,7 +22,8 @@ import { ToastService } from '../../shared/services/toast/toast.service';
     TableComponent,
     PopupComponent,
     FormComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    FormActionsComponent,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'

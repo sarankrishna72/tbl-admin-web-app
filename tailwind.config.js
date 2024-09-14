@@ -9,6 +9,7 @@ module.exports = {
       "xs": ['12px', '20px'],
       "x-base": ['13px', '21px'],
       "base": ['14px', '22px'],
+      "base-2": ['15px', '23px'],
       "sm": ['16px', '24px'],
       "md": ['17px', '25px'],
       "2sm": ['18px', '26px'],

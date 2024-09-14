@@ -22,6 +22,9 @@
                 @case ('html') {
                   <span [innerHTML]="rowData[colDef.columnKey]"></span>
                 }
+                @case ('format') {
+                <span [innerHTML]="colDef.cellFormatFn!(rowData[colDef.columnKey])"></span>
+                }
                 @case ('action') {
                   <div class="flex items-center justify-center">
                     @for ( action of tableConfigs.actions; track action.action_id) {

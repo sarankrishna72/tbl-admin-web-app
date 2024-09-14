@@ -61,7 +61,7 @@ export class TableColumn {
   checkbox ?: boolean = false;
   columnWidth ?: string = '120px';
   sort ?: boolean = false;
-
+  cellFormatFn ?: Function | undefined = undefined;
   constructor(options: {
     order ?: number;
     columnKey : string;
@@ -70,6 +70,7 @@ export class TableColumn {
     checkbox ?: boolean;
     columnWidth ?: string;
     sort ?: boolean;
+    cellFormatFn ?: Function | undefined;
   }) {
     this.order = options.order || 0;
     this.columnKey = options.columnKey || '';
@@ -78,8 +79,9 @@ export class TableColumn {
     this.columnType = options.columnType  ;
     this.columnWidth = options.columnWidth || '' ;
     this.sort = options.sort || false;
+    this.cellFormatFn = options.cellFormatFn || undefined;
   }
 }
 
-type TableColumnType = 'text' | 'image' | 'action' | 'html' | 'index';
+type TableColumnType = 'text' | 'image' | 'action' | 'html' | 'index' | 'format';
 type TableActionType = 'edit' | 'delete' | 'custom';

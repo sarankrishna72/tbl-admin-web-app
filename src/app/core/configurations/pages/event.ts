@@ -1,10 +1,11 @@
+import moment from "moment";
 import { API_URI } from "../../constants/api_uri";
 import { CrudPageModel, TableColumn, TableModel } from "../../model";
 import { EVENT_FORM_DATA } from "../forms";
 
 const tableColumns: TableColumn[] = [
   new TableColumn({
-    columnKey: "restaurant.name",
+    columnKey: "restaurant.address",
     columnName: "Outlet Name",
     columnType: "text",
     order: 1,
@@ -34,9 +35,12 @@ const tableColumns: TableColumn[] = [
   new TableColumn({
     columnKey: "event_date",
     columnName: "Event Date",
-    columnType: "text",
+    columnType: "format",
     order: 5,
     columnWidth: "150px",
+    cellFormatFn: (data: any) => {
+      return moment(new Date(data)).format("DD/MM/YYYY hh:mm A");
+    }
   }),
 
   new TableColumn({

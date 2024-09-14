@@ -80,13 +80,17 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
         ]
       }),
-      new InputTextField({
+      new InputDropdown({
         key: "redirection_link",
         value: "",
         type: "text",
         label: "Redirection link",
         order: 7,
-        placeholder: "Enter Redirection Link",
+        placeholder: "Select Redirection Link",
+         api: {
+          apiUrl: API_URI.eventsRedirectionListURI,
+          method: "get"
+        },
         validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
         ]

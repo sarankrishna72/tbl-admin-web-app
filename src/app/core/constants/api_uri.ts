@@ -17,4 +17,5 @@ export const API_URI = {
   cashierUpdateWalletPointsURI: `/${API_VERSION}/${CASHIER}/users/update_wallet_points.json`,
   eventsURI: `/${API_VERSION}/${ADMIN}/events.json`,
   eventsIdURI: `/${API_VERSION}/${ADMIN}/events/{id}.json`,
+  eventsRedirectionListURI: `/events/redirection_lists.json`,
 }

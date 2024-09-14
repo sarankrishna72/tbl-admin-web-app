@@ -18,6 +18,7 @@ export class PopupComponent {
   @Input() containerClass: string = '';
   @Input() title: string = '';
   @Input() titleClass: string = '';
+  @Input() bodyClass: string = '';
   @Input() popupConfig ?: PopupConfigInterface;
   public _appStoreService = inject(AppStoreService);
 }
