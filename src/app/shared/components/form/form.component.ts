@@ -69,7 +69,6 @@ export class FormComponent implements OnChanges {
   }
 
   renderSubFormCompleted(event: any, formKey: string) {
-    console.log("renderSubFormCompleted");
     let obj: any = {}
     if (event.length > 0) {
       for (const key of event) {
