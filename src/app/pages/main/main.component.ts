@@ -153,7 +153,8 @@ export class MainComponent implements OnInit{
         setTimeout(() =>
           { this.formGroup.patchValue(data); }
         ,10)
-        this.selectedData  = action.data;
+
+        this.selectedData  = data;
         break;
       case "delete":
         this.actionType = this.CONST_DELETE;

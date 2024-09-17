@@ -20,7 +20,7 @@
         <app-input-select [data]="data" [formControlName]="formQuestion.key" [formGroup]="formGroup" [formConfig]="formQuestion" />
       }
     }
-    @if (formGroup?.value?.[formQuestion.key] && checkFormSubChildsInstance(formQuestion.sub_childs, formQuestion)?.length > 0) {
+    @if (formGroup.value[formQuestion.key] && checkFormSubChildsInstance(formQuestion.sub_childs, formQuestion)?.length > 0) {
       @for ( subFormQuestion of checkFormSubChildsInstance(formQuestion.sub_childs, formQuestion); track subFormQuestion.key) {
         @if (formGroup.controls[subFormQuestion.key]) {
           <ng-container [ngTemplateOutlet]="renderFormElement"
