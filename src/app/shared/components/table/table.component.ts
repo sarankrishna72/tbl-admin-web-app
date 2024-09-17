@@ -29,7 +29,7 @@ export class TableComponent implements OnChanges{
         columnKey: "index",
         columnType: "index",
         columnName: "No.",
-        columnWidth: "100px"
+        columnWidth: "50px"
       })
     }
     if (this.tableConfigs.actions?.length! > 0) {

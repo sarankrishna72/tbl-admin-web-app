@@ -9,53 +9,60 @@ const tableColumns: TableColumn[] = [
     columnName: "Outlet Name",
     columnType: "text",
     order: 1,
-    columnWidth: "150px",
+    // columnWidth: "150px",
   }),
   new TableColumn({
     columnKey: "title",
     columnName: "Title",
     columnType: "text",
     order: 2,
-    columnWidth: "150px",
+    // columnWidth: "150px",
   }),
   new TableColumn({
     columnKey: "description",
     columnName: "Description",
     columnType: "text",
     order: 3,
-    columnWidth: "150px",
+    // columnWidth: "150px",
   }),
   new TableColumn({
     columnKey: "feature_photo",
     columnName: "Image",
     columnType: "image",
     order: 4,
-    columnWidth: "150px",
+    // columnWidth: "150px",
   }),
   new TableColumn({
     columnKey: "event_date",
     columnName: "Event Date",
     columnType: "format",
     order: 5,
-    columnWidth: "150px",
+    // columnWidth: "150px",
     cellFormatFn: (data: any) => {
       return moment(new Date(data)).format("DD/MM/YYYY hh:mm A");
     }
   }),
-new TableColumn({
+  new TableColumn({
     columnKey: "redirection_type",
-    columnName: "Redirect To",
+    columnName: "Redirection",
     columnType: "text",
     order: 6,
-    columnWidth: "150px",
+    // columnWidth: "150px",
   }),
   new TableColumn({
     columnKey: "redirection_link",
-    columnName: "Redirection Link",
+    columnName: "Link",
     columnType: "text",
     order: 7,
-    columnWidth: "150px",
-  })
+    // columnWidth: "150px",
+  }),
+  new TableColumn({
+    columnKey: "status",
+    columnName: "Status",
+    columnType: "text",
+    order: 8,
+    // columnWidth: "150px",
+  }),
 ]
 
 
