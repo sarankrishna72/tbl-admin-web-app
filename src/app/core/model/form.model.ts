@@ -1,4 +1,3 @@
-import { Observable } from "rxjs/internal/Observable";
 import { ButtonRadius, ButtonTheme, ButtonType, Size } from "../constants/types";
 
 export class FormBase {
@@ -9,7 +8,7 @@ export class FormBase {
   controlType: string;
   type: string;
   placeholder ?: string;
-  options: { key: string, value: string }[];
+  options: { id: string, name: string }[];
   api ?: ApiConfigInterface | null;
   prefix ?: any;
   validations: FormBaseControlValidator[] = [];
@@ -21,6 +20,7 @@ export class FormBase {
   showValidationIcon ?: boolean = false;
   rows ?: number = 4;
   cols ?: number = 50;
+  sub_childs ?: ChildFormInterfaceModel[] | FormBase[] = []
   resize ?: boolean = false;
   constructor(options: {
     value?: any;
@@ -30,7 +30,7 @@ export class FormBase {
     controlType?: string;
     type?: string;
     prefix ?: any;
-    options?: { key: string, value: string }[];
+    options?: { id: string, name: string }[];
     api ?: ApiConfigInterface;
     placeholder ?: string;
     helpText ?: string;
@@ -43,6 +43,7 @@ export class FormBase {
     rows ?: number;
     cols ?: number;
     resize ?: boolean;
+    sub_childs ?:  ChildFormInterfaceModel[] | FormBase[]
   } = {}) {
     this.value = options.value;
     this.key = options.key || '';
@@ -64,7 +65,22 @@ export class FormBase {
     this.rows = options.rows || 4;
     this.cols = options.cols || 50;
     this.resize = options.resize || false;
+    this.sub_childs = options.sub_childs || [];
   }
+}
+
+
+export class ChildFormInterfaceModel {
+  conditionValue : string;
+  items : FormBase[];
+  constructor(options: {
+    conditionValue : string;
+    items : FormBase[];
+  }) {
+    this.conditionValue = options.conditionValue;
+    this.items = options.items;
+  }
+
 }
 
 

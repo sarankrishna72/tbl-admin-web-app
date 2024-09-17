@@ -42,7 +42,13 @@ const tableColumns: TableColumn[] = [
       return moment(new Date(data)).format("DD/MM/YYYY hh:mm A");
     }
   }),
-
+new TableColumn({
+    columnKey: "redirection_type",
+    columnName: "Redirect To",
+    columnType: "text",
+    order: 6,
+    columnWidth: "150px",
+  }),
   new TableColumn({
     columnKey: "redirection_link",
     columnName: "Redirection Link",
@@ -104,7 +110,9 @@ const EventPageData: CrudPageModel = new CrudPageModel(
       {mappingKey: 'photos', key: 'photos'},
       {mappingKey: 'notification_push_date', key: 'notification_push_date'},
       {mappingKey: 'event_date', key: 'event_date'},
-      {mappingKey: 'redirection_link', key: 'redirection_link'}
+      {mappingKey: 'redirection_link', key: 'redirection_link'},
+      {mappingKey: 'redirection_type', key: 'redirection_type'},
+      {mappingKey: 'send_immediate_notification', key: 'send_notification_now'},
 
     ],
     pageActions: [

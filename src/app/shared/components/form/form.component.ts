@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import {FormAction, FormConfig } from '../../../core/model';
+import {ChildFormInterfaceModel, FormAction, FormConfig } from '../../../core/model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as _ from 'lodash';
 import { InputComponent, InputFileComponent, InputSelectComponent } from './components';
 import { ButtonComponent } from '..';
 import { FormActionsComponent } from './components/form-actions/form-actions.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -15,13 +16,15 @@ import { FormActionsComponent } from './components/form-actions/form-actions.com
     InputFileComponent,
     ReactiveFormsModule,
     InputSelectComponent,
-    FormActionsComponent
+    FormActionsComponent,
+    CommonModule
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
 export class FormComponent implements OnChanges {
   @Input() formData!: FormConfig;
+  @Input() data: any;
   @Input() formGroup: FormGroup = new FormGroup({});
   @Output() formOutput: EventEmitter<any> = new EventEmitter();
   @Output() onFormGroupReady: EventEmitter<any> = new EventEmitter();
@@ -35,7 +38,7 @@ export class FormComponent implements OnChanges {
     let { controls, actions } : FormConfig = this.formData;
     controls = _.orderBy(controls, ['order'],['asc']);
     for (const formQuestion of controls) {
-      const control = new FormControl(formQuestion.value || '') as FormControl<any>;
+      const control = new FormControl(formQuestion.value ||  this.data[formQuestion.key] || '' ) as FormControl<any>;
       this.formGroup.addControl(formQuestion.key, control )
     }
     this.onFormGroupReady.emit(this.formGroup);
@@ -43,6 +46,37 @@ export class FormComponent implements OnChanges {
 
   formAction(action: any) {
     this.formOutput.emit(action);
+  }
+
+
+
+
+
+  checkFormSubChildsInstance(items: any, formQuestions:any): any{
+    if (items?.length > 0 && this.formGroup?.value) {
+      if (items[0] instanceof ChildFormInterfaceModel) {
+        let formItems = items.find((child: any) => child.conditionValue  == this.formGroup?.value?.[formQuestions.key])
+        if (formItems) {
+          return formItems.items;
+        }
+        return [];
+      } else if (this.formGroup?.value?.[formQuestions.key]) {
+        return items;
+      }
+      return [];
+    }
+    return [];
+  }
+
+  renderSubFormCompleted(event: any, formKey: string) {
+    console.log("renderSubFormCompleted");
+    let obj: any = {}
+    if (event.length > 0) {
+      for (const key of event) {
+        obj[key] = this.data[key] || null;
+      }
+      this.formGroup.patchValue(obj)
+    }
   }
 
   /**

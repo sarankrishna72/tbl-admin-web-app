@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, FormGroup } from '@angular/forms';
 import { ControlValueAccessorDirective } from '../../../../directives/form/control-value-accessor.directive';
 import { FormBase } from '../../../../../core/model';
 import { FormService } from '../../../../services/form/form.service';
@@ -20,12 +20,13 @@ export class InputSelectComponent extends ControlValueAccessorDirective  impleme
 
   @Input() formControlName!: any;
   @Input() formConfig!: FormBase;
+  @Input() formGroup !: FormGroup;
+  @Input() data: any;
   value: string = '';
   isEyeOpen: boolean = false;
   @Output() blur: EventEmitter<void> = new EventEmitter<void>();
   isRequired: boolean = false;
   private _formService = inject(FormService);
-  private _httpService = inject(HttpService);
   options: any = [];
 
 
@@ -40,21 +41,14 @@ export class InputSelectComponent extends ControlValueAccessorDirective  impleme
   }
 
 
-  getSelectApi() {
-    switch (this.formConfig.api?.method) {
-      case "get":
-        return this._httpService.get(this.formConfig.api.apiUrl)
-      default:
-        return new Observable();
-    }
-  }
+
 
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
 
     if (this.formConfig.api) {
-      this.getSelectApi().subscribe((res: any) => {
+      this.callApiData(this.formConfig).subscribe((res: any) => {
         this.options = res.data || res;
       })
     }

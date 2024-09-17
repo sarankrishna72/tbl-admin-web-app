@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { ControlValueAccessor, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, inject } from '@angular/core';
+import { ControlValueAccessor, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormBase } from '../../../../../core/model';
 import { ControlValueAccessorDirective } from '../../../../directives/form/control-value-accessor.directive';
 import { CommonModule } from '@angular/common';
@@ -18,9 +18,11 @@ import moment from 'moment';
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss'
 })
-export class InputComponent extends ControlValueAccessorDirective  implements OnInit, ControlValueAccessor {
+export class InputComponent extends ControlValueAccessorDirective  implements OnInit, OnChanges, ControlValueAccessor {
   @Input() formControlName!: any;
   @Input() formConfig!: FormBase;
+  @Input() data: any;
+  @Input() formGroup !: FormGroup;
   value: string = '';
   isEyeOpen: boolean = false;
   @Output() blur: EventEmitter<void> = new EventEmitter<void>();
@@ -43,8 +45,6 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
     (this.isEyeOpen) ? this.formConfig.type = "text" : this.formConfig.type = "password";
   }
 
-
-
   checkFormControlsDate() {
     setTimeout(() => {
       let value = this.controlDir?.control?.value;
@@ -53,6 +53,16 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
       }
     },100);
   }
+
+   ngOnChanges(changes: SimpleChanges): void {
+    if (this.formConfig.api) {
+      this.callApiData(this.formConfig).subscribe((res: any) => {
+        this.formConfig.options = res.data || res;
+      })
+    }
+    this.formValueChanges(this.formConfig, this.formGroup);
+  }
+
 
 
   ngOnInit(): void {
@@ -72,7 +82,12 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
       this.checkFormControlsDate();
       this.isRequired = this._formService.checkRequiredField(this.formConfig.validations);
     }
+
+
+
   }
+
+
 }
 
 

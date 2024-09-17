@@ -1,5 +1,5 @@
 import { API_URI } from "../../constants/api_uri";
-import { FormBaseControlValidator, FormConfig, InputDropdown, InputFile, InputTextField, ValidatorsType,  } from "../../model";
+import { ChildFormInterfaceModel, FormBaseControlValidator, FormConfig, InputDropdown, InputFile, InputTextField, ValidatorsType,  } from "../../model";
 
 export const EVENT_FORM_DATA: FormConfig = new FormConfig(
   {
@@ -62,7 +62,7 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
         key: "event_date",
         value: "",
         type: "datetime-local",
-        label: "Event Date",
+        label: "Event Date & Time",
         order: 5,
         placeholder: "Enter Event Date",
         validations: [
@@ -70,27 +70,91 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
         ]
       }),
       new InputTextField({
-        key: "notification_push_date",
-        value: "",
-        type: "datetime-local",
-        label: "Notification Date",
-        order: 6,
-        placeholder: "Enter Notification Date",
+        key: "redirection_type",
+        type: "radio",
+        label: "Select Redirection",
+        order: 7,
+        sub_childs: [
+          new ChildFormInterfaceModel({
+            conditionValue: "App Screen",
+            items: [
+              new InputDropdown({
+                key: "redirection_link",
+                value: "",
+                type: "text",
+                label: "Redirection link",
+                order: 8,
+                placeholder: "Select Redirection Link",
+                api: {
+                  apiUrl: API_URI.eventsRedirectionListURI,
+                  method: "get"
+                },
+                validations: [
+                  new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
+                ]
+              })
+            ]
+          }),
+          new ChildFormInterfaceModel({
+            conditionValue: "Link",
+            items: [
+              new InputTextField({
+                key: "redirection_link",
+                value: "",
+                type: "text",
+                label: "Redirection link",
+                order: 8,
+                placeholder: "Enter Redirection Link for Zomato / Swiggy etc.",
+                validations: [
+                  new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
+                ]
+              })
+            ]
+          })
+        ],
+        options: [
+
+        ],
+        api: {
+          apiUrl: API_URI.eventsRedirectionTypesURI,
+          method: "get"
+        },
         validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
         ]
       }),
-      new InputDropdown({
-        key: "redirection_link",
-        value: "",
-        type: "text",
-        label: "Redirection link",
+      new InputTextField({
+        key: "send_immediate_notification",
+        type: "radio",
+        label: "Send Notification Now?",
         order: 7,
-        placeholder: "Select Redirection Link",
-         api: {
-          apiUrl: API_URI.eventsRedirectionListURI,
-          method: "get"
-        },
+        options: [
+          {
+            name: "Yes",
+            id: "yes",
+          },{
+            name: "No",
+            id: "no",
+          }
+        ],
+        sub_childs: [
+          new ChildFormInterfaceModel({
+            conditionValue: "no",
+            items: [
+              new InputTextField({
+                key: "notification_push_date",
+                value: "",
+                type: "datetime-local",
+                label: "Scheduled Date & Time",
+                order: 6,
+                placeholder: "Enter Scheduled Date & Time",
+                validations: [
+                  new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
+                ]
+              })
+            ]
+          }),
+        ],
         validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
         ]

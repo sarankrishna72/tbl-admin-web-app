@@ -1,19 +1,36 @@
 <form [formGroup]="formGroup" autocomplete="off" class="flex flex-col gap-3">
+
   @for ( formQuestion of formData['controls']; track formQuestion.key) {
-    @switch (formQuestion.controlType) {
-      @case ("textfield") {
-        <app-input [formControlName]="formQuestion.key" [formConfig]="formQuestion" />
-      }
-      @case ("file") {
-        <app-input-file [formControlName]="formQuestion.key" [formConfig]="formQuestion" />
-      }
-      @case ("dropdown") {
-        <app-input-select [formControlName]="formQuestion.key" [formConfig]="formQuestion" />
-      }
-    }
+    <ng-container [ngTemplateOutlet]="renderFormElement"  [ngTemplateOutletContext]="{ formQuestion: formQuestion}" ></ng-container>
   }
 
   @if (showFormActions) {
     <app-form-actions [formGroup]="formGroup" [actions]="formData.actions" (formAction)="formAction($event)"></app-form-actions>
   }
+
+  <ng-template #renderFormElement let-formQuestion="formQuestion">
+    @switch (formQuestion.controlType) {
+      @case ("textfield") {
+        <app-input (renderSubFormCompleted)="renderSubFormCompleted($event, formQuestion.key)" [formControlName]="formQuestion.key" [formGroup]="formGroup" [formConfig]="formQuestion" />
+      }
+      @case ("file") {
+        <app-input-file [data]="data" [formControlName]="formQuestion.key" [formGroup]="formGroup" [formConfig]="formQuestion" />
+      }
+      @case ("dropdown") {
+        <app-input-select [data]="data" [formControlName]="formQuestion.key" [formGroup]="formGroup" [formConfig]="formQuestion" />
+      }
+    }
+    @if (formGroup?.value?.[formQuestion.key] && checkFormSubChildsInstance(formQuestion.sub_childs, formQuestion)?.length > 0) {
+      @for ( subFormQuestion of checkFormSubChildsInstance(formQuestion.sub_childs, formQuestion); track subFormQuestion.key) {
+        @if (formGroup.controls[subFormQuestion.key]) {
+          <ng-container [ngTemplateOutlet]="renderFormElement"
+            [ngTemplateOutletContext]="{ formQuestion: subFormQuestion}"></ng-container>
+        }
+      }
+    }
+  </ng-template>
+
 </form>
+
+
+

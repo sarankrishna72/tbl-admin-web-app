@@ -5,6 +5,7 @@ import { ControlValueAccessorDirective } from '../../../../directives/form/contr
 import { FormService } from '../../../../services/form/form.service';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../..';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-input-file',
@@ -20,6 +21,8 @@ import { ButtonComponent } from '../../..';
 export class InputFileComponent extends ControlValueAccessorDirective implements OnInit  {
   @Input() formControlName!: any;
   @Input() formConfig!: FormBase;
+  @Input() formGroup !: FormGroup;
+  @Input() data: any;
   files: any[] = [];
   private _formService = inject(FormService);
   @ViewChild('fileDropRef') fileDropRef!: ElementRef;
@@ -110,13 +113,16 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
         this.controlDir.control?.addValidators(validators);
         this.controlDir.control?.updateValueAndValidity();
       }
-       this.isRequired = this._formService.checkRequiredField(this.formConfig.validations);
+      this.isRequired = this._formService.checkRequiredField(this.formConfig.validations);
     }
 
     setTimeout(() => {
-      this.files  =  this.controlDir.control?.value
+      this.files  =  this.controlDir.control?.value;
     } ,100)
 
+
   }
+
+
 
 }

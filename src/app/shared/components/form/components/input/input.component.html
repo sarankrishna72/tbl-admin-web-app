@@ -35,6 +35,18 @@
         />
         <label [for]="formConfig.key" class="text-sm ">{{formConfig.label}}</label>
       </div>
+    } @else if (formConfig.type == "radio") {
+      <div class="flex gap-5">
+        @for ( option of formConfig.options ; track option.id) {
+          <label [for]="option.id" class="input-radio flex gap-1 items-center text-base">
+            <input [checked]="controlDir.control?.value == option?.id" [id]="option.id" [type]="formConfig.type" [name]="formConfig.key" [value]="option?.id"
+              (change)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled" />
+            <span class="checkmark"></span>
+
+            {{option.name}}
+          </label>
+        }
+      </div>
     } @else {
       <input [id]="formConfig.key" [type]="formConfig.type" [value]="controlDir.control?.value"
         class="border-neutral-300 border outline-0  text-primary-500 rounded-md h-12 p-3 w-full roboto-regular text-base "

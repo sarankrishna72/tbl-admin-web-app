@@ -18,4 +18,5 @@ export const API_URI = {
   eventsURI: `/${API_VERSION}/${ADMIN}/events.json`,
   eventsIdURI: `/${API_VERSION}/${ADMIN}/events/{id}.json`,
   eventsRedirectionListURI: `/events/redirection_lists.json`,
+  eventsRedirectionTypesURI: `/events/redirection_types.json`,
 }
