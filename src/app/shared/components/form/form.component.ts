@@ -28,6 +28,7 @@ export class FormComponent implements OnChanges {
   @Input() formGroup: FormGroup = new FormGroup({});
   @Output() formOutput: EventEmitter<any> = new EventEmitter();
   @Output() onFormGroupReady: EventEmitter<any> = new EventEmitter();
+  @Output() onSubChildFormReady: EventEmitter<any> = new EventEmitter();
   @Input() showFormActions: boolean = true;
   /**
    * Generate Form Control Configuration
@@ -38,7 +39,7 @@ export class FormComponent implements OnChanges {
     let { controls, actions } : FormConfig = this.formData;
     controls = _.orderBy(controls, ['order'],['asc']);
     for (const formQuestion of controls) {
-      const control = new FormControl(formQuestion.value ||  this.data[formQuestion.key] || '' ) as FormControl<any>;
+      const control = new FormControl(formQuestion.value ||  this.data?.[formQuestion.key] || '' ) as FormControl<any>;
       this.formGroup.addControl(formQuestion.key, control )
     }
     this.onFormGroupReady.emit(this.formGroup);
@@ -69,13 +70,7 @@ export class FormComponent implements OnChanges {
   }
 
   renderSubFormCompleted(event: any, formKey: string) {
-    let obj: any = {}
-    if (event.length > 0) {
-      for (const key of event) {
-        obj[key] = this.data[key] || null;
-      }
-      this.formGroup.patchValue(obj)
-    }
+    this.onSubChildFormReady.emit(event)
   }
 
   /**

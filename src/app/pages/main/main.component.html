@@ -26,11 +26,11 @@
     <app-popup bodyClass="scrollbar-hide" [title]="selectedAction.label" containerClass="tablet:w-[460px]  w-[90%]">
         <ng-container popup-body>
           <div class="pt-1">
-            <app-form [formGroup]="formGroup" [data]="selectedData" [showFormActions]="false" [formData]="configurations?.formConfigs!"></app-form>
+            <app-form [formGroup]="formGroup" (onSubChildFormReady)="onSubChildFormReady($event)" [data]="selectedData" [showFormActions]="false" [formData]="configurations?.formConfigs!"></app-form>
           </div>
         </ng-container>
         <ng-container popup-footer>
-          <app-form-actions  [formGroup]="formGroup" [actions]="configurations?.formConfigs!.actions"
+          <app-form-actions  [formGroup]="formGroup"  [actions]="configurations?.formConfigs!.actions"
             (formAction)="onSubmit($event)"></app-form-actions>
         </ng-container>
     </app-popup>

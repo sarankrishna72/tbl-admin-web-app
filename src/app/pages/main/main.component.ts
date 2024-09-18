@@ -154,7 +154,7 @@ export class MainComponent implements OnInit{
           { this.formGroup.patchValue(data); }
         ,10)
 
-        this.selectedData  = data;
+        this.selectedData  = action.data;
         break;
       case "delete":
         this.actionType = this.CONST_DELETE;
@@ -167,6 +167,20 @@ export class MainComponent implements OnInit{
         break;
       default:
         break;
+    }
+  }
+
+  onSubChildFormReady(event: any): void {
+    let data: any;
+    if (this.configurations?.form_display_keys?.length) {
+      data = this.restructureEditFormData(this.selectedData);
+    }
+    let obj: any = {}
+    if (event.length > 0) {
+      for (const key of event) {
+        obj[key] = data[key] || null;
+      }
+      this.formGroup.patchValue(obj)
     }
   }
 
