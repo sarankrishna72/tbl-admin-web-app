@@ -15,6 +15,7 @@ export class FormBase {
   success_icon ?: string = '';
   error_icon ?: string = '';
   icon ?: string = '';
+  inputConfig ?: InputConfigInterface | null = null;
   multiple ?: boolean = false;
   helpText?: string = '';
   showValidationIcon ?: boolean = false;
@@ -36,6 +37,7 @@ export class FormBase {
     helpText ?: string;
     validations ?: FormBaseControlValidator[];
     error_icon ?: string;
+    inputConfig ?: InputConfigInterface;
     success_icon ?: string;
     icon ?: string;
     showValidationIcon ?: boolean;
@@ -66,9 +68,15 @@ export class FormBase {
     this.cols = options.cols || 50;
     this.resize = options.resize || false;
     this.sub_childs = options.sub_childs || [];
+    this.inputConfig = options.inputConfig || null;
   }
 }
 
+
+interface InputConfigInterface {
+  min ?:any;
+  max ?:any;
+}
 
 export class ChildFormInterfaceModel {
   conditionValue : string;

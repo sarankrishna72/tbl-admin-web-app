@@ -51,6 +51,8 @@
       <input [id]="formConfig.key" [type]="formConfig.type" [value]="controlDir.control?.value"
         class="border-neutral-300 border outline-0  text-primary-500 rounded-md h-12 p-3 w-full roboto-regular text-base "
         [placeholder]="formConfig.placeholder"
+        [min]="formConfig.inputConfig?.min"
+        [max]="formConfig.inputConfig?.max"
         [ngClass]="{ 'input-prefix-form': formConfig.prefix,'!border-success-400': controlDir.control?.touched && controlDir.control?.valid , '!border-error-500': controlDir.control?.touched && controlDir.control?.invalid }"
         (input)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled" />
     }

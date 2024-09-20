@@ -1,3 +1,4 @@
+import moment from "moment";
 import { API_URI } from "../../constants/api_uri";
 import { ChildFormInterfaceModel, FormBaseControlValidator, FormConfig, InputDropdown, InputFile, InputTextField, ValidatorsType,  } from "../../model";
 
@@ -63,6 +64,9 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
         value: "",
         type: "datetime-local",
         label: "Event Date & Time",
+        inputConfig: {
+          min: moment(new Date()).add(1, "day").format("YYYY-MM-DDTHH:mm:ss")
+        },
         order: 5,
         placeholder: "Enter Event Date",
         validations: [
@@ -72,7 +76,7 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
       new InputTextField({
         key: "redirection_type",
         type: "radio",
-        label: "Select Redirection",
+        label: "Select App Screen",
         order: 7,
         sub_childs: [
           new ChildFormInterfaceModel({
@@ -145,6 +149,9 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
                 key: "notification_push_date",
                 value: "",
                 type: "datetime-local",
+                inputConfig: {
+                  min: moment(new Date()).add(1, "day").format("YYYY-MM-DDTHH:mm:ss")
+                },
                 label: "Scheduled Date & Time",
                 order: 6,
                 placeholder: "Enter Scheduled Date & Time",
