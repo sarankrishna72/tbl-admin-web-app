@@ -52,10 +52,12 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
         label: "Event Image",
         order: 4,
         placeholder: "Enter Outlet Image",
-        helpText: "Image file must be 20MB or less",
+        helpText: "Image file must be 1MB or less",
         multiple: false,
         validations: [
-          new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true })
+          new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
+          new FormBaseControlValidator({validatorName: ValidatorsType.FILE_VALID_TYPE, message: "Invalid file type. Please upload an image.", validatorValue: ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'] }),
+          new FormBaseControlValidator({validatorName: ValidatorsType.MAX_FILE_SIZE, message: "File size must be 1MB or less", validatorValue: 1 }),
         ]
       }),
 

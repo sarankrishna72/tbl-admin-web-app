@@ -38,6 +38,16 @@ export class ControlValueAccessorDirective  implements  ControlValueAccessor {
     this.disabled = disabled;
   }
 
+  errorMessage(formConfig: any): string {
+    let error = this.controlDir?.control?.errors || {};
+    if ( Object.keys(error)?.length > 0) {
+      let errorName = Object.keys(error)[0]
+      if (errorName)
+        return formConfig?.validations?.find((validation: any) => validation.validatorName?.toLowerCase() === errorName.toLowerCase())?.message || '';
+    }
+    return 'This field is required';
+  }
+
   generateSubFormsControls(items: any, formGroup: FormGroup) {
     for (const formItem of items) {
       formGroup.addControl(formItem.key, new FormControl(""))

@@ -29,17 +29,6 @@ export class InputComponent extends ControlValueAccessorDirective  implements On
   private _formService = inject(FormService);
   isRequired: boolean = false;
 
-
-  errorMessage(): string {
-    let error = this.controlDir?.control?.errors || {};
-    if ( Object.keys(error)?.length > 0) {
-      let errorName = Object.keys(error)[0]
-      if (errorName)
-        return this.formConfig?.validations?.find(validation => validation.validatorName?.toLowerCase() === errorName)?.message || '';
-    }
-    return 'This field is required';
-  }
-
   toggleEye() {
     this.isEyeOpen = !this.isEyeOpen;
     (this.isEyeOpen) ? this.formConfig.type = "text" : this.formConfig.type = "password";

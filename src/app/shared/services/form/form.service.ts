@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBaseControlValidator, ValidatorsType } from '../../../core/model';
 import { Validators } from '@angular/forms';
-import { MaxSizeValidator } from '../../components/form/validators/max.file.size';
+import { FormUploadTypeValidator, MaxSizeValidator} from './validators/custom-validators';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,8 @@ export class FormService {
       return Validators.nullValidator;
     case "maxFileSize":
       return MaxSizeValidator(parseInt(validation.validatorValue) * 1024 * 1024)
+    case "fileValidType":
+      return FormUploadTypeValidator(validation.validatorValue)
     default:
       return null;
    }

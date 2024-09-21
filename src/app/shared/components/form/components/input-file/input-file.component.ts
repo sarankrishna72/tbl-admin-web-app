@@ -27,15 +27,7 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
   private _formService = inject(FormService);
   @ViewChild('fileDropRef') fileDropRef!: ElementRef;
   isRequired: boolean = false;
-  errorMessage(): string {
-    let error = this.controlDir?.control?.errors || {};
-    if ( Object.keys(error)?.length > 0) {
-      let errorName = Object.keys(error)[0]
-      if (errorName)
-        return this.formConfig?.validations?.find(validation => validation.validatorName?.toLowerCase() === errorName)?.message || '';
-    }
-    return 'This field is required';
-  }
+
 
 
   /**
@@ -115,7 +107,7 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
       }
       this.isRequired = this._formService.checkRequiredField(this.formConfig.validations);
     }
-
+    console.log(this.controlDir.control)
     setTimeout(() => {
       this.files  =  this.controlDir.control?.value;
     } ,100)

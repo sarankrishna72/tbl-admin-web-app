@@ -29,20 +29,6 @@ export class InputSelectComponent extends ControlValueAccessorDirective  impleme
   private _formService = inject(FormService);
   options: any = [];
 
-
-  errorMessage(): string {
-    let error = this.controlDir?.control?.errors || {};
-    if ( Object.keys(error)?.length > 0) {
-      let errorName = Object.keys(error)[0]
-      if (errorName)
-        return this.formConfig?.validations?.find(validation => validation.validatorName?.toLowerCase() === errorName)?.message || '';
-    }
-    return 'This field is required';
-  }
-
-
-
-
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.

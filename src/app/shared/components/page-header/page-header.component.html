@@ -1,8 +1,9 @@
 <div class="flex justify-between items-center mb-6">
   <app-title size="xxl" theme="secondary" classes="roboto-medium max-tablet:!text-xl">{{pageTitle}}</app-title>
-  <ng-content></ng-content>
-  <div class="laptop:hidden block">
-    <app-button (onClick)="_appStoreService.toggleSideMenuOpened()" buttonSize="sm" classes="!p-0" buttonTheme="">
+
+  <div class="flex gap-4">
+    <ng-content></ng-content>
+    <app-button class="laptop:!hidden " (onClick)="_appStoreService.toggleSideMenuOpened()" buttonSize="sm" classes="!p-1" buttonTheme="">
       <div class="h-7 flex items-center">
         <img [src]="staticImages.menu" class="" />
       </div>

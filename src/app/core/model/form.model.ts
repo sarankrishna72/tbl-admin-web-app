@@ -161,7 +161,8 @@ export enum ValidatorsType {
   MAX = "max",
   NULL_VALIDATOR = "nullValidator",
   EMAIL = "email",
-  MAX_FILE_SIZE = "maxFileSize"
+  MAX_FILE_SIZE = "maxFileSize",
+  FILE_VALID_TYPE = "fileValidType"
 }
 
 
