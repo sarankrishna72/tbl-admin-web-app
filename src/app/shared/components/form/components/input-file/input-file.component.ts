@@ -57,6 +57,15 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
   }
 
 
+  get fileUrlPresent() {
+   for (const item of this.files) {
+      if (item.id) {
+        return true;
+      }
+   }
+    return false;
+  }
+
   /**
    * Convert Files list to normal array list
    * @param files (Files List)
@@ -107,7 +116,7 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
       }
       this.isRequired = this._formService.checkRequiredField(this.formConfig.validations);
     }
-    console.log(this.controlDir.control)
+
     setTimeout(() => {
       this.files  =  this.controlDir.control?.value;
     } ,100)
