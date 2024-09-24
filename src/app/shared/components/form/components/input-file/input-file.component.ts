@@ -57,7 +57,7 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
   }
 
 
-  get fileUrlPresent() {
+  get fileIdPresent() {
    for (const item of this.files) {
       if (item.id) {
         return true;

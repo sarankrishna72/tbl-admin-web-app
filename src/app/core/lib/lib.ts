@@ -11,3 +11,24 @@ export const getObjValueFromPath = (obj: any, dotNotationString: any) => {
 
   return current;
 }
+
+
+export const returnStatusClass = (status: string) => {
+  switch (status.split(" ")?.join("")?.toLowerCase()) {
+    case "completed":
+      return "text-success-400";
+    case "pending":
+      return "text-error-500";
+  }
+
+  return '';
+}
+
+export const checkIsUrl = (text: string) => {
+  try {
+    new URL(text);
+    return true;
+  } catch {
+    return false;
+  }
+}

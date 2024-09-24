@@ -2,6 +2,7 @@ import moment from "moment";
 import { API_URI } from "../../constants/api_uri";
 import { CrudPageModel, TableColumn, TableModel } from "../../model";
 import { EVENT_FORM_DATA } from "../forms";
+import { checkIsUrl, returnStatusClass } from "../../lib/lib";
 
 const tableColumns: TableColumn[] = [
   new TableColumn({
@@ -47,20 +48,30 @@ const tableColumns: TableColumn[] = [
     columnName: "Redirection",
     columnType: "text",
     order: 6,
-    // columnWidth: "150px",
+    columnWidth: "150px",
   }),
   new TableColumn({
     columnKey: "redirection_link",
     columnName: "Link",
-    columnType: "text",
+    columnType: "format",
     order: 7,
+    cellFormatFn: (data: any) => {
+      if (checkIsUrl(data)) {
+        return `<a class="w-[150px] text-primary-600 font-semibold overflow-hidden truncate block" href="${data}" target="_blank" title="${data}">${data}</a>`
+      }
+      return `<div class="w-[150px] overflow-hidden truncate block">${data}</div>`
+    }
+
     // columnWidth: "150px",
   }),
   new TableColumn({
     columnKey: "status",
     columnName: "Status",
-    columnType: "text",
+    columnType: "format",
     order: 8,
+    cellFormatFn: (data: any) => {
+      return `<span class="capitalize ${returnStatusClass(data)} font-semibold">${data}</span>`
+    }
     // columnWidth: "150px",
   }),
 ]
