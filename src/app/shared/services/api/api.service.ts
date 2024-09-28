@@ -72,6 +72,16 @@ export class ApiService {
   }
 
 
+  /**
+   * Get Total  number of users
+   *
+   * @return {*}
+   * @memberof ApiService
+   */
+  getTotalUsersCount() {
+    return this._httpService.get(API_URI.usersCountURI)
+  }
+
 }
 
 

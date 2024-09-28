@@ -14,17 +14,21 @@
       }
     </div>
     <div class="p-3">
-      <div class="p-3 py-6 rounded-md"
+      <div class="p-3 py-6 rounded-md relative"
         style="background: linear-gradient(to right, rgba(0, 62, 133, 1) 0%, rgba(0, 62, 133, 0.7) 100%);box-shadow: 0px 10px 30px 0px rgba(103, 174, 255, 0.5);">
+        @if (usersCount != 0) {
+          <div
+            class="flex w-7 h-7 rounded-full text-xxs items-center bg-green-600 roboto-medium absolute right-[-10px] top-[-10px] text-white justify-center">
+            {{usersCount}}</div>
+        }
         <div class="h-11 w-11 flex justify-center items-center rounded-full overflow-hidden bg-white m-auto">
           <img [src]="staticImages.rocket" class="h-9 w-9" />
         </div>
         <div class="text-white mt-3 roboto-regular text-center text-sm">{{ currentUserData?.user_type == 'admin' ? 'Super Admin' : 'Cashier' }}</div>
         @if (currentUserData?.user_type != 'admin') {
-              <div class="text-white mb-3 roboto-regular text-center text-x-base">{{ currentUserData?.city }}</div>
+          <div class="text-white mb-3 roboto-regular text-center text-x-base">{{ currentUserData?.city }}</div>
         }
-
-        <div class="flex justify-center mt-2">
+        <div class="flex justify-center mt-2 relative">
           <app-button [buttonTheme]="'secondary'" (onClick)="logoutAdmin()" [buttonSize]="'xs'" [classes]="' text-x-base '">
             <div class="flex justify-between  gap-2 items-center">
               <span class="material-icons text-white text-md cursor-pointer  ">

@@ -6,6 +6,7 @@ import { ButtonComponent } from '..';
 import { IndexedDbService } from '../../services/storage/indexed-db.service';
 import { ToastService } from '../../services/toast/toast.service';
 import { APP_PAGES_PATH } from '../../../core/constants/application_paths';
+import { ApiService } from '../../services/api/api.service';
 
 @Component({
   selector: 'app-left-menu',
@@ -21,15 +22,26 @@ import { APP_PAGES_PATH } from '../../../core/constants/application_paths';
 export class LeftMenuComponent implements OnInit {
   staticImages: any = DEFAULT_IMAGES;
   private _indexedDbService = inject(IndexedDbService);
+  private _apiService = inject(ApiService);
   private _toastService = inject(ToastService);
   private _router = inject(Router);
   menuItems: MenuItem[]  = [];
   currentUserData: any;
+  usersCount: number = 0;
 
   ngOnInit(): void {
     this._indexedDbService.getItem("token").then( (res) => {
       this.currentUserData = res;
+      if (this.currentUserData['user_type'] == "admin") {
+        this.getTotalUsers();
+      }
       this.setMenuItems();
+    })
+  }
+
+  getTotalUsers() {
+    this._apiService.getTotalUsersCount().subscribe((response: any) => {
+      this.usersCount = response.users_count;
     })
   }
 
