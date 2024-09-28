@@ -18,8 +18,11 @@
         style="background: linear-gradient(to right, rgba(0, 62, 133, 1) 0%, rgba(0, 62, 133, 0.7) 100%);box-shadow: 0px 10px 30px 0px rgba(103, 174, 255, 0.5);">
         @if (usersCount != 0) {
           <div
-            class="flex w-7 h-7 rounded-full text-xxs items-center bg-green-600 roboto-medium absolute right-[-10px] top-[-10px] text-white justify-center">
-            {{usersCount}}</div>
+            class="flex w-7 h-7 rounded-full text-xxs items-center bg-green-600 roboto-medium absolute right-[-10px] top-[-10px] text-white justify-center"
+            title="Total users"
+          >
+            {{usersCount}}
+          </div>
         }
         <div class="h-11 w-11 flex justify-center items-center rounded-full overflow-hidden bg-white m-auto">
           <img [src]="staticImages.rocket" class="h-9 w-9" />
