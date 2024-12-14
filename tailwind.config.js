@@ -34,6 +34,8 @@ module.exports = {
         'gray-600': 'var(--gray-600)',
         'gray-400': 'var(--gray-400)',
         'gray-300': 'var(--gray-300)',
+        'pagination-color': 'var(--pagination-color)',
+        'pagination-disabled': 'var(--pagination-disabled)',
         'gray-100': 'var(--gray-100)',
         'success-400': 'var(--success-400)',
         'success-500': 'var(--success-500)',

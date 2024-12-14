@@ -27,10 +27,10 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
         label: "Title",
         order:2,
         placeholder: "Enter Title",
-        helpText: "Title must be 20 characters or less",
+        helpText: "Title must be 100 characters or less",
         validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
-          new FormBaseControlValidator({validatorName: ValidatorsType.MAX_LENGTH,message: "Title must be 20 characters or less", validatorValue: 20 })
+          new FormBaseControlValidator({validatorName: ValidatorsType.MAX_LENGTH,message: "Title must be 100 characters or less", validatorValue: 100 })
         ]
       }),
       new InputTextField({
@@ -40,10 +40,10 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
         label: "Description",
         order:3,
         placeholder: "Enter Description",
-        helpText: "Description must be 50 characters or less",
+        helpText: "Description must be 100 characters or less",
         validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
-          new FormBaseControlValidator({validatorName: ValidatorsType.MAX_LENGTH,message: "Description must be 50 characters or less", validatorValue: 50 })
+          new FormBaseControlValidator({validatorName: ValidatorsType.MAX_LENGTH,message: "Description must be 100 characters or less", validatorValue: 100 })
         ]
       }),
       new InputFile({
@@ -55,7 +55,6 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
         helpText: "Image file must be 1MB or less",
         multiple: false,
         validations: [
-          new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
           new FormBaseControlValidator({validatorName: ValidatorsType.FILE_VALID_TYPE, message: "Invalid file type. Please upload an image.", validatorValue: ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'] }),
           new FormBaseControlValidator({validatorName: ValidatorsType.MAX_FILE_SIZE, message: "File size must be 1MB or less", validatorValue: 1 }),
         ]

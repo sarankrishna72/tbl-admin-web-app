@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import { ButtonComponent } from '..';
 import { CommonModule } from '@angular/common';
 import { getObjValueFromPath } from '../../../core/lib/lib';
+import { PaginationComponent } from '../pagination/pagination.component';
 
 @Component({
   selector: 'app-table',
@@ -12,6 +13,7 @@ import { getObjValueFromPath } from '../../../core/lib/lib';
   imports: [
     ButtonComponent,
     CommonModule,
+    PaginationComponent
   ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
@@ -19,9 +21,11 @@ import { getObjValueFromPath } from '../../../core/lib/lib';
 export class TableComponent implements OnChanges{
   @Input() tableConfigs!: TableModel;
   @Output() tableActionCTA: EventEmitter<any> = new EventEmitter();
+  @Output() onPaginationChange:  EventEmitter<any> = new EventEmitter();
   colsDef: TableColumn[] = [];
   @Input() tableRowData: any[] = [];
   staticImages:any =  DEFAULT_IMAGES;
+
   generateColumns(): void {
     this.colsDef = _.orderBy(this.tableConfigs!.columns, ['order'],['asc']);
     if (this.tableConfigs.showIndexColumn) {
@@ -42,6 +46,14 @@ export class TableComponent implements OnChanges{
     }
   }
 
+  paginationChange(event: any) {
+    this.onPaginationChange.emit(event)
+  }
+
+  checkActionShow(action: any, data: any) {
+    return (typeof action.is_show == 'function' && action.is_show!(data) )|| !action.is_show
+  }
+
   tableAction(data: any): void {
     if (data.action == 'create') {
       data.action = {
@@ -56,12 +68,19 @@ export class TableComponent implements OnChanges{
   }
 
   getColumnData(columnKey: string, rowData: any) {
-    return getObjValueFromPath(rowData, columnKey)
+    return getObjValueFromPath(rowData, columnKey) != '' ? getObjValueFromPath(rowData, columnKey) : null
   }
 
 
   sortData(sortKey: string, sortDirection: boolean | "asc" | "desc" ): void {
-    this.tableRowData = _.orderBy(this.tableRowData, [sortKey],[sortDirection]);
+  
+    this.tableRowData = _.orderBy(this.tableRowData, [(obj: any) => {
+      if (!isNaN(Date.parse(obj[sortKey]))) {
+        return new Date(obj[sortKey]).getTime();
+      } else {
+        return obj[sortKey];
+      }
+    }],[sortDirection]);
   }
 
 

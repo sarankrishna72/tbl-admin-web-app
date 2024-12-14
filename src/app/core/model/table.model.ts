@@ -3,7 +3,7 @@ export class TableModel {
   data : any[] = [];
   createButtonLabel ?: string = '';
   mobileResponsiveCard ?: boolean = false;
-  pagination ?: TablePagination | null;
+  pagination: TablePagination | null;
   tableHeadColumnClass ?: string = '';
   tableBodyColumnClass ?: string = '';
   sortKey : string = '';
@@ -38,10 +38,23 @@ export class TableModel {
 }
 
 export class TablePagination {
-  pageNumber : number | null = null;
-  totalPages : number | null = null;
-  currentPage : number | null = null;
-  pageSize : number | null = null;
+  totalCount : number;
+  totalPages : number;
+  currentPage : number;
+  pageSize : number;
+  constructor(
+    options: {
+      current_page: number,
+      total_pages: number,
+      per_page: number,
+      total_count: number,
+    }
+  ) {
+    this.currentPage = options.current_page || 1;
+    this.totalPages = options.total_pages || 1;
+    this.pageSize = options.per_page || 10;
+    this.totalCount = options.total_count || 1;
+  }
 }
 
 interface TableActions {
@@ -51,6 +64,7 @@ interface TableActions {
   action_type: TableActionType;
   icon ?: string;
   classes ?: string;
+  is_show ?: Function
 }
 
 export class TableColumn {

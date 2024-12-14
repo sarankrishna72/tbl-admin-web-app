@@ -57,9 +57,9 @@ const tableColumns: TableColumn[] = [
     order: 7,
     cellFormatFn: (data: any) => {
       if (checkIsUrl(data)) {
-        return `<a class="w-[150px] text-primary-600 font-semibold overflow-hidden truncate block" href="${data}" target="_blank" title="${data}">${data}</a>`
+        return `<a class="w-[150px] text-primary-600 font-semibold overflow-hidden truncate block" href="${data}" target="_blank" title="${data}">${data == 'null' || !data ? '-' : data }</a>`
       }
-      return `<div class="w-[150px] overflow-hidden truncate block">${data}</div>`
+      return `<div class="w-[150px] overflow-hidden truncate block">${data == 'null' || !data ? '-' : data }</div>`
     }
 
     // columnWidth: "150px",
@@ -85,14 +85,15 @@ const tableConfig: TableModel = new TableModel(
     createButtonLabel: 'Create New Event',
     mobileResponsiveCard: true,
     showIndexColumn: true,
-    sortKey: 'id',
-    sortDirection: 'asc',
+    sortKey: 'notification_push_date',
+    sortDirection: 'desc',
     actions: [
       {
         action_id: 'edit',
         action_type: 'edit',
         icon: 'edit',
         label: "Edit Event",
+        is_show: (data: any) => { return data.status?.toLowerCase() == "pending" },
         classes: 'hover:!text-primary-500'
       }, {
         action_id: 'delete',

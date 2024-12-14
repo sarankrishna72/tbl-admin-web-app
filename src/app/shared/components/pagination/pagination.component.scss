@@ -1,0 +1,32 @@
+.mat-paginator-range-actions {
+    display: flex;
+    align-items: center;
+}
+
+.mat-paginator-range-label {
+    margin: 0 32px 0 24px;
+    color: rgba(0, 0, 0, .54);
+    font-size: 12px;
+}
+
+.mat-paginator-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 40px;
+    padding: 0 8px;
+    flex-wrap: wrap-reverse;
+    width: 100%;
+}
+
+.mat-paginator-page-size {
+    display: flex;
+    align-items: baseline;
+    margin-right: 8px;
+}
+
+.mat-paginator-page-size-label {
+    margin: 0 4px;
+    color: rgba(0, 0, 0, .54);
+    font-size: 12px;
+}

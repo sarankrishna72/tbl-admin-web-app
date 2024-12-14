@@ -2,7 +2,7 @@ import { DEFAULT_IMAGES } from './../../core/constants/image';
 import { Component, OnInit, inject, effect } from '@angular/core';
 import { AppStoreService } from '../../shared/services/store/app-store.service';
 import { CommonService } from '../../shared/services/common/common.service';
-import { CrudPageModel } from '../../core/model';
+import { CrudPageModel, TablePagination } from '../../core/model';
 import { NavigationEnd, Router } from '@angular/router';
 import { ButtonComponent, FormComponent, MainContainerComponent, TitleComponent, PopupComponent, TableComponent, PageHeaderComponent } from '../../shared/components';
 import { CREATE, DELETE, EDIT } from '../../core/constants/const';
@@ -17,7 +17,6 @@ import { FormActionsComponent } from '../../shared/components/form/components/fo
   standalone: true,
   imports: [
     MainContainerComponent,
-    TitleComponent,
     ButtonComponent,
     TableComponent,
     PopupComponent,
@@ -44,6 +43,10 @@ export class MainComponent implements OnInit{
   formGroup: FormGroup = new FormGroup({});
   selectedData: any;
   selectedAction: any;
+  paginationDetails = {
+    per_page: 10,
+    page: 1
+  }
   private loggingEffect = effect(() => {
     if (this._appStoreService.getCurrentPageConfig()) {
       this.configurations = this._appStoreService.getCurrentPageConfig();
@@ -64,7 +67,10 @@ export class MainComponent implements OnInit{
     });
   }
 
-
+  onPaginationChange(event: any) {
+    this.paginationDetails = event;
+    this.generateList();
+  }
 
   onSubmit(event: any) {
     if (event.action = "submit") {
@@ -104,7 +110,7 @@ export class MainComponent implements OnInit{
     let url = "";
     switch (api.method) {
       case "get":
-        return this._httpService.get(api.url);
+        return this._httpService.get(api.url, data);
       case "post":
         return this._httpService.post(api.url, data);
       case "put":
@@ -119,8 +125,12 @@ export class MainComponent implements OnInit{
   }
 
   generateList() {
-    this.getApi(this.configurations?.list_api).subscribe((response: any) => {
+    this.getApi(this.configurations?.list_api, {params: this.paginationDetails}).subscribe((response: any) => {
       this.tableData = response.data || [];
+      
+      if (response.pagination) {
+        this.configurations!['tableConfigs'].pagination = new TablePagination(response.pagination)
+      }
     })
   }
 
