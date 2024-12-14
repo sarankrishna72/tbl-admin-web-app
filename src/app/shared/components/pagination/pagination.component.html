@@ -15,7 +15,7 @@
             </select>
         </div>
         <div class="mat-paginator-range-actions">
-            <div class="mat-paginator-range-label text-pagination-color">{{((pagination.currentPage - 1 )* pagination.pageSize) + 1}} - {{ ((pagination.currentPage - 1 )* pagination.pageSize) + currentPageCount }} of {{pagination.totalCount}}</div>
+            <div class="mat-paginator-range-label text-pagination-color">{{((pagination.currentPage - 1 ) * pagination.pageSize) + 1}} - {{ ((pagination.currentPage - 1 )* pagination.pageSize) + currentPageCount }} of {{pagination.totalCount}}</div>
     
             <button 
                 [disabled]="pagination.currentPage == 1" 
