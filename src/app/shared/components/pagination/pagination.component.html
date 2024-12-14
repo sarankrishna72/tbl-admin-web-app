@@ -1,6 +1,6 @@
 @if(pagination.pageSize) {
     <div class="mat-paginator-container">
-        <div class="mat-paginator-page-size">
+        <div class="mat-paginator-page-size  max-laptop:!hidden">
             <div class="mat-paginator-page-size-label text-pagination-color">Items per page:</div>
             <select 
                 [(ngModel)]="pagination.pageSize" 
@@ -19,7 +19,7 @@
     
             <button 
                 [disabled]="pagination.currentPage == 1" 
-                class="ripple relative w-[30px] h-[30px] inline-flex justify-center items-center rounded-full" 
+                class="ripple relative  w-[30px] h-[30px] inline-flex justify-center items-center rounded-full" 
                 (click)="paginationUpdateCallback({page: 1, per_page: pagination.pageSize })"
             >
                 <span [ngClass]="{'text-pagination-color': !(pagination.currentPage == 1), 'text-pagination-disabled': pagination.currentPage == 1 }" class="material-icons text-pagination-color text-2sm">
@@ -49,7 +49,7 @@
     
             <button 
                 [disabled]="pagination.currentPage == pagination.totalPages" 
-                class="ripple relative w-[30px] h-[30px] inline-flex justify-center items-center rounded-full" 
+                class="ripple   relative w-[30px] h-[30px] inline-flex justify-center items-center rounded-full" 
                 (click)="paginationUpdateCallback({page: pagination.totalPages, per_page: pagination.pageSize })"
             >
                 <span [ngClass]="{'text-pagination-color': !(pagination.currentPage == pagination.totalPages), 'text-pagination-disabled': pagination.currentPage == pagination.totalPages }" class="material-icons text-pagination-color text-2sm">

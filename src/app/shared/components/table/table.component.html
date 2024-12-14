@@ -17,7 +17,7 @@
                   {{ getColumnData(colDef.columnKey, rowData) }}
                 }
                 @case ('index') {
-                  @if (tableConfigs.pagination && tableConfigs.pagination?.currentPage) {
+                  @if (tableConfigs.pagination && tableConfigs.pagination.currentPage) {
                     {{ ((tableConfigs.pagination.currentPage  - 1) * tableConfigs.pagination.pageSize) +   index + 1 }}
                   } @else {
                     {{ index + 1 }}
@@ -81,12 +81,19 @@
         </tr>
       }
     </tbody>
+    <tfoot>
+      <tr>
+        <td [attr.colspan]="colsDef.length">
+          <div class="pt-3">
+            @if(tableConfigs.pagination) {
+              <app-pagination [currentPageCount]="tableRowData.length" (onPaginationChange)="paginationChange($event)" [pagination]="tableConfigs.pagination"></app-pagination>
+            }
+            
+          </div>  
+        </td>
+      </tr>
+    </tfoot>
   </table>
-  <div class="pt-3">
-    @if(tableConfigs.pagination) {
-      <app-pagination [currentPageCount]="tableRowData.length" (onPaginationChange)="paginationChange($event)" [pagination]="tableConfigs.pagination"></app-pagination>
-    }
-    
-  </div>  
+  
   
 </div>

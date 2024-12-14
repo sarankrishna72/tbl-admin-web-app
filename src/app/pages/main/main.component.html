@@ -1,5 +1,5 @@
 <app-main-container>
-  <app-page-header [pageTitle]="configurations?.title || ''">
+  <app-page-header class="sticky" [pageTitle]="configurations?.title || ''">
     <div class="flex gap-4 items-center">
       @for ( pageAction of configurations?.pageActions; track pageAction.action_id) {
         <app-button buttonSize="xs" buttonRadius="xs" (onClick)="actionCTA(pageAction)" [buttonTheme]="pageAction.button_theme">
