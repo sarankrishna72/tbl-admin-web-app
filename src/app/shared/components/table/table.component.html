@@ -85,7 +85,7 @@
       <tr>
         <td [attr.colspan]="colsDef.length">
           <div class="pt-3">
-            @if(tableConfigs.pagination) {
+            @if(tableConfigs.pagination && tableConfigs.pagination.totalPages > 1  ) {
               <app-pagination [currentPageCount]="tableRowData.length" (onPaginationChange)="paginationChange($event)" [pagination]="tableConfigs.pagination"></app-pagination>
             }
             
