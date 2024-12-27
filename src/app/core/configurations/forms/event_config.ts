@@ -151,7 +151,7 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
                 value: "",
                 type: "datetime-local",
                 inputConfig: {
-                  min: moment(new Date()).add(1, "day").format("YYYY-MM-DDTHH:mm:ss")
+                  min: moment(new Date()).format("YYYY-MM-DDTHH:mm:ss")
                 },
                 label: "Scheduled Date & Time",
                 order: 6,
