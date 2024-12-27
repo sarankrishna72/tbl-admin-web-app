@@ -66,7 +66,7 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
         type: "datetime-local",
         label: "Event Date & Time",
         inputConfig: {
-          min: moment(new Date()).add(1, "day").format("YYYY-MM-DDTHH:mm:ss")
+          min: moment(new Date()).format("YYYY-MM-DDTHH:mm:ss")
         },
         order: 5,
         placeholder: "Enter Event Date",
