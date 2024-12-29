@@ -53,7 +53,7 @@ export class CashierHomeComponent {
           this.popupDetails = response;
           this.userDetailsForm.reset()
           this._appStoreService.setPopupShowing()
-          this._toastService.success({ title: "Success", message: this.popupDetails?.message})
+          // this._toastService.success({ title: "Success", message: this.popupDetails?.message})
         });
         break;
       default:
