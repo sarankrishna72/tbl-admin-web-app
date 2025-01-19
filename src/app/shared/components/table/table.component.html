@@ -46,10 +46,15 @@
                   </div>
                 }
                 @case ('image') {
-                  <img
-                    class="h-[50px] w-[90px] rounded-md"
-                    [src]="getColumnData(colDef.columnKey, rowData) || staticImages.no_image "
-                  />
+                  @if(getColumnData(colDef.columnKey, rowData) ) {
+                    <img
+                      class="h-[50px] w-[90px] rounded-md"
+                      [src]="getColumnData(colDef.columnKey, rowData) || staticImages.no_image "
+                    />
+                  } @else {
+                     -
+                  }
+                 
                 }
                 @default {
                   {{rowData[colDef.columnKey]}}

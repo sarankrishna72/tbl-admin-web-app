@@ -101,6 +101,13 @@ const tableConfig: TableModel = new TableModel(
         icon: 'delete',
         label: "Delete Event",
         classes: 'hover:!text-error-500'
+      },
+      {
+        action_id: 'view',
+        action_type: 'custom',
+        label: "View Outlet",
+        icon: 'visibility',
+        classes: 'hover:!text-primary-500'
       }
     ]
   }
