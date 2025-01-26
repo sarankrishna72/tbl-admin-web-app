@@ -1,15 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainComponent } from './main.component';
-import { HttpService } from '../../shared/services/http/http.service';
-import { CommonService } from '../../shared/services/common/common.service';
-import { ToastService } from '../../shared/services/toast/toast.service';
+import { HttpService } from '../../../shared/services/http/http.service';
+import { CommonService } from '../../../shared/services/common/common.service';
+import { ToastService } from '../../../shared/services/toast/toast.service';
 import { NavigationEnd, Router } from '@angular/router';
-import { AppStoreService } from '../../shared/services/store/app-store.service';
+import { AppStoreService } from '../../../shared/services/store/app-store.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
-import { OutletPageData } from '../../core/configurations/pages/outlet';
+import { OutletPageData } from '../../../core/configurations/pages/outlet';
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -78,7 +78,7 @@ describe('MainComponent', () => {
     }));
 
     component.onSubmit(event)
-    expect(component.getApi).toHaveBeenCalledWith(component.configurations.create_api, jasmine.any(FormData))
+    expect(component.getApi).toHaveBeenCalledWith(component.configurations.createApi, jasmine.any(FormData))
   });
 
   it('should submit new form data when selectedData is present', () => {
@@ -94,7 +94,7 @@ describe('MainComponent', () => {
     }));
 
     component.onSubmit(event)
-    expect(component.getApi).toHaveBeenCalledWith(component.configurations.update_api, jasmine.any(FormData))
+    expect(component.getApi).toHaveBeenCalledWith(component.configurations.updateApi, jasmine.any(FormData))
 
   });
 
@@ -136,10 +136,10 @@ describe('MainComponent', () => {
     expect(res).toBe(component._httpService.get('api/resource'))
   });
 
-  it('should call generateList', () => {
+  it('should call configureCallback', () => {
     component.configurations = OutletPageData;
-    const res = component.getApi(component.configurations.list_api, {})
-    expect(res).toBe(component._httpService.get(OutletPageData.list_api!.url))
+    const res = component.getApi(component.configurations.listApi, {})
+    expect(res).toBe(component._httpService.get(OutletPageData.listApi!.url))
 
   });
 

@@ -58,13 +58,14 @@ export class TablePagination {
 }
 
 interface TableActions {
-  action_name ?: string;
-  action_id : string;
+  actionName ?: string;
+  actionId : string;
   label ?: string;
-  action_type: TableActionType;
+  actionType: TableActionType;
   icon ?: string;
+  customIconPath ?: string;
   classes ?: string;
-  is_show ?: Function
+  isShow ?: Function
 }
 
 export class TableColumn {

@@ -47,14 +47,14 @@ const tableConfig: TableModel = new TableModel(
     sortDirection: 'asc',
     actions: [
       {
-        action_id: 'edit',
-        action_type: 'edit',
+        actionId: 'edit',
+        actionType: 'edit',
         icon: 'edit',
         label: "Edit Outlet",
         classes: 'hover:!text-primary-500'
       }, {
-        action_id: 'delete',
-        action_type: 'delete',
+        actionId: 'delete',
+        actionType: 'delete',
         label: "Delete Outlet",
         icon: 'delete',
         classes: 'hover:!text-error-500'
@@ -66,7 +66,8 @@ const tableConfig: TableModel = new TableModel(
 
 const OutletPageData: CrudPageModel = new CrudPageModel(
   {
-    api_params: "restaurant",
+    id: 'outlets',
+    apiParams: "restaurant",
     title: 'Manage Outlets',
     tableConfigs: tableConfig,
     formConfigs: OUTLET_FORM_DATA,
@@ -74,11 +75,11 @@ const OutletPageData: CrudPageModel = new CrudPageModel(
       {label: "Create New Outlet", buttonLabel: "Create", type: "create"},
       {label: "Edit Outlet", buttonLabel: "Update", type: "edit"}
     ],
-    list_api: {url: API_URI.restaurantsURI, method: "get"},
-    create_api: {url: API_URI.restaurantsURI, method: "post"},
-    update_api: {url: API_URI.restaurantsIdURI, method: "put"},
-    delete_api: {url: API_URI.restaurantsIdURI, method: "delete"},
-    form_display_keys: [
+    listApi: {url: API_URI.restaurantsURI, method: "get"},
+    createApi: {url: API_URI.restaurantsURI, method: "post"},
+    updateApi: {url: API_URI.restaurantsIdURI, method: "put"},
+    deleteApi: {url: API_URI.restaurantsIdURI, method: "delete"},
+    formDisplayKeys: [
       {mappingKey: 'id', key: 'id'},
       {mappingKey: 'city_id', key: 'city.id'},
       {mappingKey: 'address', key: 'address'},
@@ -89,11 +90,11 @@ const OutletPageData: CrudPageModel = new CrudPageModel(
     ],
     pageActions: [
       {
-        action_name: 'create',
+        actionName: 'create',
         icon: "add",
         label: "Create New Outlet",
-        button_theme: "primary-outlined",
-        action_id : "create",
+        buttonTheme: "primary-outlined",
+        actionId : "create",
       },
 
     ]

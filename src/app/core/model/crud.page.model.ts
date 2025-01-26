@@ -4,41 +4,53 @@ import { TableModel } from "./table.model";
 import { ButtonTheme } from "../constants/types";
 
 export class CrudPageModel {
+  id: string; 
   tableConfigs: TableModel;
   pageActions?: CrudPageActions[] = [];
+  viewPageActions?: CrudPageActions[] = [];
   title : string = '';
-  list_api ?: ApiInterface | null;
-  create_api ?: ApiInterface | null;
-  update_api ?: ApiInterface  | null;
-  delete_api ?: ApiInterface  | null;
+  listApi ?: ApiInterface | null;
+  createApi ?: ApiInterface | null;
+  updateApi ?: ApiInterface  | null;
+  deleteApi ?: ApiInterface  | null;
+  viewApi ?: ApiInterface  | null;
   formConfigs ?: FormConfig | null;
-  api_params ?: Object = {};
-  form_display_keys ?: FormDisplayKeys[] | null = [];
+  apiParams ?: Object = {};
+  formDisplayKeys ?: FormDisplayKeys[] | null = [];
   actionsLabel ?: ActionsLabel[] = [];
+  viewDisplayData ?: ViewDisplayData[] = [] 
   constructor(options: {
+    id: string;
     tableConfigs: TableModel;
     pageActions?: CrudPageActions[] ;
+    viewPageActions?: CrudPageActions[] ;
     title : string;
-    list_api ?: ApiInterface;
-    create_api ?: ApiInterface;
-    update_api ?: ApiInterface;
-    delete_api ?: ApiInterface;
+    listApi ?: ApiInterface;
+    createApi ?: ApiInterface;
+    updateApi ?: ApiInterface;
+    deleteApi ?: ApiInterface;
+    viewApi ?: ApiInterface;
     formConfigs ?: FormConfig;
-    api_params ?: Object;
-    form_display_keys ?: FormDisplayKeys[];
+    apiParams ?: Object;
+    formDisplayKeys ?: FormDisplayKeys[];
     actionsLabel ?: ActionsLabel[];
+    viewDisplayData ?: ViewDisplayData[]
   }) {
+    this.id = options.id;
     this.tableConfigs = options.tableConfigs;
     this.pageActions = options.pageActions || [];
+    this.viewPageActions = options.viewPageActions || [];
     this.title = options.title || '';
-    this.list_api = options.list_api || null;
-    this.create_api = options.create_api || null;
-    this.update_api = options.update_api || null;
-    this.delete_api = options.delete_api || null;
+    this.listApi = options.listApi || null;
+    this.createApi = options.createApi || null;
+    this.updateApi = options.updateApi || null;
+    this.deleteApi = options.deleteApi || null;
     this.formConfigs = options.formConfigs || null;
-    this.api_params = options.api_params || {};
-    this.form_display_keys = options.form_display_keys || null;
+    this.apiParams = options.apiParams || {};
+    this.formDisplayKeys = options.formDisplayKeys || null;
     this.actionsLabel = options.actionsLabel || [];
+    this.viewApi = options.viewApi || null;
+    this.viewDisplayData = options.viewDisplayData;
   }
 }
 
@@ -48,13 +60,23 @@ interface ActionsLabel {
   buttonLabel: string;
 }
 
+interface ViewDisplayData {
+  key : string;
+  label : string;
+  formatFunc ?: Function;
+  classes ?: string;
+}
+
 interface CrudPageActions {
-  action_name: CrudePageActionName;
+  actionName: CrudePageActionName;
   icon ?: string;
   label ?: string;
-  button_theme : ButtonTheme;
-  action_id : string;
+  buttonTheme : ButtonTheme;
+  actionId : string;
   classes ?: string;
+  customIconPath ?: string;
+  isShow ?: Function;
+
 }
 
 interface ApiInterface {
@@ -68,4 +90,4 @@ interface FormDisplayKeys {
   key : string;
 }
 
-type CrudePageActionName = 'create' | 'delete_all' | 'custom';
+type CrudePageActionName = 'create' | 'delete_all' | 'custom' | 'delete' | 'edit';

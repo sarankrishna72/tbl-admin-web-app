@@ -32,3 +32,7 @@ export const checkIsUrl = (text: string) => {
     return false;
   }
 }
+
+export const checkActionShow = (action: any, data: any) => {
+  return (typeof action.isShow == 'function' && action.isShow!(data) )|| !action.isShow
+}

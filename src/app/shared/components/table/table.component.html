@@ -28,17 +28,22 @@
                   <span [innerHTML]="rowData[colDef.columnKey]"></span>
                 }
                 @case ('format') {
-                <span [innerHTML]="colDef.cellFormatFn!(rowData[colDef.columnKey])"></span>
+                  <span [innerHTML]="colDef.cellFormatFn!(rowData)"></span>
                 }
                 @case ('action') {
                   <div class="flex items-center justify-center">
-                    @for ( action of tableConfigs.actions; track action.action_id) {
+                    @for ( action of tableConfigs.actions; track action.actionId) {
                       @if( checkActionShow(action, rowData)) {
-                        <app-button buttonSize="xs" (onClick)="tableAction({action, data: rowData})" [classes]="'w-10 !py-[2px] !px-[6px] '+ action.classes "  buttonTheme="custom">
-                          <span class="material-icons w-4 text-md cursor-pointer noselect ">
-                            {{ action.icon }}
-                          </span>
-                          {{ action.action_name }}
+                        <app-button buttonSize="xs" (onClick)="tableAction({action, data: rowData})" [classes]="'w-10 h-7 !py-[2px] !px-[6px] '+ action.classes "  buttonTheme="custom">
+                          @if(action.customIconPath) {
+                            <img [src]="action.customIconPath" class="h-5" />
+                          } @else {
+                            <span class="material-icons w-4 text-md cursor-pointer noselect ">
+                              {{ action.icon }}
+                            </span>
+                          }
+                        
+                          {{ action.actionName }}
                         </app-button>
                       }
                      

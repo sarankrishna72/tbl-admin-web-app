@@ -1,0 +1,63 @@
+<app-main-container>
+    <div class="pt-5">
+        <span class="inline-block">
+            <app-button buttonSize="xs" (onClick)="_location.back();" classes="!p-0 !pt-1 !pr-2 !pb-1" buttonTheme="custom">
+                <img [src]="staticImages.arrow_back" class="h-4" /> 
+                <span class="ml-1">Back</span>
+            </app-button>
+        </span>
+        <div class="desktop:w-2/5 w-full p-4 bg-neutral-100 rounded-[8px] mt-4">
+            <div class="flex justify-between items-center">
+                <span class="text-primary-800 text-md roboto-medium">Event Details</span>
+                <div class="flex justify-center items-center mr-[-10px]" >
+                    @for ( action of configurations?.viewPageActions; track action.actionId) {
+                        @if (checkActionShow(action)) {
+                            <app-button buttonSize="xs" (onClick)="actionViewCTA(action)"  [classes]="'w-10 h-7 !py-[2px] !px-[6px] '+ action.classes "  [buttonTheme]="action.buttonTheme || 'custom'">
+                                @if(action.customIconPath) {
+                                  <img [src]="action.customIconPath" class="h-5" />
+                                } @else {
+                                  <span class="material-icons w-4 text-md cursor-pointer noselect ">
+                                    {{ action.icon }}
+                                  </span>
+                                }
+                                {{ action.label || '' }}
+                            </app-button>
+                        }
+                       
+                    }
+                </div>
+            </div>
+            @if (selectedData) {
+                @for (item of configurations?.viewDisplayData; track item) {
+                    <div class="flex pt-3">
+                        <div class="flex-1 text-left text-gray-400 text-base">
+                           {{item.label}}
+                        </div>
+                        <div class="flex-1 flex justify-end text-base">
+                            @if(item.formatFunc) {
+                                <span [innerHTML]="item.formatFunc(selectedData) || '-'"></span>
+                            } @else {
+                                {{getColumnData(item.key, selectedData) || '-'}}
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    @if (_appStoreService.getPopupShowing()) {
+        <app-popup bodyClass="scrollbar-hide" [title]="selectedAction.label" containerClass="tablet:w-[460px]  w-[90%]">
+            <ng-container popup-body>
+              <div class="pt-1">
+                <app-form [formGroup]="formGroup" (onSubChildFormReady)="onSubChildFormReady($event)" [data]="selectedData" [showFormActions]="false" [formData]="configurations?.formConfigs!"></app-form>
+              </div>
+            </ng-container>
+            <ng-container popup-footer>
+              <app-form-actions  [formGroup]="formGroup"  [actions]="configurations?.formConfigs!.actions"
+                (formAction)="onSubmit($event, false)"></app-form-actions>
+            </ng-container>
+        </app-popup>
+      }
+    
+</app-main-container>

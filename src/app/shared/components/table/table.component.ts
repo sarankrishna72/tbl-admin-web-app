@@ -4,7 +4,7 @@ import { TableColumn, TableModel } from '../../../core/model';
 import * as _ from 'lodash';
 import { ButtonComponent } from '..';
 import { CommonModule } from '@angular/common';
-import { getObjValueFromPath } from '../../../core/lib/lib';
+import { checkActionShow, getObjValueFromPath } from '../../../core/lib/lib';
 import { PaginationComponent } from '../pagination/pagination.component';
 
 @Component({
@@ -51,17 +51,17 @@ export class TableComponent implements OnChanges{
   }
 
   checkActionShow(action: any, data: any) {
-    return (typeof action.is_show == 'function' && action.is_show!(data) )|| !action.is_show
+    return checkActionShow(action, data);
   }
 
   tableAction(data: any): void {
     if (data.action == 'create') {
       data.action = {
-        action_name: 'create',
+        actionName: 'create',
         icon: "add",
         label: this.tableConfigs.createButtonLabel,
-        button_theme: "primary-outlined",
-        action_id : "create",
+        buttonTheme: "primary-outlined",
+        actionId : "create",
       }
     }
     this.tableActionCTA.emit( {...data.action, data: data.data} );

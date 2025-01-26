@@ -15,9 +15,13 @@ export const routes: Routes = [
     path: "admin",
     children: [
       {
-        path: ':id',
-        loadComponent: () => import('./pages/main/main.component').then((m) => m.MainComponent),
-      }
+        path: ':type/details/:id',
+        loadComponent: () => import('./pages/admin/main/components/view-details/view-details.component').then((m) => m.ViewDetailsComponent),
+      },
+      {
+        path: ':type',
+        loadComponent: () => import('./pages/admin/main/main.component').then((m) => m.MainComponent),
+      },
     ],
     canActivate: [adminAuthGuard],
   }, {

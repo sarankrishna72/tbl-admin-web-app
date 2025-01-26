@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable, signal, WritableSignal } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { pageConfigurations } from '../../../core/configurations/pages';
 import { AppStoreService } from '../store/app-store.service';
 
@@ -7,21 +7,27 @@ import { AppStoreService } from '../store/app-store.service';
   providedIn: 'root'
 })
 export class CommonService {
-
+  private currentPageRouteData: WritableSignal<any | null> = signal(null);
+  
   constructor(
-    private _router: Router,
+    private _activatedRoute: ActivatedRoute,
     private _appStoreService: AppStoreService
   ) { }
 
 
-  getPageConfiguration() {
-    const currentUrl = this._router.url.split('/').pop();
-    if (currentUrl) {
-       this._appStoreService.setCurrentPageConfig(pageConfigurations[currentUrl]);
-    } else {
-    this._appStoreService.setCurrentPageConfig(null);
-    }
+  getCurrentPageRouteData() {
+    return this.currentPageRouteData();
+  }
 
+  getPageConfiguration() {
+    this._activatedRoute.children[0]?.children[0]?.params.subscribe((params: any) => {
+      this.currentPageRouteData.set(params);
+      if (params["type"]) {
+        this._appStoreService.setCurrentPageConfig(pageConfigurations[params["type"]]);
+      } else {
+        this._appStoreService.setCurrentPageConfig(null);
+      }
+    });
   }
 
 }

@@ -47,14 +47,14 @@ const tableConfig: TableModel = new TableModel(
     sortDirection: 'asc',
     actions: [
       {
-        action_id: 'edit',
-        action_type: 'edit',
+        actionId: 'edit',
+        actionType: 'edit',
         icon: 'edit',
         label: "Edit Cashier",
         classes: 'hover:!text-primary-500'
       }, {
-        action_id: 'delete',
-        action_type: 'delete',
+        actionId: 'delete',
+        actionType: 'delete',
         icon: 'delete',
         label: "Delete Cashier",
         classes: 'hover:!text-error-500'
@@ -66,7 +66,8 @@ const tableConfig: TableModel = new TableModel(
 
 const CashierPageData: CrudPageModel = new CrudPageModel(
   {
-    api_params: "cashier",
+    id: 'cashiers',
+    apiParams: "cashier",
     title: 'Cashier Accounts',
     tableConfigs: tableConfig,
     formConfigs: CASHIER_FORM_DATA,
@@ -74,11 +75,11 @@ const CashierPageData: CrudPageModel = new CrudPageModel(
       {label: "Create New Cashier", buttonLabel: "Create", type: "create"},
       {label: "Edit Cashier", buttonLabel: "Update", type: "edit"}
     ],
-    list_api: {url: API_URI.cashiersURI, method: "get"},
-    create_api: {url: API_URI.cashiersURI, method: "post"},
-    update_api: {url: API_URI.cashiersIdURI, method: "put"},
-    delete_api: {url: API_URI.cashiersIdURI, method: "delete"},
-    form_display_keys: [
+    listApi: {url: API_URI.cashiersURI, method: "get"},
+    createApi: {url: API_URI.cashiersURI, method: "post"},
+    updateApi: {url: API_URI.cashiersIdURI, method: "put"},
+    deleteApi: {url: API_URI.cashiersIdURI, method: "delete"},
+    formDisplayKeys: [
       {mappingKey: 'id', key: 'id'},
       {mappingKey: 'restaurant_id', key: 'restaurant.id'},
       {mappingKey: 'name', key: 'name'},
@@ -89,11 +90,11 @@ const CashierPageData: CrudPageModel = new CrudPageModel(
     ],
     pageActions: [
       {
-        action_name: 'create',
+        actionName: 'create',
         icon: "add",
         label: "Create New Cashier",
-        button_theme: "primary-outlined",
-        action_id : "create",
+        buttonTheme: "primary-outlined",
+        actionId : "create",
       },
 
     ]
