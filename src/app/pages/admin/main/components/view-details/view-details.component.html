@@ -20,7 +20,7 @@
                                     {{ action.icon }}
                                   </span>
                                 }
-                                {{ action.label || '' }}
+                                {{ action.actionName || '' }}
                             </app-button>
                         }
                        
@@ -45,7 +45,8 @@
             }
         </div>
     </div>
-
+    
+  
     @if (_appStoreService.getPopupShowing()) {
         <app-popup bodyClass="scrollbar-hide" [title]="selectedAction.label" containerClass="tablet:w-[460px]  w-[90%]">
             <ng-container popup-body>

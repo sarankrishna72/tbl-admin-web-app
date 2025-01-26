@@ -18,3 +18,7 @@
     </div>
   </div>
 </section>
+
+@if( _appStoreService.getConfirmPopup()?.active) {
+  <confirm-popup  containerClass="tablet:w-[410px] w-[90%]"></confirm-popup>
+}

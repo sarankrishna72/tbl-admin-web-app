@@ -9,8 +9,33 @@ export class AppStoreService {
   private loading:WritableSignal<boolean> = signal(false);
   private currentPageConfig: WritableSignal<CrudPageModel | null> = signal(null);
   private popupShowing: WritableSignal<boolean> = signal(false);
+  private confirmPopup: WritableSignal<{ 
+    data: any,
+    containerClass ?: string, 
+    active: boolean, 
+    title: string, 
+    cancelBtnConfig : {callback?: Function, classes ?: string, isHide ?: boolean, label: string}, 
+    confirmBtnConfig : {callback : Function, classes ?: string, isHide ?: boolean, label: string} 
+  } | null> = signal(null);
   private toasts: WritableSignal<ToastModel[]> = signal([]);
   constructor() { }
+
+
+  setConfirmPopup(obj: { 
+      data: any,
+      containerClass ?: string, 
+      active: boolean, 
+      title: string, 
+      cancelBtnConfig : { callback?: Function, classes ?: string, isHide ?: boolean, label: string}, 
+      confirmBtnConfig : { callback : Function, classes ?: string, isHide ?: boolean, label: string} 
+    } | null
+  ) {
+    this.confirmPopup.set(obj)
+  }
+
+  getConfirmPopup() {
+    return this.confirmPopup();
+  }
 
   /**
    * Toggle Loader

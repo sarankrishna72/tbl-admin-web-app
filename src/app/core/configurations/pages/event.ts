@@ -94,7 +94,7 @@ const tableConfig: TableModel = new TableModel(
         actionType: 'edit',
         customIconPath: DEFAULT_IMAGES.edit,
         label: "Edit Event",
-        isShow: (data: any) => { return data.status?.toLowerCase() == "pending" },
+        isShow: (data: any) => { return data?.status?.toLowerCase() == "pending" },
         classes: 'hover:!text-primary-500'
       }, {
         actionId: 'delete',
@@ -223,15 +223,15 @@ const EventPageData: CrudPageModel = new CrudPageModel(
     ],
     viewPageActions: [
       {
-        actionName: 'edit',
+        actionName: '',
         customIconPath: DEFAULT_IMAGES.edit,
-        label: "",
         buttonTheme: "",
+        label: "Edit Event",
         actionId : "edit",
-        isShow: (data: any) => { return data.status?.toLowerCase() == "pending" },
+        isShow: (data: any) => { return data?.status?.toLowerCase() == "pending" },
       },
       {
-        actionName: 'delete',
+        actionName: '',
         customIconPath: DEFAULT_IMAGES.delete,
         label: "",
         buttonTheme: "",

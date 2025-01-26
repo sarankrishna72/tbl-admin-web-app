@@ -15,13 +15,11 @@
       }
     </div>
   </app-page-header>
-
   <div>
     @if (configurations?.tableConfigs) {
       <app-table (onPaginationChange)="onPaginationChange($event)" (tableActionCTA)="actionCTA($event)" [tableRowData]="tableData || []" [tableConfigs]="configurations?.tableConfigs!"></app-table>
     }
   </div>
-
   @if (_appStoreService.getPopupShowing()) {
     <app-popup bodyClass="scrollbar-hide" [title]="selectedAction.label" containerClass="tablet:w-[460px]  w-[90%]">
         <ng-container popup-body>
@@ -35,7 +33,5 @@
         </ng-container>
     </app-popup>
   }
-
 </app-main-container>
-
 

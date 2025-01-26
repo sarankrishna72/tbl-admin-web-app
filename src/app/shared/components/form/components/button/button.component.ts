@@ -60,6 +60,10 @@ export class ButtonComponent implements OnChanges,OnInit {
         return ' secondary-button text-white  border ';
       case 'secondary-outlined':
         return ' border  secondary-outlined bg-white';
+      case 'info':
+        return ' bg-neutral-100 text-primary-500 hover:bg-neutral-100';
+      case 'danger':
+        return ' bg-error-500 text-white hover:bg-error-500 ';
       default:
         return '';
     }
@@ -68,17 +72,17 @@ export class ButtonComponent implements OnChanges,OnInit {
   getButtonSize() {
     switch (this.buttonSize) {
       case 'md':
-        return ' py-3 px-5 text-md';
+        return ' py-3 px-6 text-md';
       case 'sm':
-        return ' py-2 px-4 text-sm';
+        return ' py-2 px-5 text-sm';
       case 'xs':
-        return ' py-1 px-3 text-xs';
+        return ' py-1 px-4 text-xs';
       case 'lg':
-        return ' py-4 px-6 text-lg';
+        return ' py-4 px-7 text-lg';
       case 'xl':
-        return ' py-5 px-7 text-xl';
+        return ' py-5 px-8 text-xl';
       default:
-        return ' py-1 px-3 text-base';
+        return ' py-1 px-4 text-base';
     }
   }
 

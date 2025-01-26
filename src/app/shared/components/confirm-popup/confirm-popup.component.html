@@ -1,0 +1,25 @@
+<div class="popup-container transition-opacity duration-300 ease-out flex justify-center items-center right-0 z-10 overflow-hidden fixed left-0 top-0 h-full popup-bg">
+    <div class="p-7 rounded-md max-h-[90%] overflow-auto flex flex-col bg-white relative {{containerClass}}" [ngClass]="_appStoreService.getConfirmPopup()?.containerClass">
+        <div class="text-primary-800 text-lg text-center">
+            {{_appStoreService.getConfirmPopup()?.title}}
+        </div>
+        <div class="flex gap-3 mt-4 justify-center">
+            @if(!_appStoreService.getConfirmPopup()?.cancelBtnConfig?.isHide) {
+                <app-button (onClick)="onBtnAction('cancel')" classes="roboto-regular {{_appStoreService.getConfirmPopup()?.cancelBtnConfig?.classes || ''}}" buttonTheme="info" buttonSize="sm">
+                    <span class="roboto-regular text-base-2" style="line-height: normal;">
+                        {{_appStoreService.getConfirmPopup()?.cancelBtnConfig?.label}}
+                    </span>
+                </app-button>
+            }
+            @if(!_appStoreService.getConfirmPopup()?.confirmBtnConfig?.isHide) {
+                <app-button (onClick)="onBtnAction('confirm')" classes="roboto-regular {{_appStoreService.getConfirmPopup()?.confirmBtnConfig?.classes || ''}}" buttonTheme="danger" buttonSize="sm">
+                    <span class="roboto-regular text-base-2" style="line-height: normal;">
+                        {{_appStoreService.getConfirmPopup()?.confirmBtnConfig?.label}}
+                    </span>
+                </app-button>
+            }
+           
+        </div>
+    </div>
+</div>
+  

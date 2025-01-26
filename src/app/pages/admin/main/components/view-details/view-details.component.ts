@@ -6,6 +6,7 @@ import { ButtonComponent, FormComponent, PopupComponent } from '../../../../../s
 import { checkActionShow, getObjValueFromPath } from '../../../../../core/lib/lib';
 import { Location } from '@angular/common';
 import { FormActionsComponent } from '../../../../../shared/components/form/components/form-actions/form-actions.component';
+import { ConfirmPopupComponent } from '../../../../../shared/components/confirm-popup/confirm-popup.component';
 
 @Component({
   selector: 'app-view-details',
@@ -15,15 +16,15 @@ import { FormActionsComponent } from '../../../../../shared/components/form/comp
     ButtonComponent,
     PopupComponent,
     FormActionsComponent,
-    FormComponent
+    FormComponent,
+    ConfirmPopupComponent
   ],
   templateUrl: './view-details.component.html',
   styleUrl: './view-details.component.scss'
 })
 export class ViewDetailsComponent extends MainCommonComponent implements OnInit {
-  // data: any = null;
   public _location = inject(Location)
-  
+
   override configureCallback(): void {
     if (this.configurations?.viewApi) {
       let url = this.configurations?.viewApi.url.split("{id}").join(this._commonService.getCurrentPageRouteData().id)
@@ -43,7 +44,7 @@ export class ViewDetailsComponent extends MainCommonComponent implements OnInit 
   }
 
   actionViewCTA(action: any) {
-    this.actionCTA({...action, ...{data: this.selectedData}})
+    this.actionCTA({...action, ...{data: this.selectedData}}, false)
   }
   
   

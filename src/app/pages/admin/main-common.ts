@@ -67,7 +67,19 @@ export class MainCommonComponent implements OnInit{
         }
     }
 
-    actionCTA(action: any) {
+    deleteData(data: any, isIndexPage = true) {
+      this.getApi(this.configurations?.deleteApi).subscribe((response: any) => {
+        this._toastService.success({autoClose: true, message: response.message, duration: 3, title: "Success"});
+        if (isIndexPage) {
+          this.tableData =  this.tableData.filter((x: any) => x.id != data.id)
+        } else {
+          this._router.navigate([`admin/${this.configurations!.id}`]);
+        }
+        
+      })
+    }
+
+    actionCTA(action: any, isIndexPage = true) {
       this.selectedData = null;
       this.formGroup.reset();
       let actionLabel: any;
@@ -102,10 +114,19 @@ export class MainCommonComponent implements OnInit{
         case "delete":
           this.actionType = this.CONST_DELETE;
           this.selectedData  = action.data;
-          this.getApi(this.configurations?.deleteApi).subscribe((response: any) => {
-            this._toastService.success({autoClose: true, message: response.message, duration: 3, title: "Success"});
-            this.tableData =  this.tableData.filter((x: any) => x.id != action.data.id)
-            this._appStoreService.closePopup();
+          this._appStoreService.setConfirmPopup( {
+            title: "Are you sure you want delete this event?",
+            data: action.data,
+            cancelBtnConfig: {
+              label: 'Cancel'
+            },
+            active: true,
+            confirmBtnConfig: {
+              label: 'Delete',
+              callback: (data: any) => {
+                this.deleteData(data, isIndexPage);
+              }
+            }
           })
           break;
         default:

@@ -90,4 +90,4 @@ interface FormDisplayKeys {
   key : string;
 }
 
-type CrudePageActionName = 'create' | 'delete_all' | 'custom' | 'delete' | 'edit';
+type CrudePageActionName = 'create' | 'delete_all' | 'custom' | 'delete' | 'edit' | '';
