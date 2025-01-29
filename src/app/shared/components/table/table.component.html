@@ -3,7 +3,7 @@
     <thead>
       <tr>
         @for ( colDef of colsDef; track colDef.columnKey) {
-          <td class="bg-neutral-100 py-[10px] px-3 roboto-medium text-base text-primary-800" [ngClass]="{'text-center': colDef.columnType == 'action'}" [ngStyle]="{'min-width': colDef.columnWidth }">{{colDef.columnName}}</td>
+          <td class="bg-neutral-100 py-[10px] px-3 roboto-medium text-base text-primary-800" [ngClass]="{'text-end': colDef.columnType == 'action'}" [ngStyle]="{'min-width': colDef.columnWidth }">{{colDef.columnName}}</td>
         }
       </tr>
     </thead>
@@ -22,7 +22,6 @@
                   } @else {
                     {{ index + 1 }}
                   }
-                  
                 }
                 @case ('html') {
                   <span [innerHTML]="rowData[colDef.columnKey]"></span>
@@ -31,7 +30,7 @@
                   <span [innerHTML]="colDef.cellFormatFn!(rowData)"></span>
                 }
                 @case ('action') {
-                  <div class="flex items-center justify-center">
+                  <div class="flex items-center justify-end">
                     @for ( action of tableConfigs.actions; track action.actionId) {
                       @if( checkActionShow(action, rowData)) {
                         <app-button buttonSize="xs" (onClick)="tableAction({action, data: rowData})" [classes]="'w-10 h-7 !py-[2px] !px-[6px] '+ action.classes "  buttonTheme="custom">
@@ -42,11 +41,9 @@
                               {{ action.icon }}
                             </span>
                           }
-                        
                           {{ action.actionName }}
                         </app-button>
                       }
-                     
                     }
                   </div>
                 }
@@ -57,9 +54,8 @@
                       [src]="getColumnData(colDef.columnKey, rowData) || staticImages.no_image "
                     />
                   } @else {
-                     -
+                    -
                   }
-                 
                 }
                 @default {
                   {{rowData[colDef.columnKey]}}
