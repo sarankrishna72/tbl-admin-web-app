@@ -1,3 +1,4 @@
+import { DEFAULT_IMAGES } from "../../constants";
 import { API_URI } from "../../constants/api_uri";
 import { CrudPageModel, TableColumn, TableModel } from "../../model";
 import { CASHIER_FORM_DATA } from "../forms";
@@ -49,13 +50,13 @@ const tableConfig: TableModel = new TableModel(
       {
         actionId: 'edit',
         actionType: 'edit',
-        icon: 'edit',
+        customIconPath: DEFAULT_IMAGES.edit,
         label: "Edit Cashier",
         classes: 'hover:!text-primary-500'
       }, {
         actionId: 'delete',
         actionType: 'delete',
-        icon: 'delete',
+        customIconPath: DEFAULT_IMAGES.delete,
         label: "Delete Cashier",
         classes: 'hover:!text-error-500'
       }

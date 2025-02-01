@@ -1,3 +1,4 @@
+import { DEFAULT_IMAGES } from "../../constants";
 import { API_URI } from "../../constants/api_uri";
 import { CrudPageModel, TableColumn, TableModel } from "../../model";
 import { OUTLET_FORM_DATA } from "../forms";
@@ -49,14 +50,14 @@ const tableConfig: TableModel = new TableModel(
       {
         actionId: 'edit',
         actionType: 'edit',
-        icon: 'edit',
+        customIconPath: DEFAULT_IMAGES.edit,
         label: "Edit Outlet",
         classes: 'hover:!text-primary-500'
       }, {
         actionId: 'delete',
         actionType: 'delete',
         label: "Delete Outlet",
-        icon: 'delete',
+        customIconPath: DEFAULT_IMAGES.delete,
         classes: 'hover:!text-error-500'
       }
     ]
