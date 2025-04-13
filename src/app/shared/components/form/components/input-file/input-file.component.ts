@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
-import { DragAndDropDirective } from '../../../../directives/drag-and-drop/drag-and-drop.directive';
+import { DragAndDropDirective } from '../../../../directives';
 import { FormBase } from '../../../../../core/model';
 import { ControlValueAccessorDirective } from '../../../../directives/form/control-value-accessor.directive';
 import { FormService } from '../../../../services/form/form.service';

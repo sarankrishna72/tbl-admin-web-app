@@ -82,6 +82,12 @@ export class ApiService {
     return this._httpService.get(API_URI.usersCountURI)
   }
 
+  getUserWalletHistories(id: number, params: any) {
+    const url =  API_URI.cashierUserWalletHistoriesURI.replace('{id}', String(id));
+    return this._httpService.get(url, params)
+  }
+
+
 }
 
 

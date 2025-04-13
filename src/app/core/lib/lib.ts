@@ -12,6 +12,21 @@ export const getObjValueFromPath = (obj: any, dotNotationString: any) => {
   return current;
 }
 
+export const returnWalletHistoryStatusClass = (status: string) => {
+  switch (status.split(" ")?.join("")?.toLowerCase()) {
+    case "active":
+      return "text-success-400";
+    case "expired":
+      return "text-error-500";
+    case "pending":
+      return "text-warning";
+    case "redeemed":
+      return "text-success-400";
+  }
+
+  return '';
+}
+
 
 export const returnStatusClass = (status: string) => {
   switch (status.split(" ")?.join("")?.toLowerCase()) {
@@ -19,6 +34,10 @@ export const returnStatusClass = (status: string) => {
       return "text-success-400";
     case "pending":
       return "text-error-500";
+    case "expired":
+      return "text-warning";
+    case "active":
+      return "text-success-400";
   }
 
   return '';

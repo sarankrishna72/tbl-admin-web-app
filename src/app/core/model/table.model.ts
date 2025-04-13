@@ -100,3 +100,8 @@ export class TableColumn {
 
 type TableColumnType = 'text' | 'image' | 'action' | 'html' | 'index' | 'format';
 type TableActionType = 'edit' | 'delete' | 'custom' | 'view';
+
+export interface PaginationInterface {
+  page: number, 
+  per_page: number
+}

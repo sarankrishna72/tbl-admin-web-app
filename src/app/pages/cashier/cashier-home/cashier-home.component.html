@@ -2,13 +2,13 @@
   <div class="">
     <app-page-header pageTitle="Manage Wallet" ></app-page-header>
 
-    <div class="flex max-tablet:flex-col gap-4">
+    <div class="flex max-tablet:flex-col gap-6">
       <div class="flex-1">
         <app-form [formGroup]="userDetailsForm" (formOutput)="submitFormData($event, 'userDetails')" [formData]="cashierFormConfig"></app-form>
       </div>
       <div class="flex-1">
 
-        @if (userDetails) {
+        @if (userDetails()) {
           <div class="bg-neutral-100 p-4 rounded-md">
             <app-title size="lg" theme="secondary" classes="roboto-medium">{{"Customer Details"}}</app-title>
             <div class="mt-4">
@@ -17,7 +17,7 @@
                   <app-title size="base" classes="roboto-regular !text-gray-400">{{"Phone Number"}}</app-title>
                 </div>
                 <div>
-                  <app-title size="base" theme="primary" classes="roboto-medium">{{userDetails.phone_number}}</app-title>
+                  <app-title size="base" theme="primary" classes="roboto-medium">{{userDetails()!.phone_number}}</app-title>
                 </div>
               </div>
               <div class="flex justify-between item-center mt-2">
@@ -25,7 +25,7 @@
                   <app-title size="base" classes="roboto-regular !text-gray-400">{{"Customer Name"}}</app-title>
                 </div>
                 <div>
-                  <app-title size="base" theme="primary" classes="roboto-medium">{{userDetails.name}}</app-title>
+                  <app-title size="base" theme="primary" classes="roboto-medium">{{userDetails()!.name}}</app-title>
                 </div>
               </div>
               <div class="flex justify-between item-center mt-2">
@@ -33,20 +33,68 @@
                   <app-title size="base" classes="roboto-regular !text-gray-400">{{"Wallet Points"}}</app-title>
                 </div>
                 <div>
-                  <app-title size="base" theme="primary" classes="roboto-medium">{{userDetails.balance_amount}}</app-title>
+                  <app-title size="base" theme="primary" classes="roboto-medium">{{userDetails()!.balance_amount}}</app-title>
+                </div>
+              </div>
+              <div class="flex justify-between item-center mt-2">
+                <div>
+                  <app-title size="base" classes="roboto-regular !text-gray-400">{{"Last updated on"}}</app-title>
+                </div>
+                <div>
+                  <app-title size="base" theme="primary" classes="roboto-medium">{{userDetails()!.last_updated_on | momentDate: 'DD/MM/YYYY hh:mm A'}}</app-title>
                 </div>
               </div>
             </div>
           </div>
-          <div class="p-4 border border-primary-500 rounded-md mt-4">
-            <app-title size="lg" theme="secondary" classes="roboto-medium">{{"Calculate Wallet Points"}}</app-title>
-            <div class="mt-4">
-              <app-form (formOutput)="submitFormData($event, 'updateWallet')" [formData]="cashierWalletCaluclationFormConfig"></app-form>
-            </div>
-          </div>
+         
         }
       </div>
     </div>
+    @if (userDetails()) {
+     
+      <div class="mt-4">
+        <app-tabs>
+          <tab-item [active]="true">
+            <ng-template #tabHeader>
+            <div class="flex item-center items-center gap-2 justify-center">
+              <svg-icon
+                icon="wallet"
+                [width]="18"
+                [height]="18"
+              />
+              Calculate Wallet Points
+            </div>
+            </ng-template>
+            <ng-template #tabContent>
+              <div class="flex max-tablet:flex-col gap-6">
+                <div class="p-4 border border-primary-500 rounded-md mt-4 sm:w-1/2">
+                  <app-title size="lg" theme="secondary" classes="roboto-medium">{{"Calculate Wallet Points"}}</app-title>
+                  <div class="mt-4 ">
+                    <app-form (formOutput)="submitFormData($event, 'updateWallet')" [formData]="cashierWalletCaluclationFormConfig"></app-form>
+                  </div>
+                </div>
+                <div class="sm:w-1/2"></div>
+              </div>
+            </ng-template>  
+          </tab-item>
+          <tab-item >
+            <ng-template #tabHeader>
+            <div class="flex item-center items-center gap-2 justify-center">
+              <svg-icon
+                icon="history"
+                [width]="18"
+                [height]="18"
+              />
+                Wallet History
+            </div>
+            </ng-template>
+            <ng-template #tabContent>
+                <app-table [tableRowData]="walletHistoriesData || []" [tableConfigs]="tableConfigs"></app-table>
+            </ng-template>  
+          </tab-item>
+        </app-tabs>
+      </div>
+    }
   </div>
 </app-main-container>
 

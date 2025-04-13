@@ -1,11 +1,24 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
-import { FormComponent, PageHeaderComponent, MainContainerComponent, PopupComponent, TitleComponent } from '../../../shared/components';
+import { Component, effect, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { FormComponent, PageHeaderComponent, MainContainerComponent, PopupComponent, TitleComponent, TableComponent } from '../../../shared/components';
 import { CASHIER_CUSTOMER_CALCULATE_WALLET_FORM, CASHIER_CUSTOMER_FORM_DATA } from '../../../core/configurations/forms';
-import { FormConfig } from '../../../core/model';
+import { FormConfig, PaginationInterface, TablePagination } from '../../../core/model';
 import { ApiService } from '../../../shared/services/api/api.service';
 import { ToastService } from '../../../shared/services/toast/toast.service';
 import { FormGroup } from '@angular/forms';
 import { AppStoreService } from '../../../shared/services/store/app-store.service';
+import { MomentDatePipe } from '../../../core/pipes';
+import { TabsComponent } from '../../../shared/components/tabs/tabs.component';
+import { TabItemComponent } from '../../../shared/components/tabs/components/tab-item/tab-item.component';
+import { SvgIconComponent } from '../../../shared/components/svg-icon/svg-icon.component';
+import { cashierTableConfig } from '../../../core/configurations/tables/cashier-user-wallet-history';
+
+interface UserDetails {
+  balance_amount: number,
+  id: number,
+  last_updated_on: string,
+  name: string,
+  phone_number: string
+}
 
 @Component({
   selector: 'app-cashier-home',
@@ -15,11 +28,18 @@ import { AppStoreService } from '../../../shared/services/store/app-store.servic
     TitleComponent,
     FormComponent,
     PopupComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    MomentDatePipe,
+    TabsComponent,
+    TabItemComponent,
+    SvgIconComponent,
+    TableComponent
   ],
   templateUrl: './cashier-home.component.html',
   styleUrl: './cashier-home.component.scss'
 })
+
+
 
 export class CashierHomeComponent {
   cashierFormConfig: FormConfig = CASHIER_CUSTOMER_FORM_DATA;
@@ -27,20 +47,36 @@ export class CashierHomeComponent {
   _apiService: ApiService = inject(ApiService);
   _toastService: ToastService = inject(ToastService)
   _appStoreService: AppStoreService = inject(AppStoreService)
-  userDetails: any ;
+  userDetails: WritableSignal<UserDetails | null>  = signal(null);
+  paginationData!: PaginationInterface | null;
   userDetailsForm: FormGroup<any> = new FormGroup({})
   popupDetails: any;
-
+  tableConfigs = cashierTableConfig;
+  walletHistoriesData: any[] = []
   private _useEffect = effect(() => {
     if (!this._appStoreService.getPopupShowing()) this.popupDetails = null;
+    if (this.userDetails())   {
+      this.paginationData = {page: 1, per_page: 15};
+      this.getWalletHistoriesData();
+    }
   })
 
+
+  getWalletHistoriesData() {
+    this._apiService.getUserWalletHistories(this.userDetails()!.id, {per_page: 15, page: 1}).subscribe((response: any) => {
+      this.walletHistoriesData = response['data'];
+       this.tableConfigs.pagination = new TablePagination(response.pagination)
+    })
+  }
 
   submitFormData(event: any, type: string) {
     switch (type) {
       case 'userDetails':
         this._apiService.cashierGetUserDetails(event.value).subscribe((response: any) => {
-          this.userDetails = response.data;
+          this.userDetails.set(response.data);
+        }, error => {
+          this.userDetails.set(null);
+          this.paginationData = null;
         });
         break;
       case 'updateWallet':
@@ -48,8 +84,8 @@ export class CashierHomeComponent {
           this._toastService.error({ title: "Error", message: "Amount must be greater than 0"})
           return;
         }
-        this._apiService.cashierUpdateWalletPoints( {...{phone_number: this.userDetails.phone_number}, ...event.value}).subscribe((response: any) => {
-          this.userDetails = null;
+        this._apiService.cashierUpdateWalletPoints( {...{phone_number: this.userDetails()!.phone_number}, ...event.value}).subscribe((response: any) => {
+          this.userDetails.set(null);
           this.popupDetails = response;
           this.userDetailsForm.reset()
           this._appStoreService.setPopupShowing()

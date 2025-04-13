@@ -40,11 +40,22 @@ export const CASHIER_CUSTOMER_CALCULATE_WALLET_FORM: FormConfig = new FormConfig
   {
     controls: [
       new InputTextField({
+        key: "bill_no",
+        value: "",
+        type: "text",
+        label: "Bill Number",
+        order:1,
+        placeholder: "Enter bill number",
+         validations: [
+          new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
+        ]
+      }),
+      new InputTextField({
         key: "total_amount",
         value: "",
         type: "number",
         label: "Bill Amount",
-        order:1,
+        order:2,
         prefix: "₹",
         showValidationIcon: true,
         placeholder: "Enter bill amount",

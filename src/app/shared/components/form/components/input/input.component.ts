@@ -4,7 +4,7 @@ import { FormBase } from '../../../../../core/model';
 import { ControlValueAccessorDirective } from '../../../../directives/form/control-value-accessor.directive';
 import { CommonModule } from '@angular/common';
 import { FormService } from '../../../../services/form/form.service';
-import { SafeHtmlPipe } from '../../../../../core/pipe/safe-html/safe-html.pipe';
+import { SafeHtmlPipe } from '../../../../../core/pipes';
 import moment from 'moment';
 @Component({
   selector: 'app-input',

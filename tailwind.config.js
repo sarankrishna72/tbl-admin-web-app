@@ -41,6 +41,8 @@ module.exports = {
         'success-500': 'var(--success-500)',
         'error-500': 'var(--error-500)',
         'error-600': 'var(--error-600)',
+        'warning': 'var(--warning)',
+        'info': 'var(--warning)'
       },
       screens: {
         'mobile': '320px',

@@ -14,6 +14,7 @@ export const API_URI = {
   cashiersURI: `/${API_VERSION}/${ADMIN}/cashiers.json`,
   cashiersIdURI: `/${API_VERSION}/${ADMIN}/cashiers/{id}.json`,
   cashierUserDetailsURI: `/${API_VERSION}/${CASHIER}/users/get_user_details.json`,
+  cashierUserWalletHistoriesURI: `/${API_VERSION}/${CASHIER}/users/{id}/wallet_histories.json`,
   cashierUpdateWalletPointsURI: `/${API_VERSION}/${CASHIER}/users/update_wallet_points.json`,
   eventsURI: `/${API_VERSION}/${ADMIN}/events.json`,
   usersCountURI: `/${API_VERSION}/${ADMIN}/users/total_users_count.json`,

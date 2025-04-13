@@ -1,0 +1,30 @@
+<div class="flex border-b border-gray-100">
+    <div
+      *ngFor="let tab of tabArray; let i = index"
+      (click)="selectTab(i)"
+      [ngClass]="{
+        'px-4 py-2 cursor-pointer border-b-2 rounded-t-lg ripple': true,
+        'border-primary-800 text-primary-800': activeIndex() === i,
+        'border-transparent text-gray-500 hover:text-primary-800': activeIndex() !== i
+      }"
+    >
+      <ng-container *ngIf="tab.customHeader; else defaultHeader">
+        <ng-container *ngTemplateOutlet="tab.customHeader"></ng-container>
+      </ng-container>
+
+      <ng-template #defaultHeader>
+        <div class="flex items-center space-x-2">
+          <ng-container *ngIf="tab.icon">
+            <span class="text-sm">{{ tab.icon }}</span>
+          </ng-container>
+          <span>{{ tab.title }}</span>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <ng-container *ngIf="tabArray[activeIndex()]">
+      <ng-container *ngTemplateOutlet="tabArray[activeIndex()].content"></ng-container>
+    </ng-container>
+  </div>

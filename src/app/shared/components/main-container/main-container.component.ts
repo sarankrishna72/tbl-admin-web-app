@@ -1,6 +1,6 @@
 import { AppStoreService } from './../../services/store/app-store.service';
 import { Component, inject } from '@angular/core';
-import { OutsideClickDirective } from '../../directives/outside-click/outside-click.directive';
+import { OutsideClickDirective } from '../../directives';
 import { LeftMenuComponent } from '..';
 import { ConfirmPopupComponent } from '../confirm-popup/confirm-popup.component';
 
