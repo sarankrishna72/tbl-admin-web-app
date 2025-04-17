@@ -21,7 +21,7 @@ export const returnWalletHistoryStatusClass = (status: string) => {
     case "pending":
       return "text-warning";
     case "redeemed":
-      return "text-success-400";
+      return "text-orange-500";
   }
 
   return '';

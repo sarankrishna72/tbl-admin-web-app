@@ -9,7 +9,7 @@ const tableColumns: TableColumn[] = [
     columnType: "format",
     order: 1,
     cellFormatFn: (data: any) => {
-        return data.bill_no || '-';
+        return `<span class="capitalize">${data.bill_no || data.point_category?.split("_")?.join(" ") || '-'} </span>`;
     }
   }),
   new TableColumn({
