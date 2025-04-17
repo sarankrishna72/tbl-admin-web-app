@@ -46,8 +46,7 @@ export const CASHIER_CUSTOMER_CALCULATE_WALLET_FORM: FormConfig = new FormConfig
         label: "Bill Number",
         order:1,
         placeholder: "Enter bill number",
-         validations: [
-          new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
+        validations: [
         ]
       }),
       new InputTextField({

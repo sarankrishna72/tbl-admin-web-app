@@ -1,5 +1,5 @@
 <app-main-container>
-  <div class="">
+  <div class="h-full d-flex flex-col">
     <app-page-header pageTitle="Manage Wallet" ></app-page-header>
 
     <div class="flex max-tablet:flex-col gap-6">
@@ -52,8 +52,8 @@
     </div>
     @if (userDetails()) {
      
-      <div class="mt-4">
-        <app-tabs>
+      <div class="mt-4" style="height: calc(100% - 284px);">
+        <app-tabs tabBodyClass="h-[calc(100%-58.7px)]" class="h-full block">
           <tab-item [active]="true">
             <ng-template #tabHeader>
             <div class="flex item-center items-center gap-2 justify-center">
@@ -89,7 +89,7 @@
             </div>
             </ng-template>
             <ng-template #tabContent>
-                <app-table [tableRowData]="walletHistoriesData || []" [tableConfigs]="tableConfigs"></app-table>
+                <app-table class="block h-full overflow-auto" [tableRowData]="walletHistoriesData || []" [tableConfigs]="tableConfigs"></app-table>
             </ng-template>  
           </tab-item>
         </app-tabs>

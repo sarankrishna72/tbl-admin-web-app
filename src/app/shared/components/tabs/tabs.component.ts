@@ -1,5 +1,5 @@
 import { CommonModule, NgClass, NgForOf, NgTemplateOutlet } from '@angular/common';
-import { AfterContentInit, Component, ContentChildren, QueryList, signal } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, Input, QueryList, signal } from '@angular/core';
 import { TabItemComponent } from './components/tab-item/tab-item.component';
 
 @Component({
@@ -16,6 +16,7 @@ export class TabsComponent implements AfterContentInit {
   @ContentChildren(TabItemComponent) tabs!: QueryList<TabItemComponent>;
   activeIndex = signal(0);
   tabArray: TabItemComponent[] = [];
+  @Input() tabBodyClass: string = ''
   
   ngAfterContentInit() {
     this.tabArray = this.tabs.toArray();

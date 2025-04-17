@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="mt-4">
+  <div class="mt-4" [ngClass]="tabBodyClass">
     <ng-container *ngIf="tabArray[activeIndex()]">
       <ng-container *ngTemplateOutlet="tabArray[activeIndex()].content"></ng-container>
     </ng-container>

@@ -17,9 +17,8 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [
     FormComponent,
-    ButtonComponent,
     TitleComponent,
-    NgOptimizedImage ,
+    NgOptimizedImage,
     CommonModule
   ],
 
