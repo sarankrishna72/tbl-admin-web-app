@@ -69,6 +69,14 @@ export class CashierHomeComponent {
     })
   }
 
+  constructFormData(data: any) {
+    const formData = new FormData();
+    for (const key of Object.keys(data)) {
+      formData.append(key, key == 'bill_attachment' ? data[key][0] : data[key]);
+    }
+    return formData;
+  }
+
   submitFormData(event: any, type: string) {
     switch (type) {
       case 'userDetails':
@@ -84,7 +92,8 @@ export class CashierHomeComponent {
           this._toastService.error({ title: "Error", message: "Amount must be greater than 0"})
           return;
         }
-        this._apiService.cashierUpdateWalletPoints( {...{phone_number: this.userDetails()!.phone_number}, ...event.value}).subscribe((response: any) => {
+        
+        this._apiService.cashierUpdateWalletPoints( this.constructFormData({...{phone_number: this.userDetails()!.phone_number}, ...event.value})).subscribe((response: any) => {
           this.userDetails.set(null);
           this.popupDetails = response;
           this.userDetailsForm.reset()

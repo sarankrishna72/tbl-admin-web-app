@@ -79,7 +79,6 @@ export const CASHIER_CUSTOMER_CALCULATE_WALLET_FORM: FormConfig = new FormConfig
             items: [
               new InputTextField({
                 key: "bill_attachment",
-                value: "",
                 type: "file",
                 label: "Bill Photo",
                 order: 6,
