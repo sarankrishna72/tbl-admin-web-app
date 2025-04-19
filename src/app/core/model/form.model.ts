@@ -79,14 +79,17 @@ interface InputConfigInterface {
 }
 
 export class ChildFormInterfaceModel {
-  conditionValue : string;
+  conditionValue : string | number;
+  conditionLogic ?: ConditionLogicType;
   items : FormBase[];
   constructor(options: {
-    conditionValue : string;
+    conditionValue : string | number;
     items : FormBase[];
+    conditionLogic ?: ConditionLogicType;
   }) {
     this.conditionValue = options.conditionValue;
     this.items = options.items;
+    this.conditionLogic = options.conditionLogic || ConditionLogicType.EQUAL;
   }
 
 }
@@ -167,6 +170,18 @@ export enum ValidatorsType {
   MAX_FILE_SIZE = "maxFileSize",
   FILE_VALID_TYPE = "fileValidType",
   CONDITIONAL_REQUIRED = "conditional_required"
+}
+
+export enum ConditionLogicType {
+  AND = "and",
+  OR = "or",
+  EQUAL = "equal",
+  NOT_EQUAL = "notEqual",
+  GREATER_THAN = "greaterThan",
+  BETWEEN = "between",
+  LESS_THAN = "lessThan",
+  GREATER_THAN_EQUAL = "greaterThanEqual",
+  LESS_THAN_EQUAL = "lessThanEqual"
 }
 
 

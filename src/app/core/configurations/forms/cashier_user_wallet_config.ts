@@ -1,4 +1,4 @@
-import { FormBaseControlValidator, FormConfig, InputTextField, ValidatorsType } from "../../model";
+import { ChildFormInterfaceModel, ConditionLogicType, FormBaseControlValidator, FormConfig, InputTextField, ValidatorsType } from "../../model";
 
 export const CASHIER_CUSTOMER_FORM_DATA: FormConfig = new FormConfig(
   {
@@ -54,7 +54,7 @@ export const CASHIER_CUSTOMER_CALCULATE_WALLET_FORM: FormConfig = new FormConfig
             conditions: {
               fieldName: "total_amount",
               value: 50000,
-              operator: ">"
+              operator: ConditionLogicType.GREATER_THAN
             }
           })
         ]
@@ -71,6 +71,26 @@ export const CASHIER_CUSTOMER_CALCULATE_WALLET_FORM: FormConfig = new FormConfig
          validations: [
           new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
           new FormBaseControlValidator({validatorName: ValidatorsType.MIN,message: "Bill amount should be greater than 0", validatorValue: 1 }),
+        ],
+        sub_childs: [
+          new ChildFormInterfaceModel({
+            conditionValue: 50000,
+            conditionLogic: ConditionLogicType.GREATER_THAN,
+            items: [
+              new InputTextField({
+                key: "bill_attachment",
+                value: "",
+                type: "file",
+                label: "Bill Photo",
+                order: 6,
+                validations: [
+                  new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),
+                  new FormBaseControlValidator({validatorName: ValidatorsType.FILE_VALID_TYPE, message: "Invalid file type. Please upload an image.", validatorValue: ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'] }),
+                  new FormBaseControlValidator({validatorName: ValidatorsType.MAX_FILE_SIZE, message: "File size must be 1MB or less", validatorValue: 1 }),
+                ]
+              })
+            ]
+          }),
         ]
       })
     ],

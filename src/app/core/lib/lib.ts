@@ -1,3 +1,5 @@
+import { ConditionLogicType } from "../model";
+
 export const getObjValueFromPath = (obj: any, dotNotationString: any) => {
   const keys = dotNotationString.split('.');
   let current = obj;
@@ -54,4 +56,33 @@ export const checkIsUrl = (text: string) => {
 
 export const checkActionShow = (action: any, data: any) => {
   return (typeof action.isShow == 'function' && action.isShow!(data) )|| !action.isShow
+}
+
+export const formSubChildShow = (child: any, value: any) => {
+  switch (child.conditionLogic) {
+    case ConditionLogicType.GREATER_THAN:
+      return value > child.conditionValue;
+    case ConditionLogicType.LESS_THAN:
+      return value < child.conditionValue;
+    case ConditionLogicType.GREATER_THAN_EQUAL:
+      return value >= child.conditionValue;
+    case ConditionLogicType.LESS_THAN_EQUAL:
+      return value <= child.conditionValue;
+    case ConditionLogicType.EQUAL:
+      return value == child.conditionValue;
+    case ConditionLogicType.NOT_EQUAL:
+      return value != child.conditionValue;
+    case ConditionLogicType.BETWEEN:
+      if (Array.isArray(child.conditionValue) && child.conditionValue.length === 2) {
+        return value > child.conditionValue[0] && value < child.conditionValue[1];
+      }
+      return false;
+    case ConditionLogicType.OR:
+      if (Array.isArray(child.conditionValue) && child.conditionValue.length === 2) {
+        return value == child.conditionValue[0] || value == child.conditionValue[1];
+      }
+      return false;
+    default:
+      return false;
+  }
 }

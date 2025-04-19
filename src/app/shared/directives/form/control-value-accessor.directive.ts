@@ -4,6 +4,7 @@ import { ControlValueAccessor, FormControl, FormGroup, NgControl, Validators } f
 import { FormBase } from '../../../core/model';
 import { Observable, pairwise, startWith } from 'rxjs';
 import { HttpService } from '../../services/http/http.service';
+import { formSubChildShow } from '../../../core/lib/lib';
 
 @Directive({
   selector: '[appControlValueAccessor]',
@@ -62,10 +63,10 @@ export class ControlValueAccessorDirective  implements  ControlValueAccessor {
         return new Observable();
     }
   }
-
+ 
   generateSubForms(formConfig: FormBase, formGroup: FormGroup) {
     if (formConfig.sub_childs![0] instanceof ChildFormInterfaceModel) {
-      let item:any = formConfig.sub_childs!.find((child: any) => child.conditionValue ==  this.controlDir.control?.value )
+      let item:any = formConfig.sub_childs!.find((child: any) =>  formSubChildShow(child, this.controlDir.control?.value))
       if (item) {
         this.generateSubFormsControls(item.items, formGroup)
         this.renderSubFormCompleted.emit(item.items.map((x: any) => x.key))

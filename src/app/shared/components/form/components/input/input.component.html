@@ -52,7 +52,7 @@
         [placeholder]="formConfig.placeholder"
         [min]="formConfig.inputConfig?.min"
         [max]="formConfig.inputConfig?.max"
-        [ngClass]="{ 'input-prefix-form': formConfig.prefix,'!border-success-400': controlDir.control?.touched && controlDir.control?.valid , '!border-error-500': controlDir.control?.touched && controlDir.control?.invalid }"
+        [ngClass]="{ ' !p-2': formConfig.type == 'file',  'input-prefix-form': formConfig.prefix,'!border-success-400': controlDir.control?.touched && controlDir.control?.valid , '!border-error-500': controlDir.control?.touched && controlDir.control?.invalid }"
         (input)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled"
       />
     }

@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { FormBaseControlValidator, ValidatorsType } from '../../../../core/model';
+import { ConditionLogicType, FormBaseControlValidator, ValidatorsType } from '../../../../core/model';
 
 export function conditionalValidator(validation: FormBaseControlValidator): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -18,22 +18,30 @@ export function conditionalValidator(validation: FormBaseControlValidator): Vali
     let requiresValidation = false;
 
     switch (operator) {
-      case '>':
+      case ConditionLogicType.GREATER_THAN:
         requiresValidation = dependentValue > value;
         break;
-      case '<':
+      case ConditionLogicType.LESS_THAN:
         requiresValidation = dependentValue < value;
         break;
-      case '>=':
+      case ConditionLogicType.GREATER_THAN_EQUAL:
         requiresValidation = dependentValue >= value;
         break;
-      case '<=':
+      case ConditionLogicType.LESS_THAN_EQUAL:
         requiresValidation = dependentValue <= value;
         break;
-      case '==':
+      case ConditionLogicType.EQUAL:
         requiresValidation = dependentValue === value;
         break;
-      case 'between':
+      case ConditionLogicType.NOT_EQUAL:
+        requiresValidation = dependentValue !== value;
+        break;
+      case ConditionLogicType.OR:
+        if (Array.isArray(value) && value.length === 2) {
+          requiresValidation = dependentValue == value[0] || dependentValue == value[1];
+        }
+        break;
+      case ConditionLogicType.BETWEEN:
         if (Array.isArray(value) && value.length === 2) {
           requiresValidation = dependentValue > value[0] && dependentValue < value[1];
         }

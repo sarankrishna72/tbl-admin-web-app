@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import {ChildFormInterfaceModel, FormConfig } from '../../../core/model';
+import {ChildFormInterfaceModel, ConditionLogicType, FormConfig } from '../../../core/model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as _ from 'lodash';
 import { InputComponent, InputFileComponent, InputSelectComponent } from './components';
 import { FormActionsComponent } from './components/form-actions/form-actions.component';
 import { CommonModule } from '@angular/common';
+import { formSubChildShow } from '../../../core/lib/lib';
 
 @Component({
   selector: 'app-form',
@@ -49,17 +50,15 @@ export class FormComponent implements OnChanges {
 
 
 
-
-
-  checkFormSubChildsInstance(items: any, formQuestions:any): any{
+  checkFormSubChildsInstance(items: any, formQuestion:any): any{
     if (items?.length > 0 && this.formGroup?.value) {
       if (items[0] instanceof ChildFormInterfaceModel) {
-        let formItems = items.find((child: any) => child.conditionValue  == this.formGroup?.value?.[formQuestions.key])
+        let formItems = items.find((child: any) =>  formSubChildShow(child, this.formGroup?.value?.[formQuestion.key]));
         if (formItems) {
           return formItems.items;
         }
         return [];
-      } else if (this.formGroup?.value?.[formQuestions.key]) {
+      } else if (this.formGroup?.value?.[formQuestion.key]) {
         return items;
       }
       return [];

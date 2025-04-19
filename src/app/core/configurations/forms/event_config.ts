@@ -1,6 +1,6 @@
 import moment from "moment";
 import { API_URI } from "../../constants/api_uri";
-import { ChildFormInterfaceModel, FormBaseControlValidator, FormConfig, InputDropdown, InputFile, InputTextField, ValidatorsType,  } from "../../model";
+import { ChildFormInterfaceModel, ConditionLogicType, FormBaseControlValidator, FormConfig, InputDropdown, InputFile, InputTextField, ValidatorsType,  } from "../../model";
 
 export const EVENT_FORM_DATA: FormConfig = new FormConfig(
   {
@@ -145,6 +145,7 @@ export const EVENT_FORM_DATA: FormConfig = new FormConfig(
         sub_childs: [
           new ChildFormInterfaceModel({
             conditionValue: "no",
+            conditionLogic: ConditionLogicType.EQUAL,
             items: [
               new InputTextField({
                 key: "notification_push_date",
