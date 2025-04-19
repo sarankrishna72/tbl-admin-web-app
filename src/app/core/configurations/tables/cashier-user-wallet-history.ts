@@ -7,6 +7,7 @@ const tableColumns: TableColumn[] = [
     columnKey: "bill_no",
     columnName: "Bill No",
     columnType: "format",
+    columnWidth: "175px",
     order: 1,
     cellFormatFn: (data: any) => {
         return `<span class="capitalize">${data.bill_no || data.point_category?.split("_")?.join(" ") || '-'} </span>`;
@@ -16,6 +17,7 @@ const tableColumns: TableColumn[] = [
     columnKey: "bill_amount",
     columnName: "Bill Amount",
     columnType: "format",
+    columnWidth: "150px",
     order: 2,
     cellFormatFn: (data: any) => {
         return data.bill_amount ? `₹${data.bill_amount}` : '-';
@@ -33,6 +35,7 @@ const tableColumns: TableColumn[] = [
   new TableColumn({
     columnKey: "redeemed_point",
     columnName: "Redeemed Points",
+    columnWidth: "150px",
     columnType: "format",
     order: 4,
     cellFormatFn: (data: any) => {
@@ -42,6 +45,7 @@ const tableColumns: TableColumn[] = [
   new TableColumn({
     columnKey: "earned_point",
     columnName: "Earned Points",
+    columnWidth: "150px",
     columnType: "format",
     order: 5,
     cellFormatFn: (data: any) => {
@@ -61,6 +65,7 @@ const tableColumns: TableColumn[] = [
     columnKey: "status",
     columnName: "Expiry Status",
     columnType: "format",
+    columnWidth: "150px",
     order: 8,
     cellFormatFn: (data: any) => {
       return `<span class="capitalize ${returnWalletHistoryStatusClass(data.status)} ">${data.status}</span>`
