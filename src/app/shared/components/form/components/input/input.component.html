@@ -1,9 +1,8 @@
-
 @if (formConfig.label  && formConfig.type != "checkbox") {
   <label [for]="formConfig.key" [id]="'label'+formConfig.key"
     class="roboto-regular text-base text-primary-800 mb-1 inline-block">
     {{formConfig.label}}
-    @if (isRequired) {
+    @if (isRequired || controlDir.control?.errors?.['conditional_required'] === true) {
       <span class="text-error-500">*</span>
     }
   </label>
@@ -31,7 +30,7 @@
         <input
           [checked]="controlDir.control?.value"
           [id]="formConfig.key" [type]="formConfig.type" [value]="true" [name]="formConfig.key"
-          (change)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled"
+                    (change)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled"
         />
         <label [for]="formConfig.key" class="text-sm ">{{formConfig.label}}</label>
       </div>
@@ -84,10 +83,10 @@
 @if (formConfig.helpText && !(controlDir.control?.touched && controlDir.control?.invalid)) {
   <div class="text-gray-600 text-xxs flex items-center gap-1">
     @if (controlDir.control?.touched && controlDir.control?.invalid) {
-    <span class="material-icons text-base cursor-pointer noselect"
-      [ngClass]="{ 'text-error-500': controlDir.control?.touched && controlDir.control?.invalid }">
-      {{ 'error' }}
-    </span>
+      <span class="material-icons text-base cursor-pointer noselect"
+        [ngClass]="{ 'text-error-500': controlDir.control?.touched && controlDir.control?.invalid }">
+        {{ 'error' }}
+      </span>
     }
     {{formConfig.helpText }}
   </div>

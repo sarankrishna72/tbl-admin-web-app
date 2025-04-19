@@ -53,7 +53,7 @@
     @if (userDetails()) {
      
       <div class="mt-4" style="height: calc(100% - 284px);">
-        <app-tabs tabBodyClass="h-[calc(100%-58.7px)]" class="h-full block">
+        <app-tabs tabBodyClass="h-[calc(100%-58.7px)] overflow-auto" class="h-full block">
           <tab-item [active]="true">
             <ng-template #tabHeader>
             <div class="flex item-center items-center gap-2 justify-center">

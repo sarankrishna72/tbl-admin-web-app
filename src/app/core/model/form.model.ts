@@ -95,15 +95,18 @@ export class ChildFormInterfaceModel {
 export class FormBaseControlValidator{
   validatorName: ValidatorsType | null ;
   message: string;
+  conditions ?: {fieldName: string, value: any, operator: string} | null;
   validatorValue: any | null;
   constructor(options: {
     validatorName ?: ValidatorsType;
     message ?: string;
     validatorValue ?: any | null;
+    conditions ?: {fieldName: string, value: any, operator: string} | null;
   } = {}) {
     this.validatorName = options.validatorName || null;
     this.message = options.message || 'Enter a valid input';
     this.validatorValue = options.validatorValue || null;
+    this.conditions = options.conditions || null;
   }
 }
 
@@ -162,7 +165,8 @@ export enum ValidatorsType {
   NULL_VALIDATOR = "nullValidator",
   EMAIL = "email",
   MAX_FILE_SIZE = "maxFileSize",
-  FILE_VALID_TYPE = "fileValidType"
+  FILE_VALID_TYPE = "fileValidType",
+  CONDITIONAL_REQUIRED = "conditional_required"
 }
 
 

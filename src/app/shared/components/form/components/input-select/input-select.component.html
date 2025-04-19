@@ -4,7 +4,7 @@
     class="roboto-regular text-base text-primary-800 mb-1 inline-block">
     {{formConfig.label}}
 
-    @if (isRequired) {
+    @if (isRequired || controlDir.control?.errors?.['conditional_required'] === true) {
       <span class="text-error-500">*</span>
     }
   </label>

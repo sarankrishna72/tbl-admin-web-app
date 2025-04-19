@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import {ChildFormInterfaceModel, FormAction, FormConfig } from '../../../core/model';
+import {ChildFormInterfaceModel, FormConfig } from '../../../core/model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as _ from 'lodash';
 import { InputComponent, InputFileComponent, InputSelectComponent } from './components';
-import { ButtonComponent } from '..';
 import { FormActionsComponent } from './components/form-actions/form-actions.component';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +11,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [
     InputComponent,
-    ButtonComponent,
     InputFileComponent,
     ReactiveFormsModule,
     InputSelectComponent,

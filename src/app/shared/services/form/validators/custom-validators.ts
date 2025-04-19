@@ -1,2 +1,3 @@
-export { FormUploadTypeValidator } from "./form-upload-type";
-export { MaxSizeValidator } from "./max.file.size";
+export { formUploadTypeValidator } from "./form-upload-type";
+export { maxFileSizeValidator } from "./max.file.size";
+export { conditionalValidator } from "./conditional.validator";

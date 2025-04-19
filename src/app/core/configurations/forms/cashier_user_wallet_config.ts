@@ -47,6 +47,16 @@ export const CASHIER_CUSTOMER_CALCULATE_WALLET_FORM: FormConfig = new FormConfig
         order:1,
         placeholder: "Enter bill number",
         validations: [
+          new FormBaseControlValidator({
+            validatorName: ValidatorsType.CONDITIONAL_REQUIRED,
+            message: "Bill number is required when amount exceeds ₹50,000",
+            validatorValue: true,
+            conditions: {
+              fieldName: "total_amount",
+              value: 50000,
+              operator: ">"
+            }
+          })
         ]
       }),
       new InputTextField({
