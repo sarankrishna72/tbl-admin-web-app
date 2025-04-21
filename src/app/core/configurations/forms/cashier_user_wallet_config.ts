@@ -80,7 +80,7 @@ export const CASHIER_CUSTOMER_CALCULATE_WALLET_FORM: FormConfig = new FormConfig
               new InputTextField({
                 key: "bill_attachment",
                 type: "file",
-                label: "Bill Photo",
+                label: "Bill Image",
                 order: 6,
                 validations: [
                   new FormBaseControlValidator({validatorName: ValidatorsType.REQUIRED,message: "Required this field", validatorValue: true }),

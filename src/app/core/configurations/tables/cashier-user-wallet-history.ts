@@ -10,7 +10,7 @@ const tableColumns: TableColumn[] = [
     columnWidth: "175px",
     order: 1,
     cellFormatFn: (data: any) => {
-        return `<span class="capitalize">${data.bill_no || data.point_category?.split("_")?.join(" ") || '-'} </span>`;
+      return `<span class="capitalize">${data.bill_no || '-'} </span>`;
     }
   }),
   new TableColumn({
@@ -20,7 +20,7 @@ const tableColumns: TableColumn[] = [
     columnWidth: "150px",
     order: 2,
     cellFormatFn: (data: any) => {
-        return data.bill_amount ? `₹${data.bill_amount}` : '-';
+      return data.bill_amount ? `₹${data.bill_amount}` : '-';
     }
   }),
   new TableColumn({
@@ -39,7 +39,7 @@ const tableColumns: TableColumn[] = [
     columnType: "format",
     order: 4,
     cellFormatFn: (data: any) => {
-        return data.redeemed_point ? data.redeemed_point : '-';
+      return data.redeemed_point ? data.redeemed_point : '-';
     }
   }),
   new TableColumn({
@@ -49,7 +49,7 @@ const tableColumns: TableColumn[] = [
     columnType: "format",
     order: 5,
     cellFormatFn: (data: any) => {
-        return data.earned_point ? data.earned_point : '-';
+      return data.earned_point ? data.earned_point : '-';
     }
   }),
   new TableColumn({
