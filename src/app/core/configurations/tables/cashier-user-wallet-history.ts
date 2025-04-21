@@ -82,6 +82,6 @@ export const cashierTableConfig: TableModel = new TableModel(
     mobileResponsiveCard: true,
     showIndexColumn: true,
     sortKey: 'id',
-    sortDirection: 'asc',
+    sortDirection: 'desc',
   }
 );
