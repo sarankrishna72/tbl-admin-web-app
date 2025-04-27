@@ -29,8 +29,7 @@
       <div class="input-checkbox">
         <input
           [checked]="controlDir.control?.value"
-          [id]="formConfig.key" [type]="formConfig.type" [value]="true" [name]="formConfig.key"
-                    (change)="onChange($any($event.target).value)" (blur)="onTouched();" [disabled]="disabled"
+          [id]="formConfig.key" [type]="formConfig.type" [name]="formConfig.key" (change)="onChange($any($event.target).checked)" (blur)="onTouched();" [disabled]="disabled"
         />
         <label [for]="formConfig.key" class="text-sm ">{{formConfig.label}}</label>
       </div>
