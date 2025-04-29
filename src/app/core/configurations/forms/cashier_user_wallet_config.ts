@@ -74,7 +74,7 @@ export const CASHIER_CUSTOMER_CALCULATE_WALLET_FORM: FormConfig = new FormConfig
         ],
         sub_childs: [
           new ChildFormInterfaceModel({
-            conditionValue: 50000,
+            conditionValue: 20000,
             conditionLogic: ConditionLogicType.GREATER_THAN,
             items: [
               new InputTextField({
