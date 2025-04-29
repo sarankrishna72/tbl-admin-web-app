@@ -53,7 +53,7 @@ export const CASHIER_CUSTOMER_CALCULATE_WALLET_FORM: FormConfig = new FormConfig
             validatorValue: true,
             conditions: {
               fieldName: "total_amount",
-              value: 50000,
+              value: 20000,
               operator: ConditionLogicType.GREATER_THAN
             }
           })
