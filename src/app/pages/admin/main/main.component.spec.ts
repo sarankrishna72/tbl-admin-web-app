@@ -6,8 +6,8 @@ import { CommonService } from '../../../shared/services/common/common.service';
 import { ToastService } from '../../../shared/services/toast/toast.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { AppStoreService } from '../../../shared/services/store/app-store.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
 import { OutletPageData } from '../../../core/configurations/pages/outlet';
 
@@ -29,16 +29,18 @@ describe('MainComponent', () => {
     appStoreService = jasmine.createSpyObj('AppStoreService', ['closePopup', 'getPopupShowing']);
     httpService =  jasmine.createSpyObj('AppStoreService', ['get', 'put', 'post', 'delete']);
     await TestBed.configureTestingModule({
-      imports: [MainComponent, HttpClientTestingModule],
-      providers: [
+    imports: [MainComponent],
+    providers: [
         HttpClient,
         { provide: HttpService, useValue: httpService },
         { provide: CommonService, useValue: commonServiceSpy },
         { provide: ToastService, useValue: toastService },
         { provide: AppStoreService, useValue: appStoreService },
-        { provide: Router, useValue: { events: routerEventsSubject.asObservable() } }
-      ]
-    })
+        { provide: Router, useValue: { events: routerEventsSubject.asObservable() } },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(MainComponent);

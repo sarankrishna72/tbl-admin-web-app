@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpInterceptor,
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpErrorResponse,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { catchError, from, Observable, switchMap, tap, throwError } from 'rxjs';
 import { ToastModel } from '../../core/model';
 import { ToastService } from '../services/toast/toast.service';
