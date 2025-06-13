@@ -7,13 +7,12 @@ import { Router } from '@angular/router';
 import { SignInComponent } from '../../components/sign-in/sign-in.component';
 
 @Component({
-  selector: 'app-admin-sign-in',
-  standalone: true,
-  imports: [
-    SignInComponent
-  ],
-  templateUrl: './admin-sign-in.component.html',
-  styleUrl: './admin-sign-in.component.scss'
+    selector: 'app-admin-sign-in',
+    imports: [
+        SignInComponent
+    ],
+    templateUrl: './admin-sign-in.component.html',
+    styleUrl: './admin-sign-in.component.scss'
 })
 export class AdminSignInComponent {
 

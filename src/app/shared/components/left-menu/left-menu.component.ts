@@ -9,15 +9,14 @@ import { APP_PAGES_PATH } from '../../../core/constants/application_paths';
 import { ApiService } from '../../services/api/api.service';
 
 @Component({
-  selector: 'app-left-menu',
-  standalone: true,
-  imports: [
-    ButtonComponent,
-    RouterLink,
-    RouterLinkActive
-  ],
-  templateUrl: './left-menu.component.html',
-  styleUrl: './left-menu.component.scss'
+    selector: 'app-left-menu',
+    imports: [
+        ButtonComponent,
+        RouterLink,
+        RouterLinkActive
+    ],
+    templateUrl: './left-menu.component.html',
+    styleUrl: './left-menu.component.scss'
 })
 export class LeftMenuComponent implements OnInit {
   staticImages: any = DEFAULT_IMAGES;

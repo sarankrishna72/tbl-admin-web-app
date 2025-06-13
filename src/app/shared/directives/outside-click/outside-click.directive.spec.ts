@@ -4,13 +4,14 @@ import { Component, DebugElement, ElementRef } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 @Component({
-  template: `
+    template: `
     <div class="parent">
       <div class="child" appOutsideClick (appClickOutside)="onOutsideClick()">
         Child Element
       </div>
     </div>
-  `
+  `,
+    standalone: false
 })
 class TestComponent {
   onOutsideClick = jasmine.createSpy('onOutsideClick');

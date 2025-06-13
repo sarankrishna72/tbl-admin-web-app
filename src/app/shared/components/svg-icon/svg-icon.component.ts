@@ -4,10 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'svg-icon',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'svg-icon',
+    imports: [CommonModule],
+    template: `
     <div
       [innerHTML]="svgContent"
       [ngStyle]="{
@@ -19,7 +18,7 @@ import { CommonModule } from '@angular/common';
       class="svg-icon"
     ></div>
   `,
-  styles: [`
+    styles: [`
     .svg-icon svg {
       width: 100%;
       height: 100%;

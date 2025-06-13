@@ -4,14 +4,13 @@ import { ButtonComponent } from '../form/components/button/button.component';
 import { AppStoreService } from '../../services/store/app-store.service';
 
 @Component({
-  selector: 'confirm-popup',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ButtonComponent
-  ],
-  templateUrl: './confirm-popup.component.html',
-  styleUrl: './confirm-popup.component.scss'
+    selector: 'confirm-popup',
+    imports: [
+        CommonModule,
+        ButtonComponent
+    ],
+    templateUrl: './confirm-popup.component.html',
+    styleUrl: './confirm-popup.component.scss'
 })
 export class ConfirmPopupComponent {
   @Input() containerClass ?: string = '';

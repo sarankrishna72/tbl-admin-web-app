@@ -12,12 +12,9 @@ import { ToastService } from "../../shared/services/toast/toast.service";
 import { getObjValueFromPath } from "../../core/lib/lib";
 
 @Component({
-  selector: 'app-main-common',
-  standalone: true,
-  imports: [
-    
-  ],
-  template: '',
+    selector: 'app-main-common',
+    imports: [],
+    template: ''
 })
 export class MainCommonComponent implements OnInit{ 
     public _appStoreService = inject(AppStoreService)

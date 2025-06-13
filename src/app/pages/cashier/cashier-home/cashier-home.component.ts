@@ -21,22 +21,21 @@ interface UserDetails {
 }
 
 @Component({
-  selector: 'app-cashier-home',
-  standalone: true,
-  imports: [
-    MainContainerComponent,
-    TitleComponent,
-    FormComponent,
-    PopupComponent,
-    PageHeaderComponent,
-    MomentDatePipe,
-    TabsComponent,
-    TabItemComponent,
-    SvgIconComponent,
-    TableComponent
-  ],
-  templateUrl: './cashier-home.component.html',
-  styleUrl: './cashier-home.component.scss'
+    selector: 'app-cashier-home',
+    imports: [
+        MainContainerComponent,
+        TitleComponent,
+        FormComponent,
+        PopupComponent,
+        PageHeaderComponent,
+        MomentDatePipe,
+        TabsComponent,
+        TabItemComponent,
+        SvgIconComponent,
+        TableComponent
+    ],
+    templateUrl: './cashier-home.component.html',
+    styleUrl: './cashier-home.component.scss'
 })
 
 

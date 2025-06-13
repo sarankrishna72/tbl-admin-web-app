@@ -7,16 +7,14 @@ import { FormService } from '../../../../services/form/form.service';
 import { SafeHtmlPipe } from '../../../../../core/pipes';
 import moment from 'moment';
 @Component({
-  selector: 'app-input',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    SafeHtmlPipe
-  ],
-
-  templateUrl: './input.component.html',
-  styleUrl: './input.component.scss'
+    selector: 'app-input',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        SafeHtmlPipe
+    ],
+    templateUrl: './input.component.html',
+    styleUrl: './input.component.scss'
 })
 export class InputComponent extends ControlValueAccessorDirective  implements OnInit, OnChanges, ControlValueAccessor {
   @Input() formControlName!: any;

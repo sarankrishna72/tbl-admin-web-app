@@ -3,14 +3,13 @@ import { AfterContentInit, Component, ContentChildren, Input, QueryList, signal 
 import { TabItemComponent } from './components/tab-item/tab-item.component';
 
 @Component({
-  selector: 'app-tabs',
-  standalone: true,
-  imports: [
-    CommonModule,
-    NgForOf, NgClass, NgTemplateOutlet
-  ],
-  templateUrl: './tabs.component.html',
-  styleUrl: './tabs.component.scss'
+    selector: 'app-tabs',
+    imports: [
+        CommonModule,
+        NgForOf, NgClass, NgTemplateOutlet
+    ],
+    templateUrl: './tabs.component.html',
+    styleUrl: './tabs.component.scss'
 })
 export class TabsComponent implements AfterContentInit {
   @ContentChildren(TabItemComponent) tabs!: QueryList<TabItemComponent>;

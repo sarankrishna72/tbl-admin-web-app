@@ -8,15 +8,14 @@ import { checkActionShow, getObjValueFromPath } from '../../../core/lib/lib';
 import { PaginationComponent } from '../pagination/pagination.component';
 
 @Component({
-  selector: 'app-table',
-  standalone: true,
-  imports: [
-    ButtonComponent,
-    CommonModule,
-    PaginationComponent
-  ],
-  templateUrl: './table.component.html',
-  styleUrl: './table.component.scss'
+    selector: 'app-table',
+    imports: [
+        ButtonComponent,
+        CommonModule,
+        PaginationComponent
+    ],
+    templateUrl: './table.component.html',
+    styleUrl: './table.component.scss'
 })
 export class TableComponent implements OnChanges{
   @Input() tableConfigs!: TableModel;

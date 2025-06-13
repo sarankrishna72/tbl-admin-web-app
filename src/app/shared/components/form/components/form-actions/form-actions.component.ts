@@ -4,13 +4,12 @@ import { FormGroup } from '@angular/forms';
 import { FormAction } from '../../../../../core/model';
 
 @Component({
-  selector: 'app-form-actions',
-  standalone: true,
-  imports: [
-    ButtonComponent
-  ],
-  templateUrl: './form-actions.component.html',
-  styleUrl: './form-actions.component.scss'
+    selector: 'app-form-actions',
+    imports: [
+        ButtonComponent
+    ],
+    templateUrl: './form-actions.component.html',
+    styleUrl: './form-actions.component.scss'
 })
 export class FormActionsComponent {
   @Input() actions: any[] = [];

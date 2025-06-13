@@ -8,13 +8,12 @@ import { HttpService } from '../../../../services/http/http.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-input-select',
-  standalone: true,
-  imports: [
-    CommonModule
-  ],
-  templateUrl: './input-select.component.html',
-  styleUrl: './input-select.component.scss'
+    selector: 'app-input-select',
+    imports: [
+        CommonModule
+    ],
+    templateUrl: './input-select.component.html',
+    styleUrl: './input-select.component.scss'
 })
 export class InputSelectComponent extends ControlValueAccessorDirective  implements OnInit, OnChanges, ControlValueAccessor{
 

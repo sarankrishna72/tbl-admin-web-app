@@ -13,17 +13,15 @@ import { IndexedDbService } from '../../../../shared/services/storage/indexed-db
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-sign-in',
-  standalone: true,
-  imports: [
-    FormComponent,
-    TitleComponent,
-    NgOptimizedImage,
-    CommonModule
-  ],
-
-  templateUrl: './sign-in.component.html',
-  styleUrl: './sign-in.component.scss'
+    selector: 'app-sign-in',
+    imports: [
+        FormComponent,
+        TitleComponent,
+        NgOptimizedImage,
+        CommonModule
+    ],
+    templateUrl: './sign-in.component.html',
+    styleUrl: './sign-in.component.scss'
 })
 export class SignInComponent {
   staticImages: any = DEFAULT_IMAGES;

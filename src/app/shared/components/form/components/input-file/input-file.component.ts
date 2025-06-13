@@ -8,15 +8,14 @@ import { ButtonComponent } from '../../..';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-input-file',
-  standalone: true,
-  imports: [
-    DragAndDropDirective,
-    CommonModule,
-    ButtonComponent
-  ],
-  templateUrl: './input-file.component.html',
-  styleUrl: './input-file.component.scss'
+    selector: 'app-input-file',
+    imports: [
+        DragAndDropDirective,
+        CommonModule,
+        ButtonComponent
+    ],
+    templateUrl: './input-file.component.html',
+    styleUrl: './input-file.component.scss'
 })
 export class InputFileComponent extends ControlValueAccessorDirective implements OnInit  {
   @Input() formControlName!: any;

@@ -5,16 +5,14 @@ import { LeftMenuComponent } from '..';
 import { ConfirmPopupComponent } from '../confirm-popup/confirm-popup.component';
 
 @Component({
-  selector: 'app-main-container',
-  standalone: true,
-  imports: [
-    LeftMenuComponent,
-    OutsideClickDirective,
-    ConfirmPopupComponent
-
-  ],
-  templateUrl: './main-container.component.html',
-  styleUrl: './main-container.component.scss'
+    selector: 'app-main-container',
+    imports: [
+        LeftMenuComponent,
+        OutsideClickDirective,
+        ConfirmPopupComponent
+    ],
+    templateUrl: './main-container.component.html',
+    styleUrl: './main-container.component.scss'
 })
 export class MainContainerComponent {
   public _appStoreService = inject(AppStoreService)

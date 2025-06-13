@@ -2,11 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Size, Theme } from '../../../core/constants/types';
 
 @Component({
-  selector: 'app-title',
-  standalone: true,
-  imports: [],
-  templateUrl: './title.component.html',
-  styleUrl: './title.component.scss'
+    selector: 'app-title',
+    imports: [],
+    templateUrl: './title.component.html',
+    styleUrl: './title.component.scss'
 })
 export class TitleComponent implements OnInit{
   @Input() classes: string = '';

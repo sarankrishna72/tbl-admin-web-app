@@ -6,14 +6,13 @@ import { ToastModel } from '../../../core/model';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
-  selector: 'app-toast',
-  standalone: true,
-  imports: [
-    ButtonComponent,
-    CommonModule
-  ],
-  templateUrl: './toast.component.html',
-  styleUrl: './toast.component.scss'
+    selector: 'app-toast',
+    imports: [
+        ButtonComponent,
+        CommonModule
+    ],
+    templateUrl: './toast.component.html',
+    styleUrl: './toast.component.scss'
 })
 export class ToastComponent {
   public _appStoreService = inject(AppStoreService)

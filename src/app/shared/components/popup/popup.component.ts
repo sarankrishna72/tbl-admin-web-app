@@ -5,14 +5,13 @@ import { ButtonComponent } from '../form/components/button/button.component';
 import { AppStoreService } from '../../services/store/app-store.service';
 
 @Component({
-  selector: 'app-popup',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ButtonComponent
-  ],
-  templateUrl: './popup.component.html',
-  styleUrl: './popup.component.scss'
+    selector: 'app-popup',
+    imports: [
+        CommonModule,
+        ButtonComponent
+    ],
+    templateUrl: './popup.component.html',
+    styleUrl: './popup.component.scss'
 })
 export class PopupComponent {
   @Input() containerClass: string = '';

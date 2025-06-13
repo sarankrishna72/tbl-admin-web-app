@@ -5,14 +5,13 @@ import { AppStoreService } from '../../services/store/app-store.service';
 import { ButtonComponent } from '../form/components/button/button.component';
 
 @Component({
-  selector: 'app-page-header',
-  standalone: true,
-  imports: [
-    TitleComponent,
-    ButtonComponent,
-  ],
-  templateUrl: './page-header.component.html',
-  styleUrl: './page-header.component.scss'
+    selector: 'app-page-header',
+    imports: [
+        TitleComponent,
+        ButtonComponent,
+    ],
+    templateUrl: './page-header.component.html',
+    styleUrl: './page-header.component.scss'
 })
 export class PageHeaderComponent {
   @Input() pageTitle: string = '';

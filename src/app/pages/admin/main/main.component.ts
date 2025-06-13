@@ -14,19 +14,18 @@ import { ToastService } from '../../../shared/services/toast/toast.service';
 import { FormActionsComponent } from '../../../shared/components/form/components/form-actions/form-actions.component';
 import { MainCommonComponent } from '../main-common';
 @Component({
-  selector: 'app-main',
-  standalone: true,
-  imports: [
-    MainContainerComponent,
-    ButtonComponent,
-    TableComponent,
-    PopupComponent,
-    FormComponent,
-    PageHeaderComponent,
-    FormActionsComponent,
-  ],
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.scss'
+    selector: 'app-main',
+    imports: [
+        MainContainerComponent,
+        ButtonComponent,
+        TableComponent,
+        PopupComponent,
+        FormComponent,
+        PageHeaderComponent,
+        FormActionsComponent,
+    ],
+    templateUrl: './main.component.html',
+    styleUrl: './main.component.scss'
 })
 export class MainComponent extends MainCommonComponent implements OnInit{
   

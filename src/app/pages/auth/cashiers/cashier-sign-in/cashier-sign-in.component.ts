@@ -7,13 +7,12 @@ import { SignInComponent } from '../../components/sign-in/sign-in.component';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-cashier-sign-in',
-  standalone: true,
-  imports: [
-    SignInComponent
-  ],
-  templateUrl: './cashier-sign-in.component.html',
-  styleUrl: './cashier-sign-in.component.scss'
+    selector: 'app-cashier-sign-in',
+    imports: [
+        SignInComponent
+    ],
+    templateUrl: './cashier-sign-in.component.html',
+    styleUrl: './cashier-sign-in.component.scss'
 })
 export class CashierSignInComponent {
   public _apiService = inject(ApiService);

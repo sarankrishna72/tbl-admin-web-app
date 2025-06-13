@@ -8,18 +8,17 @@ import { CommonModule } from '@angular/common';
 import { formSubChildShow } from '../../../core/lib/lib';
 
 @Component({
-  selector: 'app-form',
-  standalone: true,
-  imports: [
-    InputComponent,
-    InputFileComponent,
-    ReactiveFormsModule,
-    InputSelectComponent,
-    FormActionsComponent,
-    CommonModule
-  ],
-  templateUrl: './form.component.html',
-  styleUrl: './form.component.scss'
+    selector: 'app-form',
+    imports: [
+        InputComponent,
+        InputFileComponent,
+        ReactiveFormsModule,
+        InputSelectComponent,
+        FormActionsComponent,
+        CommonModule
+    ],
+    templateUrl: './form.component.html',
+    styleUrl: './form.component.scss'
 })
 export class FormComponent implements OnChanges {
   @Input() formData!: FormConfig;
