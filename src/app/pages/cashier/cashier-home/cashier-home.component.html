@@ -70,7 +70,7 @@
                   <div class="p-4 border border-primary-500 rounded-md mt-4 sm:w-1/2">
                     <app-title size="lg" theme="secondary" classes="roboto-medium">{{"Calculate Wallet Points"}}</app-title>
                     <div class="mt-4 ">
-                      <app-form (formOutput)="submitFormData($event, 'updateWallet')" [formData]="cashierWalletCaluclationFormConfig"></app-form>
+                      <app-form [formGroup]="calculateFormGroup" (formOutput)="submitFormData($event, 'updateWallet')" [formData]="cashierWalletCaluclationFormConfig"></app-form>
                     </div>
                   </div>
                   <div class="sm:w-1/2 max-sm:hidden"></div>
@@ -99,26 +99,60 @@
   </div>
 </app-main-container>
 
+<ng-template #walletPopupContent>
+  @if (popupDetails) {
+    <div>
+      <app-title size="xl" theme="secondary" classes="roboto-medium text-center">{{"Discount Amount is ₹" + popupDetails.offer_amount }}</app-title>
+      <div class="flex w-full justify-between pt-4">
+        <app-title size="sm" theme="secondary" classes="roboto-regular">{{"Earned Wallet Points"}}</app-title>
+        <app-title size="md" theme="secondary" classes="roboto-medium">{{popupDetails.earned_point}}</app-title>
+      </div>
+      <div class="flex justify-between pt-4 pb-4">
+        <app-title size="sm" theme="secondary" classes="roboto-regular">{{"Total Wallet Points"}}</app-title>
+        <app-title size="md" theme="secondary" classes="roboto-medium">{{popupDetails.total_wallet_points}}</app-title>
+      </div>
+      <div class="pt-4 flex justify-between  border-t border-gray-200">
+        <app-title size="lg" theme="secondary" classes="roboto-medium">{{"Final Bill Amount"}}</app-title>
+        <app-title size="lg" theme="secondary" classes="roboto-medium">{{"₹"+popupDetails.total_amount}}</app-title>
+      </div>
+    </div>
+     @if(!popupDetails?.error_message) {
+      <div class="flex justify-between mt-4 ">
+        <app-button (onClick)="addOrRedeemWalletPoints('add')" classes="roboto-regular opacity-[.90]" buttonTheme="success" buttonSize="sm">
+          <span class="roboto-regular text-base-2" style="line-height: normal;">
+            {{"Add"}}
+          </span>
+        </app-button>
+        <app-button (onClick)="addOrRedeemWalletPoints('redeem')"  classes="roboto-regular opacity-[.90]" buttonTheme="danger" buttonSize="sm">
+          <span class="roboto-regular text-base-2" style="line-height: normal;">
+            {{"Redeem"}}
+          </span>
+        </app-button>
+      </div>
+    } @else { 
+      <div class="mt-4 text-red-500 text-xs text-center roboto-regular">
+        {{popupDetails.error_message}}      
+      </div>
+    }
+  }
+</ng-template>
+
+<ng-template #successWalletPopupContent>
+  <div>
+    <app-title size="xl" theme="" classes="roboto-medium text-center !text-success-500">{{"Congratulations!" }}</app-title>
+    <div [innerHTML]="popupDetails.message" class="mt-2 text-base text-center roboto-regular"></div>
+  </div>
+</ng-template>
+
+
 @if (_appStoreService.getPopupShowing()) {
   <app-popup containerClass="tablet:w-[480px] w-[90%]">
     <ng-container popup-body>
-      @if (popupDetails) {
-        <div>
-          <app-title size="xl" theme="secondary" classes="roboto-medium text-center">{{"Discount Amount is ₹" +
-            popupDetails.offer_amount }}</app-title>
-          <div class="flex w-full justify-between	 pt-4">
-            <app-title size="sm" theme="secondary" classes="roboto-regular">{{"Earned Wallet Points"}}</app-title>
-            <app-title size="md" theme="secondary" classes="roboto-medium">{{popupDetails.earned_point}}</app-title>
-          </div>
-          <div class="flex justify-between pt-4 pb-4">
-            <app-title size="sm" theme="secondary" classes="roboto-regular">{{"Total Wallet Points"}}</app-title>
-            <app-title size="md" theme="secondary" classes="roboto-medium">{{popupDetails.total_wallet_points}}</app-title>
-          </div>
-          <div class="pt-4 flex justify-between  border-t border-gray-200">
-            <app-title size="lg" theme="secondary" classes="roboto-medium">{{"Final Bill Amount"}}</app-title>
-            <app-title size="lg" theme="secondary" classes="roboto-medium">{{"₹"+popupDetails.total_amount}}</app-title>
-          </div>
-        </div>
+      @if (popupType == "calculateWallet") {
+        <ng-container *ngTemplateOutlet="walletPopupContent"></ng-container>
+      }
+      @if(popupType == "successWallet") {
+        <ng-container *ngTemplateOutlet="successWalletPopupContent"></ng-container>
       }
     </ng-container>
   </app-popup>

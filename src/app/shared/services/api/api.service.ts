@@ -60,6 +60,17 @@ export class ApiService {
     return this._httpService.post(API_URI.cashierUpdateWalletPointsURI, data)
   }
 
+  /**
+   * Update User Wallet Points
+   *
+   * @param {*} data
+   * @return {*}
+   * @memberof ApiService
+   */
+  cashierCalculateWalletPoints(data: any) {
+    return this._httpService.post(API_URI.cashierCalculateWalletPointsURI, data)
+  }
+
 
   /**
    * Get a list of Cities

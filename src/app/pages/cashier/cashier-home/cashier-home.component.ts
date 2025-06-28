@@ -1,5 +1,5 @@
 import { Component, effect, inject, OnInit, signal, WritableSignal } from '@angular/core';
-import { FormComponent, PageHeaderComponent, MainContainerComponent, PopupComponent, TitleComponent, TableComponent } from '../../../shared/components';
+import { FormComponent, PageHeaderComponent, MainContainerComponent, PopupComponent, TitleComponent, TableComponent, ButtonComponent } from '../../../shared/components';
 import { CASHIER_CUSTOMER_CALCULATE_WALLET_FORM, CASHIER_CUSTOMER_FORM_DATA } from '../../../core/configurations/forms';
 import { FormConfig, PaginationInterface, TablePagination } from '../../../core/model';
 import { ApiService } from '../../../shared/services/api/api.service';
@@ -11,6 +11,7 @@ import { TabsComponent } from '../../../shared/components/tabs/tabs.component';
 import { TabItemComponent } from '../../../shared/components/tabs/components/tab-item/tab-item.component';
 import { SvgIconComponent } from '../../../shared/components/svg-icon/svg-icon.component';
 import { cashierTableConfig } from '../../../core/configurations/tables/cashier-user-wallet-history';
+import { NgTemplateOutlet } from '@angular/common';
 
 interface UserDetails {
   balance_amount: number,
@@ -32,7 +33,9 @@ interface UserDetails {
         TabsComponent,
         TabItemComponent,
         SvgIconComponent,
-        TableComponent
+        TableComponent,
+        ButtonComponent,
+        NgTemplateOutlet
     ],
     templateUrl: './cashier-home.component.html',
     styleUrl: './cashier-home.component.scss'
@@ -49,9 +52,11 @@ export class CashierHomeComponent {
   userDetails: WritableSignal<UserDetails | null>  = signal(null);
   paginationData!: PaginationInterface | null;
   userDetailsForm: FormGroup<any> = new FormGroup({})
+  calculateFormGroup: FormGroup<any> = new FormGroup({})
   popupDetails: any;
   tableConfigs = cashierTableConfig;
-  walletHistoriesData: any[] = []
+  walletHistoriesData: any[] = [];
+  popupType = "";
   private _useEffect = effect(() => {
     if (!this._appStoreService.getPopupShowing()) this.popupDetails = null;
     if (this.userDetails())   {
@@ -76,7 +81,22 @@ export class CashierHomeComponent {
     return formData;
   }
 
+
+  addOrRedeemWalletPoints(actionType = "add") {
+    let data = this.calculateFormGroup.value;
+    this._apiService.cashierUpdateWalletPoints( this.constructFormData({...{action_type: actionType, phone_number: this.userDetails()!.phone_number}, ...data})).subscribe((response: any) => {
+      this.userDetails.set(null);
+      this.popupType = "successWallet"
+      this.popupDetails = response;
+      this.userDetailsForm.reset()
+      // this._toastService.success({ title: "Success", message: this.popupDetails?.message})
+    });
+  }
+
+
+
   submitFormData(event: any, type: string) {
+     this.popupType = "";
     switch (type) {
       case 'userDetails':
         this._apiService.cashierGetUserDetails(event.value).subscribe((response: any) => {
@@ -91,11 +111,10 @@ export class CashierHomeComponent {
           this._toastService.error({ title: "Error", message: "Amount must be greater than 0"})
           return;
         }
-        
-        this._apiService.cashierUpdateWalletPoints( this.constructFormData({...{phone_number: this.userDetails()!.phone_number}, ...event.value})).subscribe((response: any) => {
-          this.userDetails.set(null);
+        this._apiService.cashierCalculateWalletPoints( this.constructFormData({...{phone_number: this.userDetails()!.phone_number}, ...event.value})).subscribe((response: any) => {
           this.popupDetails = response;
-          this.userDetailsForm.reset()
+          this.popupType = "calculateWallet";
+          // this.userDetailsForm.reset()
           this._appStoreService.setPopupShowing()
           // this._toastService.success({ title: "Success", message: this.popupDetails?.message})
         });
