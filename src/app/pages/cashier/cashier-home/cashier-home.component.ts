@@ -71,7 +71,8 @@ export class CashierHomeComponent {
   getWalletHistoriesData() {
     this._apiService.getUserWalletHistories(this.userDetails()!.id, {per_page: 15, page: 1}).subscribe((response: any) => {
       this.walletHistoriesData = response['data'];
-       this.tableConfigs.pagination = new TablePagination(response.pagination)
+      this.tableConfigs.pagination = new TablePagination(response.pagination);
+    
     })
   }
 
@@ -90,11 +91,17 @@ export class CashierHomeComponent {
       this.userDetails.set(null);
       this.popupType = "successWallet"
       this.popupDetails = response;
-      this.userDetailsForm.reset()
+      this.userDetailsForm.reset();
+      this.calculateFormGroup.reset();
       // this._toastService.success({ title: "Success", message: this.popupDetails?.message})
     });
   }
 
+  closePopup(event: any) {
+    this.calculateFormGroup.reset();
+    this.userDetailsForm.reset();
+    this.userDetails.set(null);
+  }
 
 
   submitFormData(event: any, type: string) {

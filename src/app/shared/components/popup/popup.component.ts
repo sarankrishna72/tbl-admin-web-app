@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { PopupConfigInterface } from '../../../core/interfaces';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../form/components/button/button.component';
@@ -20,4 +20,10 @@ export class PopupComponent {
   @Input() bodyClass: string = '';
   @Input() popupConfig ?: PopupConfigInterface;
   public _appStoreService = inject(AppStoreService);
+  @Output() closePopup: EventEmitter<any> = new EventEmitter<any>();
+
+  onClosePopup() {
+    this.closePopup.emit("close");
+    this._appStoreService.setPopupShowing()
+  }
 }

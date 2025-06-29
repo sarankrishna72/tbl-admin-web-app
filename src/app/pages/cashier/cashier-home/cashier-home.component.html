@@ -147,7 +147,7 @@
 
 
 @if (_appStoreService.getPopupShowing()) {
-  <app-popup containerClass="tablet:w-[480px] w-[90%]">
+  <app-popup (closePopup)="closePopup($event)" containerClass="tablet:w-[480px] w-[90%]">
     <ng-container popup-body>
       @if (popupType == "calculateWallet") {
         <ng-container *ngTemplateOutlet="walletPopupContent"></ng-container>
