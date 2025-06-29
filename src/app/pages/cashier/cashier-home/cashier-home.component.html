@@ -138,7 +138,8 @@
 </ng-template>
 
 <ng-template #successWalletPopupContent>
-  <div>
+  <div class="flex flex-col items-center justify-center p-4">
+    <img [src]="IMAGE_CONSTANTS.confirmation_mark" class="w-16 h-16 mx-auto" alt="Confirmation Mark">
     <app-title size="xl" theme="" classes="roboto-medium text-center !text-success-500">{{"Congratulations!" }}</app-title>
     <div [innerHTML]="popupDetails.message" class="mt-2 text-base text-center roboto-regular"></div>
   </div>

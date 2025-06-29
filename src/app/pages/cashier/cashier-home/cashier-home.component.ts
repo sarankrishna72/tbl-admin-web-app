@@ -12,6 +12,7 @@ import { TabItemComponent } from '../../../shared/components/tabs/components/tab
 import { SvgIconComponent } from '../../../shared/components/svg-icon/svg-icon.component';
 import { cashierTableConfig } from '../../../core/configurations/tables/cashier-user-wallet-history';
 import { NgTemplateOutlet } from '@angular/common';
+import { DEFAULT_IMAGES } from '../../../core/constants';
 
 interface UserDetails {
   balance_amount: number,
@@ -57,6 +58,7 @@ export class CashierHomeComponent {
   tableConfigs = cashierTableConfig;
   walletHistoriesData: any[] = [];
   popupType = "";
+  IMAGE_CONSTANTS = DEFAULT_IMAGES;
   private _useEffect = effect(() => {
     if (!this._appStoreService.getPopupShowing()) this.popupDetails = null;
     if (this.userDetails())   {
