@@ -116,24 +116,26 @@
         <app-title size="lg" theme="secondary" classes="roboto-medium">{{"₹"+popupDetails.total_amount}}</app-title>
       </div>
     </div>
-     @if(!popupDetails?.error_message) {
+    
       <div class="flex justify-between mt-4 ">
         <app-button (onClick)="addOrRedeemWalletPoints('add')" classes="roboto-regular opacity-[.90]" buttonTheme="success" buttonSize="sm">
           <span class="roboto-regular text-base-2" style="line-height: normal;">
             {{"Add"}}
           </span>
         </app-button>
-        <app-button (onClick)="addOrRedeemWalletPoints('redeem')"  classes="roboto-regular opacity-[.90]" buttonTheme="danger" buttonSize="sm">
+        <app-button [disabled]="popupDetails?.error_message" (onClick)="addOrRedeemWalletPoints('redeem')"  classes="roboto-regular opacity-[.90]" buttonTheme="danger" buttonSize="sm">
           <span class="roboto-regular text-base-2" style="line-height: normal;">
             {{"Redeem"}}
           </span>
         </app-button>
       </div>
-    } @else { 
+      
+    @if (popupDetails.error_message) {
       <div class="mt-4 text-red-500 text-xs text-center roboto-regular">
         {{popupDetails.error_message}}      
       </div>
     }
+    
   }
 </ng-template>
 
