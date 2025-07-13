@@ -62,9 +62,9 @@ export class ButtonComponent implements OnChanges,OnInit {
       case 'info':
         return ' bg-neutral-100 text-primary-500 hover:bg-neutral-100';
       case 'danger':
-        return ' bg-error-500 text-white hover:bg-error-500 ';
+        return ' bg-[#FF5752] text-white hover:bg-[#FF5752] ';
       case 'success':
-        return ' bg-success-500 text-white hover:bg-success-500 ';  
+        return ' bg-[#00B877] text-white hover:bg-[#00B877] ';  
       default:
         return '';
     }
