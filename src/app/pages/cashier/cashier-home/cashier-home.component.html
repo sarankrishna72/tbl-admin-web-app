@@ -71,6 +71,7 @@
                     <app-title size="lg" theme="secondary" classes="roboto-medium">{{"Calculate Wallet Points"}}</app-title>
                     <div class="mt-4 ">
                       <app-form [formGroup]="calculateFormGroup" (formOutput)="submitFormData($event, 'updateWallet')" [formData]="cashierWalletCaluclationFormConfig"></app-form>
+                      <div class="text-primary-500 text-x-base mt-2">* New wallet points will be available for use 24 hours after redeeming.</div>
                     </div>
                   </div>
                   <div class="sm:w-1/2 max-sm:hidden"></div>
@@ -102,7 +103,9 @@
 <ng-template #walletPopupContent>
   @if (popupDetails) {
     <div>
-      <app-title size="xl" theme="secondary" classes="roboto-medium text-center">{{"Discount Amount is ₹" + popupDetails.offer_amount }}</app-title>
+      @if (popupDetails.offer_amount != 0) {
+        <app-title size="xl" theme="secondary" classes="roboto-medium text-center">{{"Discount Amount is ₹" + popupDetails.offer_amount }}</app-title>
+      }
       <div class="flex w-full justify-between pt-4">
         <app-title size="sm" theme="secondary" classes="roboto-regular">{{"Earned Wallet Points"}}</app-title>
         <app-title size="md" theme="secondary" classes="roboto-medium">{{popupDetails.earned_point}}</app-title>
