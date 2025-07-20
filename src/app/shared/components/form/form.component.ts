@@ -86,7 +86,6 @@ export class FormComponent implements OnChanges, OnDestroy {
     if (changes['formData'] && changes['formData'].currentValue) {
       if (this.formData.controls.length > 0) {
         this.generateFormGroupControls();
-        console.log(this.formGroup)
       }
     }
   }

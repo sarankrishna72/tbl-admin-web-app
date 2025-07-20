@@ -115,7 +115,27 @@ export class ControlValueAccessorDirective  implements  ControlValueAccessor, On
     })
   }
 
+  updateValueAndValidityControl() {
+    if (this.controlDir && this.controlDir.control)  {
+      const group = this.controlDir.control.parent as FormGroup;
+      if (!group) return;
+        let name: string | null = null;
+        Object.keys(group.controls).forEach(key => {
+          const childControl = group.get(key) as FormControl;
+          if (childControl === this.controlDir.control) {
+            childControl.clearAsyncValidators();
+            childControl.clearValidators();
+            childControl.setErrors(null);
+            childControl.updateValueAndValidity();
+          }
+        });
+     
+    }
+  }
+
   ngOnDestroy(): void {
+    this.updateValueAndValidityControl();
+    // Unsubscribe from form value changes to avoid memory leaks
     if (this._formValueSub) this._formValueSub.unsubscribe();
   }
 
