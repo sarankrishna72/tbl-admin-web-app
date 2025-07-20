@@ -8,9 +8,7 @@ export function conditionalValidator(validation: FormBaseControlValidator): Vali
 
     const dependentField = form.get(validation.conditions?.fieldName || '');
     if (!dependentField) return null;
-    dependentField.valueChanges.subscribe(() => {
-        control?.updateValueAndValidity();
-    });
+    
     const { value, operator } = validation.conditions || {};
     if (!value || !operator) return null;
 

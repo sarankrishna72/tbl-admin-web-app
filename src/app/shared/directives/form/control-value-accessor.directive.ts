@@ -1,8 +1,8 @@
 import { ChildFormInterfaceModel, FormConfig } from './../../../core/model/form.model';
-import { Directive, EventEmitter, Output, Self } from '@angular/core';
+import { Directive, EventEmitter, OnDestroy, Output, Self } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NgControl, Validators } from '@angular/forms';
 import { FormBase } from '../../../core/model';
-import { Observable, pairwise, startWith } from 'rxjs';
+import { Observable, pairwise, startWith, Subscription } from 'rxjs';
 import { HttpService } from '../../services/http/http.service';
 import { formSubChildShow } from '../../../core/lib/lib';
 
@@ -10,11 +10,12 @@ import { formSubChildShow } from '../../../core/lib/lib';
   selector: '[appControlValueAccessor]',
   standalone: true
 })
-export class ControlValueAccessorDirective  implements  ControlValueAccessor {
+export class ControlValueAccessorDirective  implements  ControlValueAccessor, OnDestroy {
   @Output() renderSubFormCompleted: EventEmitter<any> = new EventEmitter();
   onChange: (value: any) => void = () => {};
   onTouched: () => void = () => {};
   disabled: boolean = false;
+  private _formValueSub?: Subscription;
 
   constructor( @Self()  public controlDir: NgControl, public _httpService: HttpService) {
     controlDir.valueAccessor = this;
@@ -99,7 +100,8 @@ export class ControlValueAccessorDirective  implements  ControlValueAccessor {
 
 
   formValueChanges(formConfig: FormBase, formGroup: FormGroup) {
-    formGroup.get(formConfig.key)?.valueChanges.pipe(startWith(null), pairwise()).subscribe(([prev, next]: [any, any]) => {
+    if (this._formValueSub) this._formValueSub.unsubscribe();
+    this._formValueSub = formGroup.get(formConfig.key)?.valueChanges.pipe(startWith(null), pairwise()).subscribe(([prev, next]: [any, any]) => {
       if (prev !== next) {
         setTimeout(() => {
           if (prev || !next) {
@@ -107,12 +109,14 @@ export class ControlValueAccessorDirective  implements  ControlValueAccessor {
           }
           if (next && formConfig.sub_childs!?.length > 0) {
             this.generateSubForms(formConfig, formGroup)
-
           }
         }, 200);
       }
     })
+  }
 
+  ngOnDestroy(): void {
+    if (this._formValueSub) this._formValueSub.unsubscribe();
   }
 
 }

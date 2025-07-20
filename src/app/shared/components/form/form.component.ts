@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, OnDestroy } from '@angular/core';
 import {ChildFormInterfaceModel, ConditionLogicType, FormConfig } from '../../../core/model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as _ from 'lodash';
@@ -20,7 +20,7 @@ import { formSubChildShow } from '../../../core/lib/lib';
     templateUrl: './form.component.html',
     styleUrl: './form.component.scss'
 })
-export class FormComponent implements OnChanges {
+export class FormComponent implements OnChanges, OnDestroy {
   @Input() formData!: FormConfig;
   @Input() data: any;
   @Input() formGroup: FormGroup = new FormGroup({});
@@ -28,6 +28,8 @@ export class FormComponent implements OnChanges {
   @Output() onFormGroupReady: EventEmitter<any> = new EventEmitter();
   @Output() onSubChildFormReady: EventEmitter<any> = new EventEmitter();
   @Input() showFormActions: boolean = true;
+  private _addedControls: string[] = [];
+
   /**
    * Generate Form Control Configuration
    *
@@ -37,8 +39,12 @@ export class FormComponent implements OnChanges {
     let { controls, actions } : FormConfig = this.formData;
     controls = _.orderBy(controls, ['order'],['asc']);
     for (const formQuestion of controls) {
-      const control = new FormControl(formQuestion.value ||  this.data?.[formQuestion.key] || '' ) as FormControl<any>;
-      this.formGroup.addControl(formQuestion.key, control )
+      const key = formQuestion.key;
+      if (!this.formGroup.contains(key)) {
+        const control = new FormControl(formQuestion.value ||  this.data?.[key] || '' ) as FormControl<any>;
+        this.formGroup.addControl(key, control );
+        this._addedControls.push(key);
+      }
     }
     this.onFormGroupReady.emit(this.formGroup);
   }
@@ -80,8 +86,18 @@ export class FormComponent implements OnChanges {
     if (changes['formData'] && changes['formData'].currentValue) {
       if (this.formData.controls.length > 0) {
         this.generateFormGroupControls();
+        console.log(this.formGroup)
       }
     }
   }
 
+  ngOnDestroy(): void {
+    // Remove controls added by this component to avoid memory leaks
+    for (const key of this._addedControls) {
+      if (this.formGroup.contains(key)) {
+        this.formGroup.removeControl(key);
+      }
+    }
+    this._addedControls = [];
+  }
 }
