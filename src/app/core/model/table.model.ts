@@ -99,7 +99,7 @@ export class TableColumn {
 }
 
 type TableColumnType = 'text' | 'image' | 'action' | 'html' | 'index' | 'format';
-type TableActionType = 'edit' | 'delete' | 'custom' | 'view';
+type TableActionType = 'edit' | 'delete' | 'custom' | 'view' | 'copy';
 
 export interface PaginationInterface {
   page: number, 

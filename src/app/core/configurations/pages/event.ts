@@ -89,6 +89,13 @@ const tableConfig: TableModel = new TableModel(
     sortKey: 'notification_push_date',
     sortDirection: 'desc',
     actions: [
+       {
+        actionId: 'copy',
+        actionType: 'custom',
+        label: "Copy Event",
+        icon: 'file_copy',
+        classes: 'hover:!text-primary-500 height-[14px]'
+      },
       {
         actionId: 'edit',
         actionType: 'edit',
@@ -106,7 +113,7 @@ const tableConfig: TableModel = new TableModel(
       {
         actionId: 'view',
         actionType: 'custom',
-        label: "View Outlet",
+        label: "View Event",
         icon: 'visibility',
         classes: 'hover:!text-primary-500'
       }

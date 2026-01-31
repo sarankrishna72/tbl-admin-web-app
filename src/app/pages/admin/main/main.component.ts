@@ -49,9 +49,6 @@ export class MainComponent extends MainCommonComponent implements OnInit{
     this.configureCallback();
   }
 
- 
-
-  
 
   override configureCallback() {
     if (this.configurations?.listApi) {

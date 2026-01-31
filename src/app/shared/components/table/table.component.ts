@@ -63,7 +63,9 @@ export class TableComponent implements OnChanges{
         actionId : "create",
       }
     }
-    this.tableActionCTA.emit( {...data.action, data: data.data} );
+    let dataObj: any = data.data || {};
+    dataObj['action'] = data.action;
+    this.tableActionCTA.emit( {...data.action, data: dataObj} );
   }
 
   getColumnData(columnKey: string, rowData: any) {

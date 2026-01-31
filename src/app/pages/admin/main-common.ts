@@ -4,7 +4,7 @@ import { AppStoreService } from "../../shared/services/store/app-store.service";
 import { CrudPageModel } from "../../core/model";
 import { Observable } from "rxjs/internal/Observable";
 import { HttpService } from "../../shared/services/http/http.service";
-import { CREATE, DELETE, EDIT } from "../../core/constants/const";
+import { COPY, CREATE, DELETE, EDIT } from "../../core/constants/const";
 import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { DEFAULT_IMAGES } from "../../core/constants";
@@ -32,6 +32,7 @@ export class MainCommonComponent implements OnInit{
     CONST_CREATE = CREATE;
     CONST_DELETE = DELETE;
     CONST_EDIT = EDIT; 
+    CONST_COPY = COPY; 
     selectedAction: any;
     public loggingEffect = effect(() => {
         if (this._appStoreService.getCurrentPageConfig()) {
@@ -82,6 +83,7 @@ export class MainCommonComponent implements OnInit{
       let actionLabel: any;
       this.selectedAction = action;
       let buttonsList:any = [];
+      
       switch (action.actionId) {
         case "view":
           this._router.navigate([`admin/${this.configurations!.id}/details/${action.data.id}`]);
@@ -92,6 +94,21 @@ export class MainCommonComponent implements OnInit{
           this.configurations!.formConfigs!.actions = buttonsList;
           this.actionType = this.CONST_CREATE;
           this._appStoreService.setPopupShowing();
+          break;
+        case "copy":
+          actionLabel = this.configurations?.actionsLabel?.find(x => x.type == this.CONST_CREATE);
+          buttonsList = this.configurations?.formConfigs?.actions?.map(x => {return {...x, label: x.actionType == 'submit' ? actionLabel.buttonLabel : x.label } })
+          this.configurations!.formConfigs!.actions = buttonsList;
+          this.actionType = this.CONST_CREATE;
+         ;
+          this._appStoreService.setPopupShowing();
+          let copyData = action.data;
+          if (this.configurations?.formDisplayKeys?.length) {
+            copyData = this.restructureEditFormData(copyData);
+          }
+          setTimeout(() =>
+            { this.formGroup.patchValue(copyData); }
+          ,10)
           break;
         case "edit":
           this.actionType = this.CONST_EDIT;
@@ -151,6 +168,7 @@ export class MainCommonComponent implements OnInit{
       for (const item of this.configurations?.formDisplayKeys!) {
         obj[item.mappingKey] = getObjValueFromPath(data, item.key)
       }
+      obj['action'] = data['action'];
       return obj;
     }
 

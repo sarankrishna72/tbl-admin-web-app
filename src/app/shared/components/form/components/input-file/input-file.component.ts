@@ -6,6 +6,7 @@ import { FormService } from '../../../../services/form/form.service';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../..';
 import { FormGroup } from '@angular/forms';
+import { COPY } from '../../../../../core/constants/const';
 
 @Component({
     selector: 'app-input-file',
@@ -116,10 +117,11 @@ export class InputFileComponent extends ControlValueAccessorDirective implements
       this.isRequired = this._formService.checkRequiredField(this.formConfig.validations);
     }
 
-    setTimeout(() => {
-      this.files  =  this.controlDir.control?.value;
-    } ,100)
-
+    if (!this.data.action || this.data.action.actionId != COPY ) {
+      setTimeout(() => {
+        this.files  =  this.controlDir.control?.value;
+      } ,100)
+    }
 
   }
 

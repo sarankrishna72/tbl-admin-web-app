@@ -53,7 +53,7 @@ export const CASHIER_CUSTOMER_CALCULATE_WALLET_FORM: FormConfig = new FormConfig
             validatorValue: true,
             conditions: {
               fieldName: "total_amount",
-              value: 20000,
+              value: 10000,
               operator: ConditionLogicType.GREATER_THAN
             }
           })
@@ -74,7 +74,7 @@ export const CASHIER_CUSTOMER_CALCULATE_WALLET_FORM: FormConfig = new FormConfig
         ],
         sub_childs: [
           new ChildFormInterfaceModel({
-            conditionValue: 20000,
+            conditionValue: 10000,
             conditionLogic: ConditionLogicType.GREATER_THAN,
             items: [
               new InputTextField({

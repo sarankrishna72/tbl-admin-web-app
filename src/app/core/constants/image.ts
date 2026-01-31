@@ -11,6 +11,7 @@ export const DEFAULT_IMAGES = {
   "menu": `${DEFAULT_IMAGES_PATH}/menu.svg`,
   "no_image": `${DEFAULT_IMAGES_PATH}/no_image.jpg`,
   "edit": `${DEFAULT_IMAGES_PATH}/edit.svg`,
+  "copy": `${DEFAULT_IMAGES_PATH}/copy.svg`,
   "arrow_back": `${DEFAULT_IMAGES_PATH}/arrow_back.svg`,
   "delete": `${DEFAULT_IMAGES_PATH}/delete.svg`,
   "confirmation_mark": `${DEFAULT_IMAGES_PATH}/confirmation_mark.svg`,
